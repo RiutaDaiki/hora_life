@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/nav_model"
+        android:id="@+id/nav_example"
         android:icon="@drawable/ear"
         android:title="@string/model"/>
     <item
@@ -15,4 +15,5 @@
         android:title="@string/you"/>
 
 </menu>
+
 

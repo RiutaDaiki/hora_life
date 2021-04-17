@@ -2,10 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_example"
     android:id="@+id/navigation_graph">
-    <fragment android:id="@+id/nav_model"
-        tools:layout="@layout/model_fragment"
-        android:name="com.example.horalife.Model.ModelFragment"
+    <fragment android:id="@+id/nav_example"
+        tools:layout="@layout/example_fragment"
+        android:name="com.example.horalife.Example.ExampleFragment"
         android:label="手本"/>
 
     <fragment android:id="@+id/nav_technique"
@@ -14,7 +15,7 @@
         android:label="コツ"/>
 
     <fragment android:id="@+id/nav_you"
-        tools:layout="@layout/your\_fragment"
+        tools:layout="@layout/you_fragment"
         android:name="com.example.horalife.You.YouFragment"
         android:label="あなた"/>
 </navigation>
