@@ -1,5 +1,6 @@
 package com.example.horalife.Example
 
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,9 +8,7 @@ import com.example.horalife.databinding.ItemExampleRecyclerBinding
 
 class RecyclerViewAdapter(private val data: List<DataModel>): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
     inner class MyViewHolder(val binding: ItemExampleRecyclerBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: DataModel){
-            binding.listItem = item
-        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,6 +23,7 @@ class RecyclerViewAdapter(private val data: List<DataModel>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(data[position])
     }
 }
+
+//item_recycler.xmlのTextViewのTextの記述を見る
