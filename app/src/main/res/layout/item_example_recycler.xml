@@ -5,9 +5,7 @@
         <variable
             name="vm"
             type="com.example.horalife.Example.ExampleFragmentViewModel" />
-        <variable
-            name="dataModel"
-            type="com.example.horalife.Example.DataModel" />
+
     </data>
 
     <LinearLayout
@@ -18,7 +16,7 @@
             android:id="@+id/sound_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{dataModel.data}"/>
+            android:text="@{vm.soundText}"/>
 
 
     </LinearLayout>

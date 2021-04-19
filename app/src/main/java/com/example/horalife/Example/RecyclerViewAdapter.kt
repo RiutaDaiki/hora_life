@@ -23,6 +23,7 @@ class RecyclerViewAdapter(private val data: List<DataModel>): RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
     }
 }
 
