@@ -18,15 +18,19 @@ class ExampleFragment : Fragment() {
     private lateinit var exampleViewModel: ExampleFragmentViewModel
     private lateinit var adapter: RecyclerViewAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setRecyclerView()
+        val root = inflater.inflate(R.layout.example_fragment, container, false)
+
+        recyclerView = root.findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.layoutManager=LinearLayoutManager(context)
+//        val adapter = RecyclerViewAdapter(ExampleFragmentViewModel().dataList)
+        recyclerView.adapter = RecyclerViewAdapter(ExampleFragmentViewModel().dataList)
+//        setRecyclerView()
         return inflater.inflate(R.layout.example_fragment, container, false)
     }
 
     private fun setRecyclerView(){
-        val dataList = listOf<DataModel>(DataModel("調べ"), DataModel("乙"))
         recyclerView.layoutManager=LinearLayoutManager(context)
-        adapter = RecyclerViewAdapter(dataList)
+        adapter = RecyclerViewAdapter(ExampleFragmentViewModel().dataList)
         recyclerView.adapter = adapter
     }
-
-    }
+}

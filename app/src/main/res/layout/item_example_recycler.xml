@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="vm"
-            type="com.example.horalife.Example.ExampleFragmentViewModel" />
+            name="sound"
+            type="com.example.horalife.Sound" />
 
     </data>
 
@@ -16,7 +16,7 @@
             android:id="@+id/sound_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{vm.soundText}"/>
+            android:text="@{sound.soundName}"/>
 
 
     </LinearLayout>
