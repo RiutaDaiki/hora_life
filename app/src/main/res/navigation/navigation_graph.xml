@@ -6,7 +6,7 @@
     android:id="@+id/navigation_graph">
     <fragment android:id="@+id/nav_example"
         tools:layout="@layout/example_fragment"
-        android:name="com.example.horalife.Example.ExampleFragment"
+        android:name="com.example.horalife.example.ExampleFragment"
         android:label="手本"/>
 
     <fragment android:id="@+id/nav_technique"

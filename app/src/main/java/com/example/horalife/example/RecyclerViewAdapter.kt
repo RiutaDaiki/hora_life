@@ -1,16 +1,13 @@
-package com.example.horalife.Example
+package com.example.horalife.example
 
-import android.provider.ContactsContract
-import android.provider.Telephony
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.horalife.R
 import com.example.horalife.Sound
 import com.example.horalife.databinding.ItemExampleRecyclerBinding
 
-class RecyclerViewAdapter(private val displayData: List<Sound>): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
+class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lifecycleOwner: LifecycleOwner,private val viewModel: ExampleFragmentViewModel): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
     inner class MyViewHolder(val binding: ItemExampleRecyclerBinding): RecyclerView.ViewHolder(binding.root){
     }
 
@@ -21,12 +18,15 @@ class RecyclerViewAdapter(private val displayData: List<Sound>): RecyclerView.Ad
         return MyViewHolder(listItemBinding)
     }
 
-    override fun getItemCount() = displayData.size
+    override fun getItemCount(): Int = displayData.size
 
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
-        val viewModel = ExampleFragmentViewModel()
-        holder.binding.soundText.text = viewModel.dataList[position].soundName
+        holder.binding.sound = displayData[position]
+        holder.binding.soundButton.setOnClickListener {
+            viewModel.onClick(displayData[position].soundName)
+        }
+        holder.binding.lifecycleOwner = lifecycleOwner
     }
 }
 
