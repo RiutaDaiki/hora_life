@@ -37,3 +37,13 @@ class ExampleFragment : Fragment() {
     }
 
 }
+
+//<Button
+//android:id="@+id/sound_button"
+//android:layout_width="62dp"
+//android:layout_height="match_parent"
+//android:layout_marginEnd="16dp"
+//android:layout_marginRight="16dp"
+//android:text="🔊"
+//app:layout_constraintEnd_toEndOf="parent"
+//app:layout_constraintTop_toTopOf="parent" />

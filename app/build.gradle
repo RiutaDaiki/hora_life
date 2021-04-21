@@ -62,6 +62,9 @@ dependencies {
 
     //noinspection LifecycleAnnotationProcessorWithJava8
     kapt "android.arch.lifecycle:compiler:1.1.1"
+//cardview
+    implementation "androidx.cardview:cardview:1.0.0"
+
 
 
 
