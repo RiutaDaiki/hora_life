@@ -30,7 +30,10 @@ class ExampleFragmentViewModel(application: Application): AndroidViewModel(appli
         }
 
         soundId = soundPool.load(context, soundFile, 1)
-        soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
+        soundPool.setOnLoadCompleteListener { soundPool, _, _ ->
+            soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
+        }
+//        soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
             soundPool.release()
             //音流す
 //        print("音流れてる")
