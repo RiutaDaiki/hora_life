@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.example.horalife.R
 import com.example.horalife.Sound
 import com.example.horalife.databinding.ItemExampleRecyclerBinding
 
@@ -20,11 +21,10 @@ class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lif
 
     override fun getItemCount(): Int = displayData.size
 
-
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
         holder.binding.sound = displayData[position]
         holder.binding.soundArea.setOnClickListener {
-            viewModel.onClick(displayData[position].soundName)
+            viewModel.outPutSound(displayData[position].soundFile)
         }
         holder.binding.lifecycleOwner = lifecycleOwner
     }

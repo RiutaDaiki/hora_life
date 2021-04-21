@@ -43,7 +43,7 @@
                         android:paddingLeft="16dp"
                         android:text="@{sound.soundName}"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:textSize="30dp"
+                        android:textSize="30sp"
                         app:layout_constraintStart_toStartOf="parent" />
 
 

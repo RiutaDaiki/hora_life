@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
@@ -23,7 +24,7 @@ class ExampleFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.recyclerView.layoutManager=LinearLayoutManager(context)
+        binding.recyclerView.layoutManager= GridLayoutManager(context, 2)
         adapter = RecyclerViewAdapter(MyViewModel.dataList, viewLifecycleOwner, MyViewModel)
         binding.recyclerView.adapter = adapter
         return binding.root
