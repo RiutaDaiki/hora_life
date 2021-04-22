@@ -16,11 +16,9 @@ class ExampleFragmentViewModel(application: Application): AndroidViewModel(appli
     lateinit var soundPool: SoundPool
     var soundId: Int = 0
     private val context = getApplication<Application>().applicationContext
-    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.no), Sound(R.string.otsu, R.raw.no))
-//    , Sound(R.string.kan), Sound(R.string.yuri), Sound(R.string.tome)
+    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.no), Sound(R.string.otsu, R.raw.one), Sound(R.string.kan, R.raw.one), Sound(R.string.yuri, R.raw.one), Sound(R.string.tome, R.raw.one))
 
     fun outPutSound(soundFile: Int) {
-
 
         soundPool = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             SoundPool.Builder().setAudioAttributes(AudioAttributes.Builder()
@@ -33,11 +31,5 @@ class ExampleFragmentViewModel(application: Application): AndroidViewModel(appli
         soundPool.setOnLoadCompleteListener { soundPool, _, _ ->
             soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
         }
-//        soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
-            soundPool.release()
-            //音流す
-//        print("音流れてる")
-            Log.d("i", "アウトプットサウンドなう")
-
         }
     }
