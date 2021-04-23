@@ -7,12 +7,12 @@
     <fragment android:id="@+id/nav_example"
         tools:layout="@layout/example_fragment"
         android:name="com.example.horalife.example.ExampleFragment"
-        android:label="手本"/>
+        android:label="お手本"/>
 
-    <fragment android:id="@+id/nav_technique"
-        tools:layout="@layout/technique_fragment"
-        android:name="com.example.horalife.Technique.TechniqueFragment"
-        android:label="コツ"/>
+    <fragment android:id="@+id/nav_library"
+        tools:layout="@layout/library_fragment"
+        android:name="com.example.horalife.library.LibraryFragment"
+        android:label="ライブラリー"/>
 
     <fragment android:id="@+id/nav_you"
         tools:layout="@layout/you_fragment"

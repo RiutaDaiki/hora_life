@@ -6,9 +6,9 @@
         android:icon="@drawable/ear"
         android:title="@string/model"/>
     <item
-        android:id="@+id/nav_technique"
-        android:icon="@drawable/search"
-        android:title="@string/technique"/>
+        android:id="@+id/nav_library"
+        android:icon="@drawable/library"
+        android:title="@string/library"/>
     <item
         android:id="@+id/nav_you"
         android:icon="@drawable/man"
