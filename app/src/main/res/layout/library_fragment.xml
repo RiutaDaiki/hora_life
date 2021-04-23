@@ -7,6 +7,7 @@
         <variable
             name="vm"
             type="com.example.horalife.library.LibraryViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +15,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
+            android:id="@+id/float_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -22,7 +23,6 @@
             android:layout_marginBottom="80dp"
             android:backgroundTint="@color/oudoiro"
             android:clickable="true"
-            android:onClick="@{() -> vm.showDialog()}"
             app:backgroundTint="@color/oudoiro"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
