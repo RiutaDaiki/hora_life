@@ -5,12 +5,14 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.horalife.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class SelectDialogFragment(): DialogFragment(){
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val inflater = activity!!.layoutInflater
-        val dialogView = inflater.inflate(R.layout.select_dialog, null)
+        val libraryView = inflater.inflate(R.layout.library_fragment, null)
+        val fab = libraryView.findViewById<FloatingActionButton>(R.id.float_btn)
         val list = arrayOf("カメラ","録音")
         var selectItem: Int = 0
 
@@ -18,12 +20,28 @@ class SelectDialogFragment(): DialogFragment(){
             selectItem = which
         })
                 .setPositiveButton("OK"){dialog, _ ->
-                    println(list[selectItem])
+                    //fab隠したい
+                    fab.hide()
+                    cameraOrMic(selectItem)
                     //API起動
                 }
                 .setNegativeButton("キャンセル"){dialog, _ ->
                     dialog.dismiss()
                 }
         return builder.create()
+    }
+
+    private fun createRecordFragment(){
+        val recordFragment = RecordFragment()
+        val fragmentTransaction = parentFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.fragment_container, recordFragment)
+        fragmentTransaction.commit()
+    }
+
+    private fun cameraOrMic(int: Int){
+        when(int){
+            0 -> println("カメラ")
+            1 -> createRecordFragment()
+        }
     }
 }
