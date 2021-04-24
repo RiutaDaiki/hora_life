@@ -17,8 +17,6 @@ class Record {
     private var fileName: String = ""
     private var playButton: PlayButton? = null
 
-
-
     private fun startRecording() {
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
