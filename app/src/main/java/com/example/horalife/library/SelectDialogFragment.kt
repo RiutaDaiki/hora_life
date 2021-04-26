@@ -16,6 +16,7 @@ class SelectDialogFragment(): DialogFragment(){
         val list = arrayOf("カメラ","録音")
         var selectItem: Int = 0
 
+
         builder.setSingleChoiceItems(list, 0, {dialog, which ->
             selectItem = which
         })
@@ -31,7 +32,7 @@ class SelectDialogFragment(): DialogFragment(){
         return builder.create()
     }
 
-    private fun createRecordFragment(){
+    private fun showRecordFragment(){
         val recordFragment = RecordFragment()
         val fragmentTransaction = parentFragmentManager.beginTransaction()
         fragmentTransaction.add(R.id.fragment_container, recordFragment)
@@ -41,7 +42,9 @@ class SelectDialogFragment(): DialogFragment(){
     private fun cameraOrMic(int: Int){
         when(int){
             0 -> println("カメラ")
-            1 -> createRecordFragment()
+            1 -> {
+                showRecordFragment()
+            }
         }
     }
 }

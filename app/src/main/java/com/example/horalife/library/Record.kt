@@ -1,5 +1,6 @@
 package com.example.horalife.library
 
+import android.Manifest
 import android.content.Context
 import android.media.MediaPlayer
 import android.media.MediaRecorder
@@ -7,13 +8,18 @@ import android.os.Looper.prepare
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import androidx.core.app.ActivityCompat
+import androidx.databinding.DataBindingUtil.setContentView
+import com.example.horalife.MainActivity
 import kotlinx.coroutines.NonCancellable.start
 import java.io.IOException
 
 class Record {
-    private var recorder: MediaRecorder? = null
-    private var player: MediaPlayer? = null
+     var recorder: MediaRecorder? = null
+     var player: MediaPlayer? = null
     private var fileName: String = ""
     private var playButton: PlayButton? = null
 
@@ -88,35 +94,29 @@ class Record {
         }
     }
 
-    private fun sonota(){
-        fileName = "${externalCacheDir.absolutePath}/audiorecordtest.3gp"
+//    private fun sonota(){
+//        var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+//
+//        fileName = "${externalCacheDir.absolutePath}/audiorecordtest.3gp"
+//
+//        ActivityCompat.requestPermissions(MainActivity(), permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+//
+//        recordButton = RecordButton(this)
+//        playButton = PlayButton(this)
+//        val ll = LinearLayout(this).apply {
+//            addView(recordButton,
+//                    LinearLayout.LayoutParams(
+//                            ViewGroup.LayoutParams.WRAP_CONTENT,
+//                            ViewGroup.LayoutParams.WRAP_CONTENT,
+//                            0f))
+//            addView(playButton,
+//                    LinearLayout.LayoutParams(
+//                            ViewGroup.LayoutParams.WRAP_CONTENT,
+//                            ViewGroup.LayoutParams.WRAP_CONTENT,
+//                            0f))
+//        }
+//        setContentView(ll)
+//    }
 
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
 
-        recordButton = RecordButton(this)
-        playButton = PlayButton(this)
-        val ll = LinearLayout(this).apply {
-            addView(recordButton,
-                    LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            0f))
-            addView(playButton,
-                    LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT,
-                            0f))
-        }
-        setContentView(ll)
     }
-
-    override fun onStop() {
-        super.onStop()
-        recorder?.release()
-        recorder = null
-        player?.release()
-        player = null
-    }
-    }
-
-}
