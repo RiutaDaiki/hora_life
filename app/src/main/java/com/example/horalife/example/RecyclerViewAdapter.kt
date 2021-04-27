@@ -24,7 +24,8 @@ class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lif
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
         holder.binding.sound = displayData[position]
         holder.binding.soundArea.setOnClickListener {
-            viewModel.outPutSound(displayData[position].soundFile)
+//            viewModel.outPutSound(displayData[position].soundFile)
+            viewModel.playMedia(displayData[position].soundFile)
         }
         holder.binding.lifecycleOwner = lifecycleOwner
     }
