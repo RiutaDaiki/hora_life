@@ -16,7 +16,7 @@ class ExampleFragmentViewModel(application: Application): AndroidViewModel(appli
     lateinit var soundPool: SoundPool
     var soundId: Int = 0
     private val context = getApplication<Application>().applicationContext
-    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.no), Sound(R.string.otsu, R.raw.one), Sound(R.string.kan, R.raw.one), Sound(R.string.yuri, R.raw.one), Sound(R.string.tome, R.raw.one))
+    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe), Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan), Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome))
 
     fun outPutSound(soundFile: Int) {
 
