@@ -6,16 +6,19 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Build
+import android.os.Handler
+import androidx.core.os.postDelayed
 import androidx.lifecycle.AndroidViewModel
 import com.example.horalife.R
 import com.example.horalife.Sound
 
 class ExampleFragmentViewModel(application: Application): AndroidViewModel(application) {
 
+
 //    lateinit var soundPool: SoundPool
 //    var soundId: Int = 0
-//    private val context = getApplication<Application>().applicationContext
-//    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe), Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan), Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome))
+    private val context = getApplication<Application>().applicationContext
+    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe), Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan), Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome))
 //
 //    fun outPutSound(soundFile: Int) {
 //
@@ -31,14 +34,19 @@ class ExampleFragmentViewModel(application: Application): AndroidViewModel(appli
 //            soundPool.play(soundId, 1.0f, 1.0f, 1, 0, 1.0f)
 //        }
 //        }
-lateinit var mp0: MediaPlayer
 
+    lateinit var mp0: MediaPlayer
 
     fun playMedia(file: Int){
         mp0 = MediaPlayer.create(context, file)
+        val duration = mp0.duration.toLong()
         mp0.isLooping = true
         mp0.start()
-        mp0.setOnCompletionListener { mp -> mp0.stop() }
+
+        Handler().postDelayed(Runnable{
+            mp0.stop()
+        }, duration)
+
     }
 
     }
