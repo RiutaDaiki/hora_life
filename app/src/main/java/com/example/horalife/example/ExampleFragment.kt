@@ -1,6 +1,9 @@
 package com.example.horalife.example
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +13,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
+import com.example.horalife.Sound
 import com.example.horalife.databinding.ExampleFragmentBinding
 
 class ExampleFragment : Fragment() {
-    private lateinit var recyclerView:RecyclerView
-    private lateinit var exampleViewModel: ExampleFragmentViewModel
     private lateinit var adapter: RecyclerViewAdapter
-    private val MyViewModel: ExampleFragmentViewModel by viewModels<ExampleFragmentViewModel>()
-    private lateinit var viewModel: ExampleFragmentViewModel
+    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe),
+            Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan),
+            Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome))
+    lateinit var player: MediaPlayer
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
         val root = inflater.inflate(R.layout.example_fragment, container, false)
@@ -25,8 +29,9 @@ class ExampleFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.recyclerView.layoutManager= GridLayoutManager(context, 2)
-        adapter = RecyclerViewAdapter(MyViewModel.dataList, viewLifecycleOwner, MyViewModel)
+        adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
+
         return binding.root
     }
 
@@ -37,14 +42,12 @@ class ExampleFragment : Fragment() {
 
     }
 
-}
+    fun playMedia(file: Int, ct: Context){
+        player = MediaPlayer.create(ct, file)
+        player.isLooping = false
+        player.start()
 
-//<Button
-//android:id="@+id/sound_button"
-//android:layout_width="62dp"
-//android:layout_height="match_parent"
-//android:layout_marginEnd="16dp"
-//android:layout_marginRight="16dp"
-//android:text="🔊"
-//app:layout_constraintEnd_toEndOf="parent"
-//app:layout_constraintTop_toTopOf="parent" />
+        player.setOnCompletionListener { mp -> player.stop() }
+    }
+
+}

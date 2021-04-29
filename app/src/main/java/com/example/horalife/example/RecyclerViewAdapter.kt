@@ -1,5 +1,6 @@
 package com.example.horalife.example
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -8,7 +9,7 @@ import com.example.horalife.R
 import com.example.horalife.Sound
 import com.example.horalife.databinding.ItemExampleRecyclerBinding
 
-class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lifecycleOwner: LifecycleOwner,private val viewModel: ExampleFragmentViewModel): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
+class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lifecycleOwner: LifecycleOwner, private val context: Context?): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
     inner class MyViewHolder(val binding: ItemExampleRecyclerBinding): RecyclerView.ViewHolder(binding.root){
     }
 
@@ -23,9 +24,11 @@ class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lif
 
     override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
         holder.binding.sound = displayData[position]
+        val exampleFragment = ExampleFragment()
         holder.binding.soundArea.setOnClickListener {
-//            viewModel.outPutSound(displayData[position].soundFile)
-            viewModel.playMedia(displayData[position].soundFile)
+            context?.let {
+                exampleFragment.playMedia(displayData[position].soundFile, it)
+            }
         }
         holder.binding.lifecycleOwner = lifecycleOwner
     }
