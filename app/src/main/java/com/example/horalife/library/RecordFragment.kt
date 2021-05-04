@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.horalife.MainActivity
 import com.example.horalife.R
 import com.example.horalife.databinding.RecordFragmentBinding
+import java.io.File
 
 class RecordFragment: Fragment() {
 
@@ -47,4 +48,5 @@ class RecordFragment: Fragment() {
         fragmentTransaction.replace(R.id.fragment_container, libraryFragment)
         fragmentTransaction.commit()
     }
+
 }
