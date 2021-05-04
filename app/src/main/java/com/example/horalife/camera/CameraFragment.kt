@@ -2,6 +2,7 @@ package com.example.horalife.camera
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.view.PreviewView
 import androidx.core.content.PermissionChecker.checkSelfPermission
@@ -85,18 +87,6 @@ class CameraFragment: Fragment(){
         val camera = cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview)
     }
 
-    private fun takePhoto(){
-        val imageCapture = imageCapture ?: return
-
-        val photoFile = createFile()
-        val outPutOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
-    }
-
-    private fun createFile(): File {
-        val fileName = "hora_pic.jpg"
-        val file = File(context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES), fileName)
-        return file
-    }
 }
 
 
