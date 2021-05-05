@@ -2,14 +2,17 @@ package com.example.horalife.camera
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.media.MediaActionSound
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.view.PreviewView
@@ -21,7 +24,12 @@ import com.example.horalife.databinding.CameraFragmentBinding
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getMainExecutor
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.*
 
 private val REQUEST_CAMERA__PERMISSION = 100
 
@@ -33,6 +41,8 @@ class CameraFragment: Fragment(){
     private lateinit var binding : CameraFragmentBinding
     private var imageCapture: ImageCapture? = null
     private lateinit var previewView: PreviewView
+    val storageRef = Firebase.storage.reference
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,11 +61,14 @@ class CameraFragment: Fragment(){
                 println("ダイアログ表示")
             }
         }
+
         binding = CameraFragmentBinding.inflate(layoutInflater, container, false)
-        val root = inflater.inflate(R.layout.camera_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val context = this.requireContext()
         viewFinder = binding.root.findViewById<PreviewView>(R.id.viewFinder)
+        val takePhotoBtn = binding.root.findViewById<Button>(R.id.btn_take_photo)
+        takePhotoBtn.setOnClickListener() {
+            takePhoto()
+        }
         return binding.root
     }
     override fun onRequestPermissionsResult(
@@ -65,7 +78,7 @@ class CameraFragment: Fragment(){
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         permissionToCameraAccepted = if (requestCode == REQUEST_CAMERA__PERMISSION) {
-            grantResults[0] == PackageManager.PERMISSION_GRANTED
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
         } else {
             false
         }
@@ -80,6 +93,7 @@ class CameraFragment: Fragment(){
         }
         cameraProviderFuture.addListener(listenerRunnable, executor)
     }
+
     fun bindToLifecycle(cameraProvider: ProcessCameraProvider){
         val preview: Preview = Preview.Builder().build()
         val cameraSelector = CameraSelector.Builder().requireLensFacing(CameraSelector.LENS_FACING_BACK).build()
@@ -87,7 +101,188 @@ class CameraFragment: Fragment(){
         val camera = cameraProvider.bindToLifecycle(viewLifecycleOwner, cameraSelector, preview)
     }
 
+    private fun getRef(imageRef: StorageReference){
+        val path = UUID.randomUUID().toString() + ".jpg"
+        var imagesRef = storageRef.child(path)
+        val pictureRef = storageRef.child("horanikki-image/" + path)
+    }
+
+    private fun takePhoto(){
+        val imageCapture =imageCapture ?: return
+        val photoFile = File(
+                getOutputDirectory(), "hora_pic.jpg")
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        val sound = MediaActionSound()
+        sound.load(MediaActionSound.SHUTTER_CLICK)
+
+        imageCapture.takePicture(
+                outputOptions, ContextCompat.getMainExecutor(context), object : ImageCapture.OnImageSavedCallback{
+            override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                val savedUri = Uri.fromFile(photoFile)
+                val msg = "Photo capture success"
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                Log.d(TAG, msg)
+                sound.play(MediaActionSound.SHUTTER_CLICK)
+            }
+
+            override fun onError(exception: ImageCaptureException) {
+                Log.e(TAG, "Photo capture failed: ${exception.message}")
+            }
+
+        })
+    }
+
+    private fun getOutputDirectory(): File {
+        val mediaDir = context?.externalMediaDirs?.firstOrNull()?.let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() } }
+        val mediaDirS = mediaDir.toString()
+        Log.d(TAG, "mediaDir: $mediaDirS filesDir:${this.requireContext().filesDir}" )
+
+        return if (mediaDir != null && mediaDir.exists())
+            mediaDir else this.requireContext().filesDir
+    }
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
