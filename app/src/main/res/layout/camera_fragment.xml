@@ -12,20 +12,13 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btn_take_photo"
+            android:id="@+id/btn_cameraLaunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="TAKE PHOTO"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="301dp"
+            android:layout_marginEnd="149dp"
+            android:text="CAMERA　起動"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.camera.view.PreviewView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/viewFinder"/>
-
-
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

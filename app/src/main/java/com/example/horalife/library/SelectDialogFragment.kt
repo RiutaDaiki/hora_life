@@ -50,9 +50,8 @@ class SelectDialogFragment(): DialogFragment(){
     private fun cameraOrMic(int: Int){
         when(int){
             0 -> showCameraFragment()
-            1 -> {
-                showRecordFragment()
-            }
+            1 -> showRecordFragment()
+
         }
     }
 }
