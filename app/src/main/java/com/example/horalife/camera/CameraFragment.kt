@@ -28,6 +28,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getMainExecutor
 import com.example.horalife.MainActivity
+import com.example.horalife.library.SelectDialogFragment
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -57,42 +58,13 @@ class CameraFragment: Fragment(){
         }
         binding = CameraFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        dispatchTakePictureIntent()
 
-        val launchBtn = binding.root.findViewById<Button>(R.id.btn_cameraLaunch)
-        launchBtn.setOnClickListener(){
-dispatchTakePictureIntent()
-        }
 
-        val projection = arrayOf(
-                MediaStore.Video.Media._ID,
-                MediaStore.Video.Media.DISPLAY_NAME
-        )
-        var displayName: String? = null
-        var contentUri: Uri? = null
-
-        context?.contentResolver?.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                projection,
-                null,
-                null,
-                null
-        )?.use { cursor ->
-            val idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID)
-            val displayNameColumn =
-                    cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME)
-            while (cursor.moveToNext()) {
-                val id = cursor.getLong(idColumn)
-                displayName = cursor.getString(displayNameColumn)
-                if (displayName != fileName) {
-                    continue
-                }
-                contentUri = Uri.withAppendedPath(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        id.toString()
-                )
-            }
-        }
-
+//        val launchBtn = binding.root.findViewById<Button>(R.id.btn_cameraLaunch)
+//        launchBtn.setOnClickListener(){
+//dispatchTakePictureIntent()
+//        }
             return binding.root
     }
     override fun onRequestPermissionsResult(
@@ -108,12 +80,11 @@ dispatchTakePictureIntent()
         }
     }
 
-    private fun dispatchTakePictureIntent() {
+     fun dispatchTakePictureIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager)?.also {
                 startActivityForResult(takePictureIntent, REQUEST_CAMERA__PERMISSION)
             }
-            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, )
         }
     }
 
