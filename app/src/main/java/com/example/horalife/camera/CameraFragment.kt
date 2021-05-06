@@ -34,6 +34,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import java.io.File
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.*
 
 private val REQUEST_CAMERA__PERMISSION = 100
@@ -58,13 +59,11 @@ class CameraFragment: Fragment(){
         }
         binding = CameraFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        dispatchTakePictureIntent()
+        dispatchTakeVideoIntent()
+        val data = LocalDate.now()
+        Log.i("", "うううううううううううううううううう")
+        Log.i("", data.toString())
 
-
-//        val launchBtn = binding.root.findViewById<Button>(R.id.btn_cameraLaunch)
-//        launchBtn.setOnClickListener(){
-//dispatchTakePictureIntent()
-//        }
             return binding.root
     }
     override fun onRequestPermissionsResult(
@@ -80,7 +79,7 @@ class CameraFragment: Fragment(){
         }
     }
 
-     fun dispatchTakePictureIntent() {
+     fun dispatchTakeVideoIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager)?.also {
                 startActivityForResult(takePictureIntent, REQUEST_CAMERA__PERMISSION)

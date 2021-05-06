@@ -18,7 +18,6 @@ import com.example.horalife.databinding.RecordFragmentBinding
 import android.Manifest
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
-
 class RecordFragment: Fragment() {
 
     private var permissionToRecordAccepted = false
@@ -46,8 +45,6 @@ class RecordFragment: Fragment() {
         }
 
         dispatchRecordIntent()
-
-
         return binding.root
     }
     override fun onRequestPermissionsResult(
@@ -61,14 +58,6 @@ class RecordFragment: Fragment() {
         } else {
             false
         }
-    }
-
-    private fun backLibrary(){
-        val libraryFragment = LibraryFragment()
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.replace(R.id.fragment_container, libraryFragment)
-        fragmentTransaction.commit()
     }
 
     fun dispatchRecordIntent() {

@@ -11,21 +11,14 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class SelectDialogFragment(): DialogFragment(){
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-        val inflater = activity!!.layoutInflater
-        val libraryView = inflater.inflate(R.layout.library_fragment, null)
-        val fab = libraryView.findViewById<FloatingActionButton>(R.id.float_btn)
         val list = arrayOf("カメラ","録音")
         var selectItem: Int = 0
-
 
         builder.setSingleChoiceItems(list, 0, {dialog, which ->
             selectItem = which
         })
                 .setPositiveButton("OK"){dialog, _ ->
-                    //fab隠したい
-                    fab.hide()
                     cameraOrMic(selectItem)
-                    //API起動
                 }
                 .setNegativeButton("キャンセル"){dialog, _ ->
                     dialog.dismiss()
@@ -51,7 +44,6 @@ class SelectDialogFragment(): DialogFragment(){
         when(int){
             0 -> showCameraFragment()
             1 -> showRecordFragment()
-
         }
     }
 }
