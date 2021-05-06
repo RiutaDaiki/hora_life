@@ -43,13 +43,12 @@ class LibraryFragment : Fragment() {
         binding.vm = LibraryViewModel()
         return binding.root
     }
-fun 
+fun
     fun showDialog() {
         val dialog = SelectDialogFragment()
         dialog.show(parentFragmentManager, null)
         Log.d("j", "ダイアログ")
     }
-
 
 }
 
