@@ -16,6 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/fragment_container">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/library_recyclerView"
+                android:layout_width="412dp"
+                android:layout_height="651dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </RelativeLayout>
 
 

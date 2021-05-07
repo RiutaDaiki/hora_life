@@ -61,8 +61,6 @@ class CameraFragment: Fragment(){
         binding.lifecycleOwner = viewLifecycleOwner
         dispatchTakeVideoIntent()
         val data = LocalDate.now()
-        Log.i("", "うううううううううううううううううう")
-        Log.i("", data.toString())
 
             return binding.root
     }

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.horalife.databinding.DiaryFragmentBinding
+import com.example.horalife.databinding.EntrieDiaryFragmentBinding
 import java.time.LocalDate
 
 class DiaryFragment: Fragment() {
@@ -14,7 +14,7 @@ class DiaryFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
+        val binding = EntrieDiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val data = LocalDate.now()
         Log.i("", data.toString())
