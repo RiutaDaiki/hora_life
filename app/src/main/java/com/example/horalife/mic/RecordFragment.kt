@@ -1,21 +1,19 @@
-package com.example.horalife.library
+package com.example.horalife.mic
 
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.horalife.R
 import com.example.horalife.databinding.RecordFragmentBinding
 import android.Manifest
+
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
 class RecordFragment: Fragment() {
@@ -30,7 +28,6 @@ class RecordFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = RecordFragmentBinding.inflate(layoutInflater, container, false)
-        val root = inflater.inflate(R.layout.record_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

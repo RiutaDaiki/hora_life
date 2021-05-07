@@ -11,43 +11,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="320dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="121dp"
-            app:layout_constraintBottom_toTopOf="@+id/diary_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
 
         <EditText
             android:id="@+id/date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="416dp"
-            android:text="うえぃ"
+            android:text="2020/4/11"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.133"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="一言"
+            android:textSize="20dp"
+            app:layout_constraintStart_toStartOf="@+id/date_text"
+            app:layout_constraintTop_toBottomOf="@+id/date_text" />
+
         <EditText
             android:id="@+id/diary_text"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="45dp"
+            android:layout_height="160dp"
             android:layout_marginEnd="45dp"
             android:layout_marginBottom="209dp"
-            android:text="うう"
+            android:text="きょうは、ひまわり畑でスケッチをしました。たのしかったです。"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textView" />
 
         <Button
             android:id="@+id/diary_btn"
@@ -69,5 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/diary_text" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

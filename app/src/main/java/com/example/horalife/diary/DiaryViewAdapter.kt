@@ -1,4 +1,4 @@
-package com.example.horalife.library
+package com.example.horalife.diary
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner)
 
     override fun getItemCount(): Int = 8
 
-    override fun onBindViewHolder(holder: DiaryViewAdapter.DiaryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
 
         holder.binding.lifecycleOwner = lifecycleOwner
     }

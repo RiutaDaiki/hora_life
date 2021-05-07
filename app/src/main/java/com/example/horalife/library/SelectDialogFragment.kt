@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.horalife.camera.CameraFragment
 import com.example.horalife.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.horalife.mic.RecordFragment
 
 class SelectDialogFragment(): DialogFragment(){
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

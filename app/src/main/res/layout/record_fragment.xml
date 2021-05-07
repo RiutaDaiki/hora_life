@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.horalife.library.RecordViewModel" />
+            type="com.example.horalife.mic.RecordViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

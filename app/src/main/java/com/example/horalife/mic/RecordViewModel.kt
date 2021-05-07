@@ -1,4 +1,4 @@
-package com.example.horalife.library
+package com.example.horalife.mic
 
 import android.media.MediaRecorder
 import android.media.MediaRecorder.AudioSource.MIC

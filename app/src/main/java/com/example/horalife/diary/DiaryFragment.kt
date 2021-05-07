@@ -1,4 +1,4 @@
-package com.example.horalife.library
+package com.example.horalife.diary
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.horalife.EntrieFragment
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton

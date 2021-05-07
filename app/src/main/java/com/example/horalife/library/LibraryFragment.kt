@@ -1,33 +1,15 @@
 package com.example.horalife.library
 
-import android.Manifest
-import android.content.Context
-import android.content.Context.CAMERA_SERVICE
-import android.content.pm.PackageManager
-import android.graphics.ImageFormat
-import android.graphics.SurfaceTexture
-import android.hardware.camera2.CameraManager
 import android.media.ImageReader
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.horalife.EntrieFragment
-import com.example.horalife.MainActivity
 import com.example.horalife.R
-import com.example.horalife.camera.CameraFragment
 import com.example.horalife.databinding.LibraryFragmentBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.security.AccessController.getContext
+import com.example.horalife.diary.DiaryFragment
 
 class LibraryFragment : Fragment() {
     private val viewModel: LibraryViewModel by viewModels<LibraryViewModel>()
