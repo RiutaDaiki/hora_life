@@ -5,7 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
-class EntriesDialogFragment(): DialogFragment() {
+class CancelDialogFragment(): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
         val list = arrayOf("カメラ","録音")

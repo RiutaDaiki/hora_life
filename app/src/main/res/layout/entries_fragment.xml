@@ -16,13 +16,14 @@
             android:id="@+id/date_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="416dp"
+            android:layout_marginBottom="415dp"
             android:text="2020/4/11"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.133"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/camera" />
 
         <TextView
             android:id="@+id/textView"
@@ -66,6 +67,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/diary_text" />
+
+        <ImageView
+            android:id="@+id/camera"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="41dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/camera_256" />
+
+        <ImageView
+            android:id="@+id/mic"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/camera"
+            app:layout_constraintTop_toTopOf="@+id/camera"
+            app:srcCompat="@drawable/mic_256" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
