@@ -24,6 +24,7 @@ import java.time.LocalDate
  private val REQUEST_CODE = 1000
 
 class EntrieFragment: Fragment() {
+    lateinit var recordWay: String
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -38,18 +39,28 @@ class EntrieFragment: Fragment() {
         if(Build.VERSION.SDK_INT >= 23){
             val permissions = arrayOf(
                     Manifest.permission.RECORD_AUDIO,
-                    Manifest.permission.CAMERA
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
             )
             checkPermission(permissions, REQUEST_CODE)
         }
 
         binding.camera.setOnClickListener(){
             openVideoIntent()
+            recordWay = "動画"
+            binding.recordWayText.text = recordWay + " " + ":"
+
         }
         binding.mic.setOnClickListener(){
             openMicIntent()
+            recordWay = "音声"
+            binding.recordWayText.text = recordWay + " " + ":"
+
         }
         binding.dateText.setText(LocalDate.now().toString())
+        binding.diaryBtn.setOnClickListener(){
+            openGallery()
+        }
 
         return binding.root
     }
@@ -88,9 +99,17 @@ class EntrieFragment: Fragment() {
     }
 
     fun openMicIntent() {
-        Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
-                startActivityForResult(takePictureIntent, REQUEST_CODE)
+        Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION).also { takeSoundIntent ->
+            takeSoundIntent.resolveActivity(this.requireContext().packageManager).also {
+                startActivityForResult(takeSoundIntent, REQUEST_CODE)
+            }
+        }
+    }
+
+    private fun openGallery(){
+        Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI).also { galleryIntent ->
+            galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
+                startActivityForResult(galleryIntent, REQUEST_CODE)
             }
         }
     }
