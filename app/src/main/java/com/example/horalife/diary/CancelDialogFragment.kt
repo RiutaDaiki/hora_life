@@ -8,13 +8,12 @@ import androidx.fragment.app.DialogFragment
 class CancelDialogFragment(): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-        val list = arrayOf("カメラ","録音")
-        var selectItem = 0
 
-        builder.setSingleChoiceItems(list, 0, {dialog, which ->
-            selectItem = which
-        })
+        builder.setMessage("キャンセルしますか？動画、音声、下書きは保存されません。")
                 .setPositiveButton("削除"){dialog, _ ->
+
+                }
+                .setNegativeButton("削除しない"){dialog, _ ->
 
                 }
         return builder.create()

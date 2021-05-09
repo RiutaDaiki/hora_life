@@ -21,17 +21,9 @@ import com.example.horalife.camera.CameraFragment
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.library.LibraryFragment
 import java.time.LocalDate
-
-private val REQUEST_CAMERA__PERMISSION = 100
  private val REQUEST_CODE = 1000
-private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
-
 
 class EntrieFragment: Fragment() {
-    private var permissionToCameraAccepted = false
-    private var permissions: Array<String> = arrayOf(Manifest.permission.CAMERA)
-    private var permissionToRecordAccepted = false
-    private var recordPermissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -39,14 +31,9 @@ class EntrieFragment: Fragment() {
     ): View? {
         val binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val cancelBtn = binding.root.findViewById<Button>(R.id.diary_cancel_btn)
-        cancelBtn.setOnClickListener(){
+        binding.diaryCancelBtn.setOnClickListener(){
             showCancelConfirm()
         }
-        val camera = binding.root.findViewById<ImageView>(R.id.camera)
-        val mic = binding.root.findViewById<ImageView>(R.id.mic)
-        val date = binding.root.findViewById<EditText>(R.id.date_text)
-
 
         if(Build.VERSION.SDK_INT >= 23){
             val permissions = arrayOf(
@@ -56,13 +43,13 @@ class EntrieFragment: Fragment() {
             checkPermission(permissions, REQUEST_CODE)
         }
 
-        camera.setOnClickListener(){
-            openTakeVideoIntent()
+        binding.camera.setOnClickListener(){
+            openVideoIntent()
         }
-        mic.setOnClickListener(){
+        binding.mic.setOnClickListener(){
             openMicIntent()
         }
-        date.setText(LocalDate.now().toString())
+        binding.dateText.setText(LocalDate.now().toString())
 
         return binding.root
     }
@@ -85,13 +72,14 @@ class EntrieFragment: Fragment() {
     }
 
     private fun showCancelConfirm(){
-
+        val dialog = CancelDialogFragment()
+        dialog.show(parentFragmentManager, null)
     }
     private fun checkPermission(permissions: Array<String>, request_code: Int){
         ActivityCompat.requestPermissions(this.requireActivity(), permissions, request_code)
     }
 
-    fun openTakeVideoIntent() {
+    fun openVideoIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(takePictureIntent, REQUEST_CODE)
