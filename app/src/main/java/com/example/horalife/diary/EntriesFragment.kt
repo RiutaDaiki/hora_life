@@ -7,7 +7,9 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.media.ThumbnailUtils
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -25,12 +27,20 @@ import com.example.horalife.R
 import com.example.horalife.camera.CameraFragment
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.library.LibraryFragment
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.time.LocalDate
+import java.util.*
+
  private val REQUEST_CODE = 1000
 
 class EntrieFragment: Fragment() {
+    var thum: Bitmap? = null
     lateinit var recordWay: String
     lateinit var binding: EntriesFragmentBinding
+    val storageRef = Firebase.storage.reference
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -41,6 +51,9 @@ class EntrieFragment: Fragment() {
         binding.diaryCancelBtn.setOnClickListener(){
             showCancelConfirm()
         }
+
+        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
+
 
         if(Build.VERSION.SDK_INT >= 23){
             val permissions = arrayOf(
@@ -61,14 +74,20 @@ class EntrieFragment: Fragment() {
             openMicIntent()
             recordWay = "音声"
             binding.recordWayText.text = recordWay + " " + ":"
-
         }
         binding.dateText.setText(LocalDate.now().toString())
-        binding.diaryBtn.setOnClickListener(){
+        binding.galleryBtn.setOnClickListener(){
             openGallery()
         }
-//        binding.thumbnailView.setImageBitmap()
-//        val e : Bitmap = ThumbnailUtils.createVideoThumbnail()
+        binding.diaryBtn.setOnClickListener(){
+            imageView.setImageBitmap(thum)
+            val filename = UUID.randomUUID().toString() + ".jpg"
+            val sunegeRef = storageRef.child(filename)
+            val videoRef = storageRef.child("horanikki-video/$filename")
+            val baos = ByteArrayOutputStream()
+            val data = baos.toByteArray()
+            var uploadTask = videoRef.putBytes(data)
+        }
 
         return binding.root
     }
@@ -99,17 +118,14 @@ class EntrieFragment: Fragment() {
             REQUEST_CODE -> {
                 try {
                     resultData?.data?.also { uri ->
-                        val inputStream = context?.contentResolver?.openInputStream(uri)
-                        val image = BitmapFactory.decodeStream(inputStream)
+//                        val inputStream = context?.contentResolver?.openInputStream(uri)
+//                        val image = BitmapFactory.decodeStream(inputStream)
                         val columns: Array<String> = arrayOf(MediaStore.Video.Media.DATA)
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
                         val path = cursor?.getString(0)
-                        Log.d("ここーーーーーーーーーーーーーーーーーーーーー", path!!)
-                        Log.d("", "うんこ")
-                        val thum = ThumbnailUtils.createVideoThumbnail(path, MediaStore.Video.Thumbnails.MINI_KIND)
-                        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
-                        imageView.setImageBitmap(thum)
+                        thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)
+//                        imageView.setImageBitmap(thum)
                     }
                 } catch (e: Exception) {
                     Toast.makeText(context, "エラーが発生しました", Toast.LENGTH_LONG).show()
@@ -125,7 +141,6 @@ class EntrieFragment: Fragment() {
     private fun checkPermission(permissions: Array<String>, request_code: Int){
         ActivityCompat.requestPermissions(this.requireActivity(), permissions, request_code)
     }
-
     fun openVideoIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
@@ -133,7 +148,6 @@ class EntrieFragment: Fragment() {
             }
         }
     }
-
     fun openMicIntent() {
         Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION).also { takeSoundIntent ->
             takeSoundIntent.resolveActivity(this.requireContext().packageManager).also {
@@ -141,7 +155,6 @@ class EntrieFragment: Fragment() {
             }
         }
     }
-
     private fun openGallery(){
         Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI).also { galleryIntent ->
             galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
