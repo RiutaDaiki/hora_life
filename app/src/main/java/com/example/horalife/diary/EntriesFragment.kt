@@ -5,34 +5,23 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.media.ThumbnailUtils
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.Fragment
-import com.example.horalife.MainActivity
 import com.example.horalife.R
-import com.example.horalife.camera.CameraFragment
 import com.example.horalife.databinding.EntriesFragmentBinding
-import com.example.horalife.library.LibraryFragment
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.io.ByteArrayOutputStream
-import java.io.File
 import java.time.LocalDate
-import java.util.*
+import java.time.LocalDateTime
 
  private val REQUEST_CODE = 1000
 
@@ -80,13 +69,25 @@ class EntrieFragment: Fragment() {
             openGallery()
         }
         binding.diaryBtn.setOnClickListener(){
-            imageView.setImageBitmap(thum)
-            val filename = UUID.randomUUID().toString() + ".jpg"
-            val sunegeRef = storageRef.child(filename)
-            val videoRef = storageRef.child("horanikki-video/$filename")
-            val baos = ByteArrayOutputStream()
-            val data = baos.toByteArray()
-            var uploadTask = videoRef.putBytes(data)
+//            imageView.setImageBitmap(thum)
+//            val filename = UUID.randomUUID().toString() + ".jpg"
+//            val sunegeRef = storageRef.child(filename)
+//            val videoRef = storageRef.child("horanikki-video/$filename")
+//            val baos = ByteArrayOutputStream()
+//            val data = baos.toByteArray()
+//            var uploadTask = videoRef.putBytes(data)
+        }
+
+        binding.diaryBtn.setOnClickListener(){
+            val db = Firebase.firestore
+            val diaryItem = hashMapOf<String, String>(
+                    "dateTime" to binding.dateText.text.toString(),
+                    "comment" to binding.diaryText.text.toString(),
+                    "videoSeconds" to "01:34"
+            )
+            val localDateTime = LocalDateTime.now().toString()
+            db.collection("Diary items")
+                    .add(diaryItem)
         }
 
         return binding.root
