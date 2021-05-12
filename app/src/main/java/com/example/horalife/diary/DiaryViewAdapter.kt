@@ -11,7 +11,6 @@ import com.google.firebase.ktx.Firebase
 
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
-    lateinit var date: String
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
     }
 
@@ -26,15 +25,19 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner)
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         val db = Firebase.firestore
+        var dc : DiaryContent? = null
+            db.collection("Diary items")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for(document in result){
+                            val d =  document.data
 
-        db.collection("Diary items")
-            .get()
-            .addOnSuccessListener { result ->
-                for(document in result){
-                    date = document["dateTime"].toString()
-                    Log.d("いいいいいいいいいいいいいいいい", date)
-                }
-            }
+                            holder.binding.content = DiaryContent(d["dateTime"].toString(), d["comment"].toString())
+
+                            println(d["dateTime"])
+                        }
+                    }
+
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 }

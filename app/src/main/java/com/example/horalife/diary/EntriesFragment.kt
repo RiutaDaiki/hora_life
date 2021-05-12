@@ -82,8 +82,7 @@ class EntrieFragment: Fragment() {
             val db = Firebase.firestore
             val diaryItem = hashMapOf<String, String>(
                     "dateTime" to binding.dateText.text.toString(),
-                    "comment" to binding.diaryText.text.toString(),
-                    "videoSeconds" to "01:34"
+                    "comment" to binding.diaryText.text.toString()
             )
             val localDateTime = LocalDateTime.now().toString()
             db.collection("Diary items")

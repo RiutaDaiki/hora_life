@@ -24,6 +24,7 @@ class DiaryFragment: Fragment() {
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         adapter = DiaryViewAdapter(viewLifecycleOwner)
         binding.diaryRecycler.adapter = adapter
+
         return binding.root
     }
     private fun showEntries(){
