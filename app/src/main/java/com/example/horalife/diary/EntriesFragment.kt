@@ -19,8 +19,10 @@ import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.time.LocalDate
+import java.util.*
 
  private val REQUEST_CODE = 1000
 
@@ -33,14 +35,6 @@ class EntrieFragment: Fragment() {
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
-        binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.diaryCancelBtn.setOnClickListener(){
-            showCancelConfirm()
-        }
-
-//        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
-
         if(Build.VERSION.SDK_INT >= 23){
             val permissions = arrayOf(
                     Manifest.permission.RECORD_AUDIO,
@@ -50,6 +44,11 @@ class EntrieFragment: Fragment() {
             checkPermission(permissions, REQUEST_CODE)
         }
 
+        binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.diaryCancelBtn.setOnClickListener(){
+            showCancelConfirm()
+        }
         binding.camera.setOnClickListener(){
             openVideoIntent()
             recordWay = "動画"
@@ -66,16 +65,15 @@ class EntrieFragment: Fragment() {
             openGallery()
         }
         binding.diaryBtn.setOnClickListener(){
-            val db = Firebase.firestore
             val baos = ByteArrayOutputStream()
             thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
-            val bitMapData = baos.toByteArray()
-            val diaryItem = hashMapOf<String, String>(
-                    "dateTime" to binding.dateText.text.toString(),
-                    "comment" to binding.diaryText.text.toString()
-            )
-            val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), bitMapData)
-            val blb = 
+            val data = baos.toByteArray()
+            val path = UUID.randomUUID().toString() + ".png"
+            val storageRef = Firebase.storage.reference
+            val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
+            uploadImageRef.putBytes(data)
+            val db = Firebase.firestore
+            val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path)
             db.collection("Diary items")
                     .add(contents)
         }

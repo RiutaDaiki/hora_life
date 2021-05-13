@@ -21,6 +21,8 @@ class DiaryFragment: Fragment() {
         fab.setOnClickListener(){
             showEntries()
         }
+        binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         val db = Firebase.firestore
         db.collection("Diary items")
@@ -30,15 +32,14 @@ class DiaryFragment: Fragment() {
 
                     for(document in result){
                         val d =  document.data
-                        val addContent = DiaryContent(d["dateTime"].toString(), d["comment"].toString(), d["thumbnail"] as ByteArray)
+                        val addContent = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString())
                         contentList.add(addContent)
                     }
-                    adapter = DiaryViewAdapter(viewLifecycleOwner, contentList)
+                    adapter = DiaryViewAdapter(viewLifecycleOwner, contentList, context)
                     binding.diaryRecycler.adapter = adapter
                 }
         
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
+
 
         return binding.root
     }

@@ -1,19 +1,22 @@
 package com.example.horalife.diary
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.util.Log
+import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.example.horalife.R
 import com.example.horalife.databinding.ItemDiaryBinding
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlin.properties.Delegates
+import com.google.firebase.storage.ktx.storage
 
-class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>)
+class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>, private val context: Context?)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
-
+    lateinit var bitmap: Bitmap
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
     }
 
@@ -28,13 +31,25 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val c
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         holder.binding.content = contentList[position]
-        val byteArray: ByteArray = contentList[position].thumbnail
-        val bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-        holder.binding.thumbnail.setImageBitmap(bm)
+        val storageRef = Firebase.storage.reference
+        val thumbnailRef = storageRef.child("horanikki-thumbnail/${contentList[position].pngFileName}")
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
+            holder.binding.thumbnail.setImageBitmap(bitmap)
+        }.addOnFailureListener {
+            val drawable = ContextCompat.getDrawable(context!!, R.drawable.no_image)
+            val bitmapDrawable = drawable as BitmapDrawable
+            bitmap = bitmapDrawable.bitmap
+            holder.binding.thumbnail.setImageBitmap(bitmap)
+                }
+        val drawable = ContextCompat.getDrawable(context!!, R.drawable.no_image)
+        val bitmapDrawable = drawable as BitmapDrawable
+        val noimage = bitmapDrawable.bitmap
+//        holder.binding.thumbnail.setImageBitmap(noimage)
+
         holder.binding.lifecycleOwner = lifecycleOwner
     }
-
-
 }
 
 
