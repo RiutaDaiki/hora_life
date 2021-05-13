@@ -30,7 +30,7 @@ class DiaryFragment: Fragment() {
 
                     for(document in result){
                         val d =  document.data
-                        val addContent = DiaryContent(d["dateTime"].toString(), d["comment"].toString())
+                        val addContent = DiaryContent(d["dateTime"].toString(), d["comment"].toString(), d["thumbnail"] as ByteArray)
                         contentList.add(addContent)
                     }
                     adapter = DiaryViewAdapter(viewLifecycleOwner, contentList)

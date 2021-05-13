@@ -19,17 +19,15 @@ import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import java.io.ByteArrayOutputStream
 import java.time.LocalDate
-import java.time.LocalDateTime
 
  private val REQUEST_CODE = 1000
 
 class EntrieFragment: Fragment() {
-    var thum: Bitmap? = null
+    var thum : Bitmap? = null
     lateinit var recordWay: String
     lateinit var binding: EntriesFragmentBinding
-    val storageRef = Firebase.storage.reference
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -41,8 +39,7 @@ class EntrieFragment: Fragment() {
             showCancelConfirm()
         }
 
-        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
-
+//        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
 
         if(Build.VERSION.SDK_INT >= 23){
             val permissions = arrayOf(
@@ -69,24 +66,18 @@ class EntrieFragment: Fragment() {
             openGallery()
         }
         binding.diaryBtn.setOnClickListener(){
-//            imageView.setImageBitmap(thum)
-//            val filename = UUID.randomUUID().toString() + ".jpg"
-//            val sunegeRef = storageRef.child(filename)
-//            val videoRef = storageRef.child("horanikki-video/$filename")
-//            val baos = ByteArrayOutputStream()
-//            val data = baos.toByteArray()
-//            var uploadTask = videoRef.putBytes(data)
-        }
-
-        binding.diaryBtn.setOnClickListener(){
             val db = Firebase.firestore
+            val baos = ByteArrayOutputStream()
+            thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            val bitMapData = baos.toByteArray()
             val diaryItem = hashMapOf<String, String>(
                     "dateTime" to binding.dateText.text.toString(),
                     "comment" to binding.diaryText.text.toString()
             )
-            val localDateTime = LocalDateTime.now().toString()
+            val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), bitMapData)
+            val blb = 
             db.collection("Diary items")
-                    .add(diaryItem)
+                    .add(contents)
         }
 
         return binding.root
@@ -96,14 +87,10 @@ class EntrieFragment: Fragment() {
             permissions: Array<String>,
             grantResults: IntArray
     ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when(requestCode){
             REQUEST_CODE -> for (i in 0..permissions.size){
                 if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(context, "パーミッションクリア", Toast.LENGTH_SHORT)
                 } else {
-                    Toast.makeText(context, "パーミッションフェイルど", Toast.LENGTH_SHORT)
-
                 }
             }
         }
@@ -118,14 +105,15 @@ class EntrieFragment: Fragment() {
             REQUEST_CODE -> {
                 try {
                     resultData?.data?.also { uri ->
-//                        val inputStream = context?.contentResolver?.openInputStream(uri)
-//                        val image = BitmapFactory.decodeStream(inputStream)
                         val columns: Array<String> = arrayOf(MediaStore.Video.Media.DATA)
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
                         val path = cursor?.getString(0)
+
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)
-//                        imageView.setImageBitmap(thum)
+                        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
+
+                        imageView.setImageBitmap(thum)
                     }
                 } catch (e: Exception) {
                     Toast.makeText(context, "エラーが発生しました", Toast.LENGTH_LONG).show()

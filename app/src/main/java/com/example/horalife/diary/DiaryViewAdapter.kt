@@ -1,5 +1,6 @@
 package com.example.horalife.diary
 
+import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,7 +28,9 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val c
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         holder.binding.content = contentList[position]
-
+        val byteArray: ByteArray = contentList[position].thumbnail
+        val bm = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+        holder.binding.thumbnail.setImageBitmap(bm)
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 
