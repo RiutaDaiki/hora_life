@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.databinding.ItemDiaryBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.properties.Delegates
 
-class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner)
+class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
+
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
     }
 
@@ -21,23 +23,23 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner)
         return DiaryViewHolder(listItemBinding)
     }
 
-    override fun getItemCount(): Int = 8
+    override fun getItemCount(): Int = contentList.size
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        val db = Firebase.firestore
-        var dc : DiaryContent? = null
-            db.collection("Diary items")
-                    .get()
-                    .addOnSuccessListener { result ->
-                        for(document in result){
-                            val d =  document.data
-
-                            holder.binding.content = DiaryContent(d["dateTime"].toString(), d["comment"].toString())
-
-                            println(d["dateTime"])
-                        }
-                    }
+        holder.binding.content = contentList[position]
 
         holder.binding.lifecycleOwner = lifecycleOwner
     }
+
+
 }
+
+
+
+
+
+
+
+
+
+

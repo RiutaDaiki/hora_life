@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class DiaryFragment: Fragment() {
     private lateinit var adapter: DiaryViewAdapter
@@ -20,10 +22,23 @@ class DiaryFragment: Fragment() {
             showEntries()
         }
 
+        val db = Firebase.firestore
+        db.collection("Diary items")
+                .get()
+                .addOnSuccessListener { result ->
+                    var contentList = mutableListOf<DiaryContent>()
+
+                    for(document in result){
+                        val d =  document.data
+                        val addContent = DiaryContent(d["dateTime"].toString(), d["comment"].toString())
+                        contentList.add(addContent)
+                    }
+                    adapter = DiaryViewAdapter(viewLifecycleOwner, contentList)
+                    binding.diaryRecycler.adapter = adapter
+                }
+        
         binding.lifecycleOwner = viewLifecycleOwner
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
-        adapter = DiaryViewAdapter(viewLifecycleOwner)
-        binding.diaryRecycler.adapter = adapter
 
         return binding.root
     }
