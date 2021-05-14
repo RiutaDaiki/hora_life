@@ -10,7 +10,6 @@ import android.media.ThumbnailUtils
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,7 +62,7 @@ class EntrieFragment: Fragment() {
             binding.recordWayText.text = recordWay + " " + ":"
 
         }
-        
+
         binding.dateText.setText(LocalDate.now().toString())
 
         binding.galleryBtn.setOnClickListener(){
@@ -114,11 +113,6 @@ class EntrieFragment: Fragment() {
                 }
             }
         }
-    }
-
-    private fun showCancelConfirm(){
-        val dialog = CancelDialogFragment()
-        dialog.show(parentFragmentManager, null)
     }
 
     private fun checkPermission(permissions: Array<String>, request_code: Int){
