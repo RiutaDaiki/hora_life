@@ -43,11 +43,9 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val c
             bitmap = bitmapDrawable.bitmap
             holder.binding.thumbnail.setImageBitmap(bitmap)
                 }
-        val drawable = ContextCompat.getDrawable(context!!, R.drawable.no_image)
-        val bitmapDrawable = drawable as BitmapDrawable
-        val noimage = bitmapDrawable.bitmap
-//        holder.binding.thumbnail.setImageBitmap(noimage)
-
+        holder.binding.wrapper.setOnClickListener(){
+            //日記に詳細表示画面
+        }
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 }
