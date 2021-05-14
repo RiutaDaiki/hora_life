@@ -10,6 +10,7 @@ import android.media.ThumbnailUtils
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,23 +57,13 @@ class EntrieFragment: Fragment() {
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.diaryCancelBtn.setOnClickListener(){
-            showCancelConfirm()
-        }
-
         binding.camera.setOnClickListener(){
             openVideoIntent()
             recordWay = "動画"
             binding.recordWayText.text = recordWay + " " + ":"
 
         }
-
-        binding.mic.setOnClickListener(){
-            openMicIntent()
-            recordWay = "音声"
-            binding.recordWayText.text = recordWay + " " + ":"
-        }
-
+        
         binding.dateText.setText(LocalDate.now().toString())
 
         binding.galleryBtn.setOnClickListener(){
@@ -81,6 +72,7 @@ class EntrieFragment: Fragment() {
 
         binding.diaryBtn.setOnClickListener(){
             storeThumbnail()
+            backToDiary()
         }
 
         return binding.root
@@ -169,6 +161,14 @@ class EntrieFragment: Fragment() {
         val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path)
         db.collection("Diary items")
                 .add(contents)
+    }
+
+     fun backToDiary(){
+            val diary = DiaryFragment()
+            val fragmentTransaction = this.parentFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment_container, diary)
+            fragmentTransaction.commit()
+
     }
 }
 

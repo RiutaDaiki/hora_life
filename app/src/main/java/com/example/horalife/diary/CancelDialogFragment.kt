@@ -9,9 +9,9 @@ class CancelDialogFragment(): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
 
-        builder.setMessage("キャンセルしますか？動画、音声、下書きは保存されません。")
-                .setPositiveButton("削除"){dialog, _ ->
-
+        builder.setMessage("キャンセルしますか？下書きは保存されません。")
+                .setPositiveButton("はい"){dialog, _ ->
+                    EntrieFragment().backToDiary()
                 }
                 .setNegativeButton("削除しない"){dialog, _ ->
 
