@@ -1,6 +1,7 @@
 package com.example.horalife.diary
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,27 +21,49 @@ class DiaryFragment: Fragment() {
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
 
-            val db = Firebase.firestore
-            db.collection("Diary items")
-                    .get()
-                    .addOnSuccessListener { result ->
-                        var contentList = mutableListOf<DiaryContent>()
+//                    val db = Firebase.firestore
+//            db.collection("Diary items")
+//                    .get()
+//                    .addOnSuccessListener { result ->
+//                        var contentList = mutableListOf<DiaryContent>()
+//
+//                        for (document in result) {
+//                            val d = document.data
+//                            val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString())
+//                            contentList.add(content)
+//                        }
+//                        adapter = DiaryViewAdapter(viewLifecycleOwner, contentList, this.requireContext())
+//                        binding.diaryRecycler.adapter = adapter
+//                    }
+        val f = mutableListOf<DiaryContent>()
+        val lam = {list: MutableList<DiaryContent> -> Unit}
 
-                        for (document in result) {
-                            val d = document.data
-                            val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString())
-                            contentList.add(content)
-                        }
-                        adapter = DiaryViewAdapter(viewLifecycleOwner, contentList, this.requireContext())
-                        binding.diaryRecycler.adapter = adapter
-                    }
+       DiaryRepository().getDiaryInfo(lam)
+//        adapter = DiaryViewAdapter(viewLifecycleOwner, lam, this.requireContext())
+        binding.diaryRecycler.adapter = adapter
 
         return binding.root
     }
+
      fun showEntries(){
         val entries = EntrieFragment()
         val fragmentTransaction = parentFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, entries)
         fragmentTransaction.commit()
     }
+
+    fun getDiaryInfo(list : MutableList<DiaryContent>){
+
+        val db = Firebase.firestore
+        db.collection("Diary items")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        val d = document.data
+                        val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString())
+                        list.add(content)
+                    }
+                }
+    }
+
 }
