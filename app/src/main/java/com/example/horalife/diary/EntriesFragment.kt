@@ -54,19 +54,9 @@ class EntrieFragment: Fragment() {
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
-
-        binding.camera.setOnClickListener(){
-            openVideoIntent()
-            recordWay = "動画"
-            binding.recordWayText.text = recordWay + " " + ":"
-
-        }
+        binding.view = this
 
         binding.dateText.setText(LocalDate.now().toString())
-
-        binding.galleryBtn.setOnClickListener(){
-            openGallery()
-        }
 
         binding.diaryBtn.setOnClickListener(){
             storeThumbnail()
@@ -103,7 +93,6 @@ class EntrieFragment: Fragment() {
                         cursor?.moveToFirst()
                         val path = cursor?.getString(0)
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)!!
-                        val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)
                     }
@@ -118,7 +107,7 @@ class EntrieFragment: Fragment() {
         ActivityCompat.requestPermissions(this.requireActivity(), permissions, request_code)
     }
 
-    private fun openVideoIntent() {
+     fun openVideoIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(takePictureIntent, REQUEST_CODE)
@@ -134,7 +123,7 @@ class EntrieFragment: Fragment() {
         }
     }
 
-    private fun openGallery(){
+    fun openGallery(){
         Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI).also { galleryIntent ->
             galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
                 startActivityForResult(galleryIntent, REQUEST_CODE)
@@ -161,7 +150,6 @@ class EntrieFragment: Fragment() {
             val fragmentTransaction = this.parentFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragment_container, diary)
             fragmentTransaction.commit()
-
     }
 }
 

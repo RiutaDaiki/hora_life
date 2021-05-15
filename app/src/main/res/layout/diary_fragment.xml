@@ -12,6 +12,10 @@
             name="viewmodel"
             type="com.example.horalife.diary.MainDiaryViewModel" />
 
+        <variable
+            name="view"
+            type="com.example.horalife.diary.DiaryFragment" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +38,7 @@
             android:layout_marginBottom="80dp"
             android:backgroundTint="@color/oudoiro"
             android:clickable="true"
+            android:onClick="@{() -> view.showEntries()}"
             app:backgroundTint="@color/oudoiro"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

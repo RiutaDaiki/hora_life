@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="view"
+            type="com.example.horalife.diary.EntrieFragment" />
 
     </data>
 
@@ -18,6 +21,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="65dp"
             android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{() -> view.openVideoIntent()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/camera_256" />
@@ -91,6 +95,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:text="ギャラリーから選択"
+            android:onClick="@{() -> view.openGallery()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
