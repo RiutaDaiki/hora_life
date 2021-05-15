@@ -35,7 +35,7 @@ class DiaryFragment: Fragment() {
                         val addContent = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString())
                         contentList.add(addContent)
                     }
-                    adapter = DiaryViewAdapter(viewLifecycleOwner, contentList, context)
+                    adapter = DiaryViewAdapter(viewLifecycleOwner, contentList, this.requireContext())
                     binding.diaryRecycler.adapter = adapter
                 }
         

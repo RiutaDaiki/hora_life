@@ -53,7 +53,6 @@ class EntrieFragment: Fragment() {
         noImage = bitmapDrawable.bitmap
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
-        binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.camera.setOnClickListener(){
@@ -106,7 +105,7 @@ class EntrieFragment: Fragment() {
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)!!
                         val imageView = binding.root.findViewById<ImageView>(R.id.thumbnail_view)
                         binding.diaryBtn.isEnabled = true
-                        imageView.setImageBitmap(thum)
+                        binding.thumbnailView.setImageBitmap(thum)
                     }
                 } catch (e: Exception) {
                     Toast.makeText(context, "エラーが発生しました", Toast.LENGTH_LONG).show()

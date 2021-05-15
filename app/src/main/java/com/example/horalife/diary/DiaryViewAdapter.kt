@@ -14,7 +14,7 @@ import com.example.horalife.databinding.ItemDiaryBinding
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>, private val context: Context?)
+class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>, private val context: Context)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
     lateinit var bitmap: Bitmap
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
