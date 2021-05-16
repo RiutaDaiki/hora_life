@@ -17,11 +17,23 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val navView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val navController = findNavController(R.id.nav_host_fragment)
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.nav_example, R.id.nav_library, R.id.nav_you))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_example, R.id.nav_diary, R.id.nav_you
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
+
+    override fun onBackPressed() {
+        if (!findNavController(R.id.nav_host_fragment).popBackStack()) {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean =
+        findNavController(R.id.nav_host_fragment).navigateUp()
 
 }
 

@@ -2,20 +2,31 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/nav_example"
-    android:id="@+id/navigation_graph">
-    <fragment android:id="@+id/nav_example"
-        tools:layout="@layout/example_fragment"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/nav_example">
+    <fragment
+        android:id="@+id/nav_example"
         android:name="com.example.horalife.example.ExampleFragment"
-        android:label="お手本"/>
+        android:label="お手本"
+        tools:layout="@layout/example_fragment" />
 
-    <fragment android:id="@+id/nav_library"
-        tools:layout="@layout/library_fragment"
-        android:name="com.example.horalife.library.LibraryFragment"
-        android:label="法螺日記"/>
+    <fragment
+        android:id="@+id/nav_diary"
+        android:name="com.example.horalife.diary.DiaryFragment"
+        android:label="法螺日記"
+        tools:layout="@layout/library_fragment">
+        <action
+            android:id="@+id/action_nav_diary_to_entrieFragment"
+            app:destination="@id/entrieFragment" />
+    </fragment>
 
-    <fragment android:id="@+id/nav_you"
-        tools:layout="@layout/you_fragment"
+    <fragment
+        android:id="@+id/nav_you"
         android:name="com.example.horalife.You.YouFragment"
-        android:label="あなた"/>
+        android:label="あなた"
+        tools:layout="@layout/you_fragment" />
+    <fragment
+        android:id="@+id/entrieFragment"
+        android:name="com.example.horalife.diary.EntrieFragment"
+        android:label="EntrieFragment" />
 </navigation>
