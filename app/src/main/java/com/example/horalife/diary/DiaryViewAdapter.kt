@@ -14,6 +14,7 @@ import com.example.horalife.databinding.ItemDiaryBinding
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
+// TODO: private val contentList: List<DiaryContent>はListを直接渡すのではなく、ViewModelごと渡してしまう
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>, private val context: Context)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
     lateinit var bitmap: Bitmap
