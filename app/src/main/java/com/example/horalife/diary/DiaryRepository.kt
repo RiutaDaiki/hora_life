@@ -26,9 +26,8 @@ class DiaryRepository {
                         d["pngFileName"].toString()
                     )
                     mList.add(content)
-                    list(mList)
-
                 }
+                list(mList)
             }
 
 

@@ -15,10 +15,15 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 // TODO: private val contentList: List<DiaryContent>はListを直接渡すのではなく、ViewModelごと渡してしまう
-class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>, private val context: Context)
-    : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
+class DiaryViewAdapter(
+    private val lifecycleOwner: LifecycleOwner,
+    private val viewModel: DiaryViewModel,
+    private val context: Context
+) : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
     lateinit var bitmap: Bitmap
-    inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
+
+    inner class DiaryViewHolder(val binding: ItemDiaryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryViewHolder {
@@ -28,12 +33,13 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val c
         return DiaryViewHolder(listItemBinding)
     }
 
-    override fun getItemCount(): Int = contentList.size
+    override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        holder.binding.content = contentList[position]
+        holder.binding.content = viewModel.diaryList.value?.get(position)
         val storageRef = Firebase.storage.reference
-        val thumbnailRef = storageRef.child("horanikki-thumbnail/${contentList[position].pngFileName}")
+        val thumbnailRef =
+            storageRef.child("horanikki-thumbnail/${viewModel.diaryList.value?.get(position)?.pngFileName}")
         val ONE_MEGABYTE: Long = 1024 * 1024
         thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
             bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
@@ -43,8 +49,8 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val c
             val bitmapDrawable = drawable as BitmapDrawable
             bitmap = bitmapDrawable.bitmap
             holder.binding.thumbnail.setImageBitmap(bitmap)
-                }
-        holder.binding.wrapper.setOnClickListener(){
+        }
+        holder.binding.wrapper.setOnClickListener() {
             //日記に詳細表示画面
         }
         holder.binding.lifecycleOwner = lifecycleOwner

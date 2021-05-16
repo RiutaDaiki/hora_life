@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
@@ -15,6 +16,8 @@ import com.google.firebase.ktx.Firebase
 class DiaryFragment : Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
+
+    private val viewModel: DiaryViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,16 +49,14 @@ class DiaryFragment : Fragment() {
 //                        binding.diaryRecycler.adapter = adapter
 //                    }
 
-        // TODO: ViewModelにおく(val diaryList = MutableLiveData<List<DiaryContent>>)
+        // TODO: ViewModelにおく(val diaryList = MutableLiveData<List<DiaryContent>>())
         // TODO: diaryList.observeしてObserverの中で${adapter.notifyDataSetChanged()}する
-        val diaryList = mutableListOf<DiaryContent>()
-        adapter = DiaryViewAdapter(viewLifecycleOwner, diaryList, this.requireContext())
-        DiaryRepository().getDiaryInfo {
-            diaryList.addAll(it)
+        adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext())
+        binding.diaryRecycler.adapter = adapter
+
+        viewModel.diaryList.observe(viewLifecycleOwner) {
             adapter.notifyDataSetChanged()
         }
-//        adapter = DiaryViewAdapter(viewLifecycleOwner, lam, this.requireContext())
-        binding.diaryRecycler.adapter = adapter
 
         return binding.root
     }
