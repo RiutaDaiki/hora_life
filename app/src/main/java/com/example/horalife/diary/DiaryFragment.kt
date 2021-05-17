@@ -25,21 +25,23 @@ class DiaryFragment: Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.view = this
 
-        val lam = {list: MutableList<DiaryContent> -> Unit}
-
-       DiaryRepository().getDiaryInfo(lam)
-        adapter = DiaryViewAdapter(viewLifecycleOwner, DiaryViewModel(), this.requireContext())
+        adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext())
         binding.diaryRecycler.adapter = adapter
 
         viewModel.diaryList.observe(viewLifecycleOwner){
             //viewModelのdiaryListを監視して変化を感知したらnotifyDataSetChanged
             adapter.notifyDataSetChanged()
         }
+        viewModel.isRowClicked.observe(viewLifecycleOwner){
+            findNavController().navigate(R.id.action_diary_to_diary_detail)
+        }
         return binding.root
     }
 
      fun showEntries(){
         findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
-    }
+         println("えんとりー")
+
+     }
 
 }

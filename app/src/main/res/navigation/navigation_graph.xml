@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nav_diary_to_entriesFragment"
             app:destination="@+id/entries_fragment"/>
+        <action
+            android:id="@+id/action_diary_to_diary_detail"
+            app:destination="@+id/diary_detail_fragment"/>
     </fragment>
 
     <fragment android:id="@+id/nav_you"
@@ -26,5 +29,19 @@
     <fragment
         android:id="@+id/entries_fragment"
         android:name="com.example.horalife.diary.EntrieFragment"
-        android:label="EntriesFragment"/>
+        android:label="EntriesFragment">
+        <action
+            android:id="@+id/action_entries_to_diary"
+            app:destination="@+id/nav_diary"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/diary_detail_fragment"
+        android:name="com.example.horalife.diary.DiaryDetailFragment"
+        android:label="ディテール">
+        <action
+            android:id="@+id/action_diary_detail_to_diary"
+            app:destination="@+id/nav_diary"/>
+    </fragment>
+
 </navigation>

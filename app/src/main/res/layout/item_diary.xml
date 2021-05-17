@@ -10,10 +10,15 @@
         <variable
             name="viewmodel"
             type="com.example.horalife.diary.DiaryViewModel" />
+        <variable
+            name="view"
+            type="com.example.horalife.diary.DiaryFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/wrapper"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

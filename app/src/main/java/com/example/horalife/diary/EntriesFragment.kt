@@ -17,6 +17,7 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -54,6 +55,7 @@ class EntrieFragment: Fragment() {
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.view = this
 
         binding.dateText.setText(LocalDate.now().toString())
 
@@ -144,11 +146,9 @@ class EntrieFragment: Fragment() {
                 .add(contents)
     }
 
+    //navigationを使った遷移にしたほうがいいかも
      fun backToDiary(){
-            val diary = DiaryFragment()
-            val fragmentTransaction = this.parentFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.fragment_container, diary)
-            fragmentTransaction.commit()
+            findNavController().navigate(R.id.action_entries_to_diary)
     }
 }
 
