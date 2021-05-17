@@ -54,7 +54,6 @@ class EntrieFragment: Fragment() {
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.view = this
 
         binding.dateText.setText(LocalDate.now().toString())
 

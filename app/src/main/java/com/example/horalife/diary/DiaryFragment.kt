@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
@@ -22,11 +23,11 @@ class DiaryFragment: Fragment() {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.view = this
 
         val lam = {list: MutableList<DiaryContent> -> Unit}
 
        DiaryRepository().getDiaryInfo(lam)
-        val f = mutableListOf<DiaryContent>()
         adapter = DiaryViewAdapter(viewLifecycleOwner, DiaryViewModel(), this.requireContext())
         binding.diaryRecycler.adapter = adapter
 
@@ -38,10 +39,7 @@ class DiaryFragment: Fragment() {
     }
 
      fun showEntries(){
-        val entries = EntrieFragment()
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, entries)
-        fragmentTransaction.commit()
+        findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
     }
 
 }
