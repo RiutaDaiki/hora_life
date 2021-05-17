@@ -29,7 +29,6 @@ class DiaryFragment: Fragment() {
         binding.diaryRecycler.adapter = adapter
 
         viewModel.diaryList.observe(viewLifecycleOwner){
-            //viewModelのdiaryListを監視して変化を感知したらnotifyDataSetChanged
             adapter.notifyDataSetChanged()
         }
         viewModel.isRowClicked.observe(viewLifecycleOwner){
@@ -40,8 +39,6 @@ class DiaryFragment: Fragment() {
 
      fun showEntries(){
         findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
-         println("えんとりー")
-
      }
 
 }

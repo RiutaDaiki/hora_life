@@ -1,9 +1,11 @@
 package com.example.horalife.diary
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.lang.Exception
@@ -30,18 +32,16 @@ class DiaryRepository {
                     }
     }
 
-//    fun storeThumbnail(){
-//        val baos = ByteArrayOutputStream()
-//        thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
-//        val data = baos.toByteArray()
-//        val path = UUID.randomUUID().toString() + ".png"
-//        val storageRef = Firebase.storage.reference
-//        val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
-//        uploadImageRef.putBytes(data)
-//        val db = Firebase.firestore
-//        val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path)
-//        db.collection("Diary items")
-//                .add(contents)
-//    }
+    fun diaryBitMap(lamda: (Bitmap?) -> Unit, thumbnailRef: StorageReference){
+        val storageRef = Firebase.storage.reference
+        //
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+
+            lamda(BitmapFactory.decodeByteArray(it, 0, it.size))
+        }.addOnFailureListener {
+            lamda(null)
+        }
+    }
 
 }

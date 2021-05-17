@@ -60,7 +60,7 @@ class EntrieFragment: Fragment() {
         binding.dateText.setText(LocalDate.now().toString())
 
         binding.diaryBtn.setOnClickListener(){
-            storeThumbnail()
+            EntriesViewModel().storeThumbnail(thum, binding)
             backToDiary()
         }
 
@@ -132,21 +132,6 @@ class EntrieFragment: Fragment() {
         }
     }
 
-    fun storeThumbnail(){
-        val baos = ByteArrayOutputStream()
-        thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        val data = baos.toByteArray()
-        val path = UUID.randomUUID().toString() + ".png"
-        val storageRef = Firebase.storage.reference
-        val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
-        uploadImageRef.putBytes(data)
-        val db = Firebase.firestore
-        val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path)
-        db.collection("Diary items")
-                .add(contents)
-    }
-
-    //navigationを使った遷移にしたほうがいいかも
      fun backToDiary(){
             findNavController().navigate(R.id.action_entries_to_diary)
     }

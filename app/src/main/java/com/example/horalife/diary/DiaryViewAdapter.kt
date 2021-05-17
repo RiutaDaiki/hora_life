@@ -33,28 +33,23 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     }
 
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
-
+lateinit var f :Bitmap
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         holder.binding.content = viewModel.diaryList.value?.get(position)
         holder.binding.viewmodel = DiaryViewModel()
         holder.binding.wrapper.setOnClickListener {
             viewModel.onClickRow()
         }
-
-        val storageRef = Firebase.storage.reference
-        val thumbnailRef = storageRef.child("horanikki-thumbnail/${viewModel.diaryList.value?.get(position)?.pngFileName}")
-        val ONE_MEGABYTE: Long = 1024 * 1024
-        thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            bitmap = BitmapFactory.decodeByteArray(it, 0, it.size)
-            holder.binding.thumbnail.setImageBitmap(bitmap)
-        }.addOnFailureListener {
-            val drawable = ContextCompat.getDrawable(context!!, R.drawable.no_image)
-            val bitmapDrawable = drawable as BitmapDrawable
-            bitmap = bitmapDrawable.bitmap
-            holder.binding.thumbnail.setImageBitmap(bitmap)
-                }
+        viewModel.
+        holder.binding.thumbnail.setImageBitmap(viewModel.bitmap.value ?: createNoImage())
 
         holder.binding.lifecycleOwner = lifecycleOwner
+    }
+
+    private fun createNoImage(): Bitmap{
+        val drawable = ContextCompat.getDrawable(context, R.drawable.no_image)
+        val bitmapDrawable = drawable as BitmapDrawable
+        return bitmapDrawable.bitmap
     }
 }
 
