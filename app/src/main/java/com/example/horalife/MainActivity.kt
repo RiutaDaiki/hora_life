@@ -23,6 +23,15 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
+    override fun onBackPressed() {
+        if (!findNavController(R.id.nav_host_fragment).popBackStack()){
+            super.onBackPressed()
+        }
+    }
+
+    override fun onSupportNavigateUp(): Boolean =
+            findNavController(R.id.nav_host_fragment).navigateUp()
+
 }
 
 

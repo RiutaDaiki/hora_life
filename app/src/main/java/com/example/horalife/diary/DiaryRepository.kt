@@ -19,16 +19,15 @@ class DiaryRepository {
                     .addOnSuccessListener { result ->
 
                         val mList = mutableListOf<DiaryContent>()
+
                         for (document in result) {
                             val d = document.data
                             val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString())
                             mList.add(content)
-                            list(mList)
 
                         }
+                        list(mList)
                     }
-        
-
     }
 
 //    fun storeThumbnail(){
@@ -44,4 +43,5 @@ class DiaryRepository {
 //        db.collection("Diary items")
 //                .add(contents)
 //    }
+
 }
