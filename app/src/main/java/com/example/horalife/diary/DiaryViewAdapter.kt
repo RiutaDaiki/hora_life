@@ -7,18 +7,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
 import com.example.horalife.databinding.ItemDiaryBinding
-import kotlin.properties.Delegates
 
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
                        private val viewModel: DiaryViewModel,
                        private val context: Context)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
-    lateinit var refString: String
-    lateinit var bitmap: Bitmap
 
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
     }
@@ -35,7 +31,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         holder.binding.content = viewModel.diaryList.value?.get(position)
         holder.binding.viewmodel = DiaryViewModel()
         holder.binding.wrapper.setOnClickListener {
-            viewModel.onClickRow()
+            viewModel.onClickRow(position)
         }
 
         viewModel.diaryBitMap(position, {

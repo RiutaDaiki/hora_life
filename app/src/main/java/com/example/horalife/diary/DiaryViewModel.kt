@@ -1,18 +1,10 @@
 package com.example.horalife.diary
 
-import android.app.usage.UsageEvents
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
-import android.util.Log
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.horalife.R
-import com.google.firebase.events.Event
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 
 class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): ViewModel() {
@@ -37,10 +29,10 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
         }
     }
 
-    val isRowClicked = MutableLiveData<Boolean>()
+    val isRowClicked = MutableLiveData<Int>()
 
-    fun onClickRow() {
-        isRowClicked.value = true
+    fun onClickRow(rowPosition: Int) {
+        isRowClicked.value = rowPosition
     }
 
 

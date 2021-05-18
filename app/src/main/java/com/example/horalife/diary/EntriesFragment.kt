@@ -10,6 +10,7 @@ import android.media.ThumbnailUtils
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,6 +94,7 @@ class EntrieFragment: Fragment() {
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
                         val path = cursor?.getString(0)
+                        Log.d("ぱすぱす", path!!)
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)!!
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)
