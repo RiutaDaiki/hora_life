@@ -1,7 +1,6 @@
 package com.example.horalife.diary
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 class DiaryFragment: Fragment() {
     private lateinit var adapter: DiaryViewAdapter
@@ -30,6 +27,7 @@ class DiaryFragment: Fragment() {
 
         viewModel.diaryList.observe(viewLifecycleOwner){
             adapter.notifyDataSetChanged()
+            DiaryViewAdapter(viewLifecycleOwner, viewModel, requireContext())
         }
         viewModel.isRowClicked.observe(viewLifecycleOwner){
             findNavController().navigate(R.id.action_diary_to_diary_detail)

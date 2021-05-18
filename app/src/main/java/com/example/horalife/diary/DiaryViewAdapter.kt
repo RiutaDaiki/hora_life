@@ -2,26 +2,24 @@ package com.example.horalife.diary
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
 import com.example.horalife.databinding.ItemDiaryBinding
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import kotlin.properties.Delegates
 
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
                        private val viewModel: DiaryViewModel,
                        private val context: Context)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
+    lateinit var refString: String
     lateinit var bitmap: Bitmap
+
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
     }
 
@@ -33,16 +31,16 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     }
 
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
-lateinit var f :Bitmap
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         holder.binding.content = viewModel.diaryList.value?.get(position)
         holder.binding.viewmodel = DiaryViewModel()
         holder.binding.wrapper.setOnClickListener {
             viewModel.onClickRow()
         }
-        viewModel.
-        holder.binding.thumbnail.setImageBitmap(viewModel.bitmap.value ?: createNoImage())
 
+        viewModel.diaryBitMap(position, {
+            holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())
+        })
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 

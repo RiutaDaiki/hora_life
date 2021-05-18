@@ -19,21 +19,22 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
 
 
     val diaryList = MutableLiveData<List<DiaryContent>>()
-    val bitmap = MutableLiveData<Bitmap?>()
-
-    //ここでストレージの参照を作るのはなんだかスマートじゃない気がする
-    private fun createRef(storageRef: StorageReference, position: Int): StorageReference{
-        return storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
-    }
-
-
-
 
     init {
         diaryRepository.getDiaryInfo {
             diaryList.value = it
         }
-        diaryRepository.diaryBitMap({ bitmap.value = it  }, createRef())
+    }
+
+    fun diaryBitMap(position: Int, lamda: (Bitmap?) -> Unit){
+        val storageRef = Firebase.storage.reference
+        val thumbnailRef = storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            lamda(BitmapFactory.decodeByteArray(it, 0, it.size))
+        }.addOnFailureListener {
+            lamda(null)
+        }
     }
 
     val isRowClicked = MutableLiveData<Boolean>()
