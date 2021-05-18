@@ -7,6 +7,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
+import java.sql.Timestamp
 import java.util.*
 
 class EntriesViewModel: ViewModel() {
@@ -20,7 +21,7 @@ class EntriesViewModel: ViewModel() {
         val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
         uploadImageRef.putBytes(data)
         val db = Firebase.firestore
-        val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path)
+        val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path, Timestamp(System.currentTimeMillis()))
         db.collection("Diary items")
                 .add(contents)
     }

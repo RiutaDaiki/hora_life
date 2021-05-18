@@ -32,6 +32,7 @@ import java.util.*
 
 class EntrieFragment: Fragment() {
     lateinit var thum: Bitmap
+    lateinit var path: String
     lateinit var noImage : Bitmap
     lateinit var recordWay: String
     lateinit var binding: EntriesFragmentBinding
@@ -93,7 +94,7 @@ class EntrieFragment: Fragment() {
                         val columns: Array<String> = arrayOf(MediaStore.Video.Media.DATA)
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
-                        val path = cursor?.getString(0)
+                        path = cursor?.getString(0)!!
                         Log.d("ぱすぱす", path!!)
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)!!
                         binding.diaryBtn.isEnabled = true
