@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.media.ThumbnailUtils
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
@@ -33,8 +34,8 @@ import java.util.*
 class EntrieFragment: Fragment() {
     lateinit var thum: Bitmap
     lateinit var path: String
+    lateinit var videoUri: Uri
     lateinit var noImage : Bitmap
-    lateinit var recordWay: String
     lateinit var binding: EntriesFragmentBinding
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -62,7 +63,7 @@ class EntrieFragment: Fragment() {
         binding.dateText.setText(LocalDate.now().toString())
 
         binding.diaryBtn.setOnClickListener(){
-            EntriesViewModel().storeThumbnail(thum, binding)
+            EntriesViewModel().storeEntriesInfo(thum, videoUri, binding)
             backToDiary()
         }
 
@@ -91,11 +92,12 @@ class EntrieFragment: Fragment() {
             REQUEST_CODE -> {
                 try {
                     resultData?.data?.also { uri ->
+                        videoUri = uri
                         val columns: Array<String> = arrayOf(MediaStore.Video.Media.DATA)
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
                         path = cursor?.getString(0)!!
-                        Log.d("ぱすぱす", path!!)
+                        Log.d("ゆーーーーーーーーーーーーーーーーーー", uri.toString())
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)!!
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)

@@ -21,7 +21,10 @@ class DiaryRepository {
 
                         for (document in result) {
                             val d = document.data
-                            val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(), d["pngFileName"].toString(), Timestamp(System.currentTimeMillis()))
+                            val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(),
+                                    d["pngFileName"].toString(),
+                                    Timestamp(System.currentTimeMillis()),
+                                    d["videoFileName"].toString())
                             storingList.add(content)
                         }
                         list(storingList)
