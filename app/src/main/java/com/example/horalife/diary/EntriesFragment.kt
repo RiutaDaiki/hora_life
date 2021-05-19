@@ -64,6 +64,8 @@ class EntrieFragment: Fragment() {
 
         binding.diaryBtn.setOnClickListener(){
             EntriesViewModel().storeEntriesInfo(thum, videoUri, binding)
+            println("うんこ")
+            println(videoUri)
             backToDiary()
         }
 
