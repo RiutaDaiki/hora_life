@@ -33,7 +33,7 @@ class DiaryFragment: Fragment() {
             // TODO  日記として表示するリストは既に降順担ってるのでリスト[it].mp4FileNameで動画を取得できるはず
             //なんやかんやしてsurfaceView1に表示する
             findNavController().navigate(R.id.action_diary_to_diary_detail)
-            DiaryDetailFragment().prepareVideo(it)
+            DiaryDetailViewModel().getVideoName(viewModel.diaryList.value!!.get(it).videoFileName)
         }
         return binding.root
     }

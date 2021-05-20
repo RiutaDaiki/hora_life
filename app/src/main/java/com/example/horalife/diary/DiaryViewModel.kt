@@ -27,6 +27,7 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
         }.addOnFailureListener {
             lamda(null)
         }
+
     }
 
     val isRowClicked = MutableLiveData<Int>()
