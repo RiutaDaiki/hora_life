@@ -18,7 +18,11 @@
             app:destination="@+id/entries_fragment"/>
         <action
             android:id="@+id/action_diary_to_diary_detail"
-            app:destination="@+id/diary_detail_fragment"/>
+            app:destination="@+id/diary_detail_fragment">
+            <argument
+                android:name="position"
+                app:argType="integer"/>
+        </action>
     </fragment>
 
     <fragment android:id="@+id/nav_you"
@@ -41,7 +45,12 @@
         android:label="ディテール">
         <action
             android:id="@+id/action_diary_detail_to_diary"
-            app:destination="@+id/nav_diary"/>
+            app:destination="@+id/nav_diary">
+
+        </action>
+
+
+
     </fragment>
 
 </navigation>

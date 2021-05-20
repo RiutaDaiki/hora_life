@@ -30,6 +30,8 @@ class DiaryFragment: Fragment() {
             DiaryViewAdapter(viewLifecycleOwner, viewModel, requireContext())
         }
         viewModel.isRowClicked.observe(viewLifecycleOwner){
+
+            val action = DiaryDetailFragmentDirections.actionDiaryDetailToDiary(it)
             findNavController().navigate(R.id.action_diary_to_diary_detail)
             DiaryDetailViewModel().setVideoName(viewModel.diaryList.value!!.get(it).videoFileName)
         }
