@@ -15,7 +15,6 @@ import com.example.horalife.databinding.DiaryDetailBinding
 class DiaryDetailFragment(): Fragment() {
     private val args: DiaryDetailFragmentArgs by navArgs()
     private lateinit var binding: DiaryDetailBinding
-    private lateinit var videoPath: Uri
     private val viewmodel : DiaryDetailViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -30,7 +29,7 @@ class DiaryDetailFragment(): Fragment() {
         }
 
         binding.playBtn.setOnClickListener(){
-            val po = args.position
+            val po = args.videoFileName
             println(po)
         }
 
