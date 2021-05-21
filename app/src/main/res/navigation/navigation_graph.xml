@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/nav_example"
     android:id="@+id/navigation_graph">
+
     <fragment android:id="@+id/nav_example"
         tools:layout="@layout/example_fragment"
         android:name="com.example.horalife.example.ExampleFragment"
@@ -11,18 +12,16 @@
 
     <fragment android:id="@+id/nav_diary"
         tools:layout="@layout/library_fragment"
-        android:name="com.example.horalife.library.LibraryFragment"
+        android:name="com.example.horalife.diary.DiaryFragment"
         android:label="法螺日記">
+
+        <action
+            android:id="@+id/action_diary_to_diary_detail"
+            app:destination="@+id/diary_detail_fragment"/>
         <action
             android:id="@+id/action_nav_diary_to_entriesFragment"
             app:destination="@+id/entries_fragment"/>
-        <action
-            android:id="@+id/action_diary_to_diary_detail"
-            app:destination="@+id/diary_detail_fragment">
-            <argument
-                android:name="position"
-                app:argType="integer"/>
-        </action>
+
     </fragment>
 
     <fragment android:id="@+id/nav_you"
@@ -44,13 +43,13 @@
         android:name="com.example.horalife.diary.DiaryDetailFragment"
         android:label="ディテール">
         <action
-            android:id="@+id/action_diary_detail_to_diary"
-            app:destination="@+id/nav_diary">
-
-        </action>
-
-
+        android:id="@+id/action_diary_detail_to_diary"
+        app:destination="@+id/nav_diary"/>
+        <argument
+            android:name="position"
+            app:argType="string" />
 
     </fragment>
 
 </navigation>
+

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import java.net.FileNameMap
 
 class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): ViewModel() {
 
@@ -30,10 +31,14 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
 
     }
 
-    val isRowClicked = MutableLiveData<Int>()
+    val isRowClicked = MutableLiveData<String>()
 
-    fun onClickRow(rowPosition: Int) {
-        isRowClicked.value = rowPosition
+//    fun onClickRow(rowPosition: Int) {
+//        isRowClicked.value = rowPosition
+//    }
+
+    fun onClickRow(videoFileName: String) {
+        isRowClicked.value = videoFileName
     }
 
 

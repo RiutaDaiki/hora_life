@@ -16,6 +16,7 @@ class DiaryFragment: Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
     private val viewModel: DiaryViewModel by viewModels()
+    private val detailViewMOdel : DiaryDetailViewModel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
@@ -29,11 +30,10 @@ class DiaryFragment: Fragment() {
             adapter.notifyDataSetChanged()
             DiaryViewAdapter(viewLifecycleOwner, viewModel, requireContext())
         }
-        viewModel.isRowClicked.observe(viewLifecycleOwner){
 
-            val action = DiaryDetailFragmentDirections.actionDiaryDetailToDiary(it)
-            findNavController().navigate(R.id.action_diary_to_diary_detail)
-            DiaryDetailViewModel().setVideoName(viewModel.diaryList.value!!.get(it).videoFileName)
+        viewModel.isRowClicked.observe(viewLifecycleOwner){
+            val action = DiaryFragmentDirections.actionDiaryToDiaryDetail(it)
+            findNavController().navigate(action)
         }
         return binding.root
     }
@@ -43,3 +43,7 @@ class DiaryFragment: Fragment() {
      }
 
 }
+
+//<action
+//android:id="@+id/action_nav_diary_to_entriesFragment"
+//app:destination="@+id/entries_fragment"/>

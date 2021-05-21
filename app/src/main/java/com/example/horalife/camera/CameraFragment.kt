@@ -3,36 +3,16 @@ package com.example.horalife.camera
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaActionSound
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
 import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.fragment.app.Fragment
-import com.example.horalife.R
 import com.example.horalife.databinding.CameraFragmentBinding
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getMainExecutor
-import com.example.horalife.MainActivity
-import com.example.horalife.library.SelectDialogFragment
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
-import java.io.File
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.*
 
 private val REQUEST_CAMERA__PERMISSION = 100
 

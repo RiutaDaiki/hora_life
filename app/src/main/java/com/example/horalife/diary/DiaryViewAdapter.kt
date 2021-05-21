@@ -3,6 +3,7 @@ package com.example.horalife.diary
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -29,9 +30,9 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         holder.binding.content = viewModel.diaryList.value?.get(position)
-        holder.binding.viewmodel = DiaryViewModel()
         holder.binding.wrapper.setOnClickListener {
-            viewModel.onClickRow(position)
+            val currentRowVideo = viewModel.diaryList.value?.get(position)!!.videoFileName
+            viewModel.onClickRow(currentRowVideo)
         }
 
         viewModel.diaryBitMap(position, {
