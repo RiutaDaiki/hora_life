@@ -33,7 +33,12 @@ class DiaryDetailFragment(): Fragment() {
                 rowVideoUri = it
                 Log.d("debug", rowVideoUri.toString())
                 monitor.setVideoPath(it.toString())
-                monitor.start()
+                monitor.setOnPreparedListener {
+                    monitor.start()
+                }
+                monitor.setOnCompletionListener {
+                    println("ほいほい")
+                }
             })
 //            monitor.setVideoPath()
         }
