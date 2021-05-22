@@ -33,10 +33,6 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
 
     val isRowClicked = MutableLiveData<String>()
 
-//    fun onClickRow(rowPosition: Int) {
-//        isRowClicked.value = rowPosition
-//    }
-
     fun onClickRow(videoFileName: String) {
         isRowClicked.value = videoFileName
     }

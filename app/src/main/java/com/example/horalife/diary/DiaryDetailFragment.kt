@@ -16,6 +16,8 @@ class DiaryDetailFragment(): Fragment() {
     private val args: DiaryDetailFragmentArgs by navArgs()
     private lateinit var binding: DiaryDetailBinding
     private val viewmodel : DiaryDetailViewModel by viewModels()
+    private lateinit var rowVideoUri: Uri
+
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -24,13 +26,16 @@ class DiaryDetailFragment(): Fragment() {
         binding = DiaryDetailBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val monitor = binding.videoView
-        viewmodel.videoName.observe(viewLifecycleOwner){
-            Log.d("debug", it)
-        }
 
         binding.playBtn.setOnClickListener(){
-            val po = args.videoFileName
-            println(po)
+            val rowVideoName = args.videoFileName
+            viewmodel.getVideoUri(rowVideoName, {
+                rowVideoUri = it
+                Log.d("debug", rowVideoUri.toString())
+                monitor.setVideoPath(it.toString())
+                monitor.start()
+            })
+//            monitor.setVideoPath()
         }
 
         return binding.root
