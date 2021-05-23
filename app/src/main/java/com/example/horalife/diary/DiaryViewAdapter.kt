@@ -12,9 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
 import com.example.horalife.databinding.ItemDiaryBinding
 
+
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
                        private val viewModel: DiaryViewModel,
                        private val context: Context)
+
+// TODO: private val contentList: List<DiaryContent>はListを直接渡すのではなく、ViewModelごと渡してしまう
+
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
 
     inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
