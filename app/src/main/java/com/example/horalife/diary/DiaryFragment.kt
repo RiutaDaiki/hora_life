@@ -16,11 +16,11 @@ class DiaryFragment: Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
     private val viewModel: DiaryViewModel by viewModels()
-    private val detailViewMOdel : DiaryDetailViewModel by viewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
+        //↓日記画面のfabはこのクラスのshowEntries()を起動します。diary_fragment.xmlでandroid:onClick="@{() -> view.showEntries()}"としているので、この記述は必要だと思います。
         binding.view = this
 
         adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext())
@@ -43,7 +43,3 @@ class DiaryFragment: Fragment() {
      }
 
 }
-
-//<action
-//android:id="@+id/action_nav_diary_to_entriesFragment"
-//app:destination="@+id/entries_fragment"/>
