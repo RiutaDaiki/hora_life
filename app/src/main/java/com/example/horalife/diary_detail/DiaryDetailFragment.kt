@@ -1,15 +1,12 @@
-package com.example.horalife.diary
+package com.example.horalife.diary_detail
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
+import com.example.horalife.R
 import com.example.horalife.databinding.DiaryDetailBinding
 
 class DiaryDetailFragment(): Fragment() {
@@ -18,8 +15,23 @@ class DiaryDetailFragment(): Fragment() {
     private val viewmodel : DiaryDetailViewModel by viewModels()
     private lateinit var rowVideoUri: Uri
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.diary_detail_menu, menu)
+    }
 
-    override fun onCreateView(inflater: LayoutInflater,
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item?.itemId){
+            R.id.delete ->{
+                val dialog = ConfirmDeleteDialog()
+                dialog.show(parentFragmentManager, null)
+            }
+        }
+        return true
+    }
+
+        override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -27,6 +39,7 @@ class DiaryDetailFragment(): Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         val monitor = binding.videoView
         binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
+            setHasOptionsMenu(true)
 
         binding.playBtn.setOnClickListener(){
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE

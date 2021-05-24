@@ -32,6 +32,7 @@ class DiaryFragment: Fragment() {
         }
 
         viewModel.isRowClicked.observe(viewLifecycleOwner){
+            //TODO 今後日記詳細画面ではdocumentName,thumbnail,commentなどが必要になるので,positionを渡すor必要な情報全部入りのデータクラス型を渡すか
             val action = DiaryFragmentDirections.actionDiaryToDiaryDetail(it)
             findNavController().navigate(action)
         }

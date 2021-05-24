@@ -1,4 +1,4 @@
- package com.example.horalife.diary
+ package com.example.horalife.diary_entries
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
@@ -22,12 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
-import java.io.ByteArrayOutputStream
 import java.time.LocalDate
-import java.util.*
 
  private val REQUEST_CODE = 1000
 
@@ -48,7 +43,9 @@ class EntrieFragment: Fragment() {
                     Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE
             )
-            checkPermission(permissions, REQUEST_CODE)
+            checkPermission(permissions,
+                REQUEST_CODE
+            )
         }
 
         val noImageDrawable = ContextCompat.getDrawable(this.requireContext(), R.drawable.no_image)
@@ -63,7 +60,8 @@ class EntrieFragment: Fragment() {
         binding.dateText.setText(LocalDate.now().toString())
 
         binding.diaryBtn.setOnClickListener(){
-            EntriesViewModel().storeEntriesInfo(thum, videoUri, binding)
+            EntriesViewModel()
+                .storeEntriesInfo(thum, videoUri, binding)
             println("うんこ")
             println(videoUri)
             backToDiary()
@@ -118,7 +116,9 @@ class EntrieFragment: Fragment() {
      fun openVideoIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
-                startActivityForResult(takePictureIntent, REQUEST_CODE)
+                startActivityForResult(takePictureIntent,
+                    REQUEST_CODE
+                )
             }
         }
     }
@@ -126,7 +126,9 @@ class EntrieFragment: Fragment() {
     private fun openMicIntent() {
         Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION).also { takeSoundIntent ->
             takeSoundIntent.resolveActivity(this.requireContext().packageManager).also {
-                startActivityForResult(takeSoundIntent, REQUEST_CODE)
+                startActivityForResult(takeSoundIntent,
+                    REQUEST_CODE
+                )
             }
         }
     }
@@ -134,7 +136,9 @@ class EntrieFragment: Fragment() {
     fun openGallery(){
         Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI).also { galleryIntent ->
             galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
-                startActivityForResult(galleryIntent, REQUEST_CODE)
+                startActivityForResult(galleryIntent,
+                    REQUEST_CODE
+                )
             }
         }
     }

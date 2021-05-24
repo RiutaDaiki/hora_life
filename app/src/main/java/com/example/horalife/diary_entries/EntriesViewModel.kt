@@ -1,9 +1,10 @@
-package com.example.horalife.diary
+package com.example.horalife.diary_entries
 
 import android.graphics.Bitmap
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.example.horalife.databinding.EntriesFragmentBinding
+import com.example.horalife.diary.DiaryContent
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -24,7 +25,13 @@ class EntriesViewModel: ViewModel() {
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
         uploadVideoRef.putFile(localVideo)
         val db = Firebase.firestore
-        val contents = DiaryContent(binding.dateText.text.toString(), binding.diaryText.text.toString(), path, Timestamp(System.currentTimeMillis()), localVideo.lastPathSegment.toString())
+        val contents = DiaryContent(
+            binding.dateText.text.toString(),
+            binding.diaryText.text.toString(),
+            path,
+            Timestamp(System.currentTimeMillis()),
+            localVideo.lastPathSegment.toString()
+        )
         db.collection("Diary items")
                 .add(contents)
     }

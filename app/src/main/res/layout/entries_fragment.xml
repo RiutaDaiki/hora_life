@@ -6,7 +6,7 @@
     <data>
         <variable
             name="view"
-            type="com.example.horalife.diary.EntrieFragment" />
+            type="com.example.horalife.diary_entries.EntrieFragment" />
 
     </data>
 

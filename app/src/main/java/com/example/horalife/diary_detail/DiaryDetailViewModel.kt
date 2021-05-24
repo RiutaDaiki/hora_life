@@ -1,9 +1,10 @@
-package com.example.horalife.diary
+package com.example.horalife.diary_detail
 
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 class DiaryDetailViewModel: ViewModel() {
@@ -13,6 +14,12 @@ class DiaryDetailViewModel: ViewModel() {
         storageRef.child("horanikki-video/$videoString").downloadUrl.addOnSuccessListener {
             uri(it)
         }
+    }
+
+    fun deleteDocument(){
+        val db = Firebase.firestore
+        db.collection("Diary items")
+
     }
 
 

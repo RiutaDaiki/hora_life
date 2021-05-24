@@ -6,10 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import java.net.FileNameMap
 
 class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): ViewModel() {
-
 
     val diaryList = MutableLiveData<List<DiaryContent>>()
 

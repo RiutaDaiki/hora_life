@@ -1,4 +1,4 @@
-package com.example.horalife.diary
+package com.example.horalife.diary_detail
 
 import android.net.Uri
 import com.google.firebase.ktx.Firebase
