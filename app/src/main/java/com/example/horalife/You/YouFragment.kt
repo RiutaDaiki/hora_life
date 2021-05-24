@@ -2,6 +2,7 @@ package com.example.horalife.You
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.FrameMetrics
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,8 @@ class YouFragment : Fragment() {
 
         if(requestCode == RC_SIGN_IN){
             val user = FirebaseAuth.getInstance().currentUser
+            Log.d("debug", user.displayName)
+            Toast.makeText(context, user.displayName + "さん", Toast.LENGTH_LONG).show()
         }
     }
 }
