@@ -57,15 +57,6 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/second_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="01:27"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/thumbnail" />
-
-        <TextView
             android:id="@+id/diary_text"
             android:layout_width="0dp"
             android:layout_height="94dp"
