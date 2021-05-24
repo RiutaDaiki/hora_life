@@ -26,21 +26,19 @@ class DiaryDetailFragment(): Fragment() {
         binding = DiaryDetailBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val monitor = binding.videoView
+        binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
 
         binding.playBtn.setOnClickListener(){
+            binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
             val rowVideoName = args.videoFileName
-            viewmodel.getVideoUri(rowVideoName, {
+            viewmodel.getVideoUri(rowVideoName) {
                 rowVideoUri = it
-                Log.d("debug", rowVideoUri.toString())
                 monitor.setVideoPath(it.toString())
                 monitor.setOnPreparedListener {
+                    binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
                     monitor.start()
                 }
-                monitor.setOnCompletionListener {
-                    println("ほいほい")
-                }
-            })
-//            monitor.setVideoPath()
+            }
         }
 
         return binding.root
