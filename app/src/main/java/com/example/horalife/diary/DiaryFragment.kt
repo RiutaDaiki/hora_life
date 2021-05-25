@@ -1,6 +1,7 @@
 package com.example.horalife.diary
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
+import java.lang.IllegalArgumentException
 
 class DiaryFragment: Fragment() {
     private lateinit var adapter: DiaryViewAdapter
@@ -33,8 +35,10 @@ class DiaryFragment: Fragment() {
 
         viewModel.isRowClicked.observe(viewLifecycleOwner){
             //TODO 今後日記詳細画面ではdocumentName,thumbnail,commentなどが必要になるので,positionを渡すor必要な情報全部入りのデータクラス型を渡すか
+            //TODO DiaryDetailの戻るボタンが使えない
             val action = DiaryFragmentDirections.actionDiaryToDiaryDetail(it)
             findNavController().navigate(action)
+//            viewModel.resetIsRowClicked()
         }
         return binding.root
     }

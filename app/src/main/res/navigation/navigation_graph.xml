@@ -47,7 +47,8 @@
         app:destination="@+id/nav_diary"/>
         <argument
             android:name="videoFileName"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
 
     </fragment>
 

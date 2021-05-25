@@ -19,6 +19,7 @@ import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
@@ -32,6 +33,7 @@ class EntrieFragment: Fragment() {
     lateinit var videoUri: Uri
     lateinit var noImage : Bitmap
     lateinit var binding: EntriesFragmentBinding
+    private val viewModel : EntriesViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
@@ -60,10 +62,8 @@ class EntrieFragment: Fragment() {
         binding.dateText.setText(LocalDate.now().toString())
 
         binding.diaryBtn.setOnClickListener(){
-            EntriesViewModel()
+            viewModel
                 .storeEntriesInfo(thum, videoUri, binding)
-            println("うんこ")
-            println(videoUri)
             backToDiary()
         }
 
@@ -97,7 +97,6 @@ class EntrieFragment: Fragment() {
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
                         path = cursor?.getString(0)!!
-                        Log.d("ゆーーーーーーーーーーーーーーーーーー", uri.toString())
                         thum = ThumbnailUtils.createVideoThumbnail(path!!, MediaStore.Video.Thumbnails.MINI_KIND)!!
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)

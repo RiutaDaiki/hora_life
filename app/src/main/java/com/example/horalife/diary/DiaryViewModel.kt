@@ -2,6 +2,7 @@ package com.example.horalife.diary
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.ktx.Firebase
@@ -29,10 +30,14 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
 
     }
 
-    val isRowClicked = MutableLiveData<String>()
+    var isRowClicked = MutableLiveData<String?>()
 
     fun onClickRow(videoFileName: String) {
         isRowClicked.value = videoFileName
+    }
+
+    fun resetIsRowClicked(){
+        isRowClicked.value = null
     }
 
 

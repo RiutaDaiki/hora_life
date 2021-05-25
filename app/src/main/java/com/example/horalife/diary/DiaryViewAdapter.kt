@@ -37,6 +37,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         holder.binding.wrapper.setOnClickListener {
             val currentRowVideo = viewModel.diaryList.value?.get(position)!!.videoFileName
             viewModel.onClickRow(currentRowVideo)
+            viewModel.resetIsRowClicked()
         }
 
         viewModel.diaryBitMap(position) {
