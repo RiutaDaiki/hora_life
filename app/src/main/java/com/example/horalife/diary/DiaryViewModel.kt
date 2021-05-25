@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.horalife.diary_detail.DiaryDetailContent
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -40,5 +42,10 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
         isRowClicked.value = null
     }
 
+    fun deleteDocument(currentDocument: String){
+        val db = Firebase.firestore
+        db.collection("Diary items").document(currentDocument)
+                .delete()
 
+    }
 }

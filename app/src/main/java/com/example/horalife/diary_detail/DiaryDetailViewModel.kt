@@ -15,12 +15,4 @@ class DiaryDetailViewModel: ViewModel() {
             uri(it)
         }
     }
-
-    fun deleteDocument(){
-        val db = Firebase.firestore
-        db.collection("Diary items")
-
-    }
-
-
 }
