@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="com.example.horalife.diary.DiaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +20,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             android:textSize="25dp"
+            android:text="@{viewmodel.selectedDiary.recordedDate}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/video_view"
             tools:text="4/5" />

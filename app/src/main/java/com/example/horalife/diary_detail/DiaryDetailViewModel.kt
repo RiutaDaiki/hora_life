@@ -9,10 +9,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 class DiaryDetailViewModel: ViewModel() {
 
-    fun getVideoUri(videoString : String, uri: (Uri) -> Unit){
-        val storageRef = Firebase.storage.reference
-        storageRef.child("horanikki-video/$videoString").downloadUrl.addOnSuccessListener {
-            uri(it)
-        }
-    }
+//    fun getVideoUri(videoString : String, uri: (Uri) -> Unit){
+//        val storageRef = Firebase.storage.reference
+//        storageRef.child("horanikki-video/$videoString").downloadUrl.addOnSuccessListener {
+//            uri(it)
+//        }
+//    }
 }

@@ -15,7 +15,8 @@ import com.example.horalife.databinding.ItemDiaryBinding
 
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
                        private val viewModel: DiaryViewModel,
-                       private val context: Context)
+                       private val context: Context,
+                       private val onClickRow: (Int) -> Unit)
 
 // TODO: private val contentList: List<DiaryContent>はListを直接渡すのではなく、ViewModelごと渡してしまう
 
@@ -36,7 +37,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         holder.binding.content = viewModel.diaryList.value?.get(position)
         holder.binding.wrapper.setOnClickListener {
             val currentRowVideo = viewModel.diaryList.value?.get(position)!!.videoFileName
-            viewModel.onClickRow(currentRowVideo)
+            onClickRow(position)
         }
 
         viewModel.diaryBitMap(position) {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -17,7 +18,7 @@ import java.lang.IllegalArgumentException
 class DiaryFragment: Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
-    private val viewModel: DiaryViewModel by viewModels()
+    private val viewModel: DiaryViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
@@ -25,21 +26,17 @@ class DiaryFragment: Fragment() {
         //↓日記画面のfabはこのクラスのshowEntries()を起動します。diary_fragment.xmlでandroid:onClick="@{() -> view.showEntries()}"としているので、この記述は必要だと思います。
         binding.view = this
 
-        adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext())
+        adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+            viewModel.onClickRow(it)
+            val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
+            findNavController().navigate(action)
+        }
         binding.diaryRecycler.adapter = adapter
 
         viewModel.diaryList.observe(viewLifecycleOwner){
             adapter.notifyDataSetChanged()
-            DiaryViewAdapter(viewLifecycleOwner, viewModel, requireContext())
         }
 
-        viewModel.isRowClicked.observe(viewLifecycleOwner){
-            //TODO 今後日記詳細画面ではdocumentName,thumbnail,commentなどが必要になるので,positionを渡すor必要な情報全部入りのデータクラス型を渡すか
-            //TODO DiaryDetailの戻るボタンが使えない
-            val action = DiaryFragmentDirections.actionDiaryToDiaryDetail(it)
-            findNavController().navigate(action)
-//            viewModel.resetIsRowClicked()
-        }
         return binding.root
     }
 

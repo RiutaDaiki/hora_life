@@ -45,10 +45,6 @@
         <action
         android:id="@+id/action_diary_detail_to_diary"
         app:destination="@+id/nav_diary"/>
-        <argument
-            android:name="videoFileName"
-            app:argType="string"
-            app:nullable="true" />
 
     </fragment>
 
