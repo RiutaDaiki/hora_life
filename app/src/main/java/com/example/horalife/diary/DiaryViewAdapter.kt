@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
 import com.example.horalife.databinding.ItemDiaryBinding
+import java.sql.Timestamp
 
 
 class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
@@ -33,7 +34,12 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
 
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        holder.binding.content = viewModel.diaryList.value?.get(position)
+        val content = DiaryContent(viewModel.diaryList.value?.get(position)!!.recordedDate,
+                viewModel.diaryList.value?.get(position)!!.comment,
+                viewModel.diaryList.value?.get(position)!!.pngFileName,
+                Timestamp(System.currentTimeMillis()),
+                viewModel.diaryList.value?.get(position)!!.videoFileName)
+        holder.binding.content = content
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }

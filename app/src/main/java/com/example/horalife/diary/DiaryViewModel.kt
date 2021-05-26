@@ -7,20 +7,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.example.horalife.databinding.EntriesFragmentBinding
-import com.google.firebase.firestore.ktx.firestore
+import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
 class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : ViewModel() {
 
-    val diaryList = MutableLiveData<List<DiaryContent>>()
-
-
-//    init {
-//        diaryRepository.readDiaryInfo {
-//            diaryList.value = it
-//        }
-//    }
+    val diaryList = MutableLiveData<List<DiaryDetailContent>>()
 
     fun setList() {
         DiaryRepository().readDiaryInfo {
@@ -50,11 +43,8 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         selectedPosition.value = position
     }
 
-    fun deleteDocument(currentDocument: String) {
-        val db = Firebase.firestore
-        db.collection("Diary items").document(currentDocument)
-                .delete()
-
+    fun deleteDocument() {
+        DiaryRepository().deleteDiary(selectedDiary.value!!.diaryId.toString())
     }
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {

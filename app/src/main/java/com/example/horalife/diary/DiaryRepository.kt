@@ -3,7 +3,9 @@ package com.example.horalife.diary
 
 import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Log
 import com.example.horalife.databinding.EntriesFragmentBinding
+import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -13,6 +15,8 @@ import java.sql.Timestamp
 import java.util.*
 
 class DiaryRepository {
+    val db = Firebase.firestore
+
 
     fun createEntriesInfo(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
         println("あああああああああああああ")
@@ -25,8 +29,8 @@ class DiaryRepository {
         uploadImageRef.putBytes(data)
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
         uploadVideoRef.putFile(localVideo)
-        val db = Firebase.firestore
         val contents = DiaryContent(
+                //正しくidを取得できてないよ
                 binding.dateText.text.toString(),
                 binding.diaryText.text.toString(),
                 path,
@@ -35,11 +39,11 @@ class DiaryRepository {
         )
         db.collection("Diary items")
                 .add(contents)
+
     }
 
 
-    fun readDiaryInfo(list: (MutableList<DiaryContent>) -> Unit) {
-        val db = Firebase.firestore
+    fun readDiaryInfo(list: (MutableList<DiaryDetailContent>) -> Unit) {
 
         db.collection("Diary items")
                 .orderBy("timestamp", Query.Direction.DESCENDING)
@@ -47,13 +51,16 @@ class DiaryRepository {
 
                 .addOnSuccessListener { result ->
 
-                    val storingList = mutableListOf<DiaryContent>()
+                    val storingList = mutableListOf<DiaryDetailContent>()
 
                     for (document in result) {
                         val d = document.data
-                        val content = DiaryContent(d["recordedDate"].toString(), d["comment"].toString(),
+                        Log.d("id", document.id)
+                        val content = DiaryDetailContent(
+                                document.id,
+                                d["recordedDate"].toString(),
+                                d["comment"].toString(),
                                 d["pngFileName"].toString(),
-                                Timestamp(System.currentTimeMillis()),
                                 d["videoFileName"].toString())
                         storingList.add(content)
                     }
@@ -65,8 +72,12 @@ class DiaryRepository {
 
     }
 
-    fun deleteDiary() {
-
+    fun deleteDiary(id: String) {
+        db.collection("Diary items").document(id)
+                .delete()
     }
-    
+
 }
+
+//fireStoreに保存するときはDiaryContentのセットで保存する
+//readDiaryInfoで読み取るときはDiaryDetailContentとして取得する
