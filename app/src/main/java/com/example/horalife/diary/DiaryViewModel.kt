@@ -43,7 +43,7 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         selectedPosition.value = position
     }
 
-    fun deleteDocument() {
+    fun callDelete() {
         DiaryRepository().deleteDiary(selectedDiary.value!!.diaryId.toString())
     }
 

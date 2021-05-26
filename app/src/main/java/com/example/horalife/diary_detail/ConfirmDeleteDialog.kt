@@ -16,7 +16,7 @@ class ConfirmDeleteDialog : DialogFragment() {
         val builder = AlertDialog.Builder(context)
                 .setMessage("この日記を削除しますか？")
                 .setPositiveButton("削除") { dialog, which ->
-                    viewModel.deleteDocument()
+                    viewModel.callDelete()
                     findNavController().navigate(R.id.nav_diary)
                 }
                 .setNegativeButton("キャンセル") { dialog, which ->
