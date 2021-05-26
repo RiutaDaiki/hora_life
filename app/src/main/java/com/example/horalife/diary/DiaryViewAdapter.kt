@@ -3,7 +3,6 @@ package com.example.horalife.diary
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -22,7 +21,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
 
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
 
-    inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
+    inner class DiaryViewHolder(val binding: ItemDiaryBinding) : RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryViewHolder {
@@ -36,7 +35,6 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         holder.binding.content = viewModel.diaryList.value?.get(position)
         holder.binding.wrapper.setOnClickListener {
-            val currentRowVideo = viewModel.diaryList.value?.get(position)!!.videoFileName
             onClickRow(position)
         }
 
@@ -46,7 +44,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 
-    private fun createNoImage(): Bitmap{
+    private fun createNoImage(): Bitmap {
         val drawable = ContextCompat.getDrawable(context, R.drawable.no_image)
         val bitmapDrawable = drawable as BitmapDrawable
         return bitmapDrawable.bitmap

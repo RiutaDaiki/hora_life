@@ -1,14 +1,11 @@
 package com.example.horalife.diary_detail
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryDetailBinding
 import com.example.horalife.diary.DiaryViewModel
@@ -45,6 +42,7 @@ class DiaryDetailFragment() : Fragment() {
         setHasOptionsMenu(true)
 
         binding.playBtn.setOnClickListener() {
+            Log.d("diary id", viewModel.selectedDiary.value!!.comment)
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
             viewModel.getVideoUri({
                 monitor.setVideoURI(it)
@@ -58,6 +56,4 @@ class DiaryDetailFragment() : Fragment() {
         }
         return binding.root
     }
-
-
 }

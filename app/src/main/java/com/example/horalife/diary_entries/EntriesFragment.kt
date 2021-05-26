@@ -1,4 +1,4 @@
- package com.example.horalife.diary_entries
+package com.example.horalife.diary_entries
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
@@ -11,49 +11,47 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
+import com.example.horalife.diary.DiaryViewModel
 import java.time.LocalDate
 
- private val REQUEST_CODE = 1000
+private val REQUEST_CODE = 1000
 
-class EntrieFragment: Fragment() {
+class EntrieFragment : Fragment() {
     lateinit var thum: Bitmap
     lateinit var path: String
     lateinit var videoUri: Uri
-    lateinit var noImage : Bitmap
     lateinit var binding: EntriesFragmentBinding
-    private val viewModel : EntriesViewModel by viewModels()
+    private val viewModel: DiaryViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?
     ): View? {
-        if(Build.VERSION.SDK_INT >= 23){
+        if (Build.VERSION.SDK_INT >= 23) {
             val permissions = arrayOf(
                     Manifest.permission.RECORD_AUDIO,
                     Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE
             )
             checkPermission(permissions,
-                REQUEST_CODE
+                    REQUEST_CODE
             )
         }
 
         val noImageDrawable = ContextCompat.getDrawable(this.requireContext(), R.drawable.no_image)
         val bitmapDrawable = noImageDrawable as BitmapDrawable
-        thum  = bitmapDrawable.bitmap
-        noImage = bitmapDrawable.bitmap
+        thum = bitmapDrawable.bitmap
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
@@ -61,22 +59,22 @@ class EntrieFragment: Fragment() {
 
         binding.dateText.setText(LocalDate.now().toString())
 
-        binding.diaryBtn.setOnClickListener(){
-            viewModel
-                .storeEntriesInfo(thum, videoUri, binding)
+        binding.diaryBtn.setOnClickListener() {
+            viewModel.passEntries(thum, videoUri, binding)
             backToDiary()
         }
 
         return binding.root
     }
+
     override fun onRequestPermissionsResult(
             requestCode: Int,
             permissions: Array<String>,
             grantResults: IntArray
     ) {
-        when(requestCode){
-            REQUEST_CODE -> for (i in 0..permissions.size){
-                if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
+        when (requestCode) {
+            REQUEST_CODE -> for (i in 0..permissions.size) {
+                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
                 } else {
                 }
             }
@@ -108,15 +106,15 @@ class EntrieFragment: Fragment() {
         }
     }
 
-    private fun checkPermission(permissions: Array<String>, request_code: Int){
+    private fun checkPermission(permissions: Array<String>, request_code: Int) {
         ActivityCompat.requestPermissions(this.requireActivity(), permissions, request_code)
     }
 
-     fun openVideoIntent() {
+    fun openVideoIntent() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(takePictureIntent,
-                    REQUEST_CODE
+                        REQUEST_CODE
                 )
             }
         }
@@ -126,24 +124,24 @@ class EntrieFragment: Fragment() {
         Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION).also { takeSoundIntent ->
             takeSoundIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(takeSoundIntent,
-                    REQUEST_CODE
+                        REQUEST_CODE
                 )
             }
         }
     }
 
-    fun openGallery(){
+    fun openGallery() {
         Intent(Intent.ACTION_PICK, MediaStore.Video.Media.EXTERNAL_CONTENT_URI).also { galleryIntent ->
             galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
                 startActivityForResult(galleryIntent,
-                    REQUEST_CODE
+                        REQUEST_CODE
                 )
             }
         }
     }
 
-     fun backToDiary(){
-            findNavController().navigate(R.id.action_entries_to_diary)
+    fun backToDiary() {
+        findNavController().navigate(R.id.action_entries_to_diary)
     }
 }
 

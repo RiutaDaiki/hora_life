@@ -3,27 +3,32 @@ package com.example.horalife.diary
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import com.example.horalife.diary_detail.DiaryDetailContent
+import com.example.horalife.databinding.EntriesFragmentBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlin.coroutines.suspendCoroutine
 
-class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): ViewModel() {
+class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : ViewModel() {
 
     val diaryList = MutableLiveData<List<DiaryContent>>()
 
-    init {
-        diaryRepository.getDiaryInfo {
+
+//    init {
+//        diaryRepository.readDiaryInfo {
+//            diaryList.value = it
+//        }
+//    }
+
+    fun setList() {
+        DiaryRepository().readDiaryInfo {
             diaryList.value = it
         }
     }
 
-    fun diaryBitMap(position: Int, lamda: (Bitmap?) -> Unit){
+    fun diaryBitMap(position: Int, lamda: (Bitmap?) -> Unit) {
         val storageRef = Firebase.storage.reference
         val thumbnailRef = storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
         val ONE_MEGABYTE: Long = 1024 * 1024
@@ -35,7 +40,8 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
 
     }
 
-    var selectedPosition = MutableLiveData<Int>()
+
+    private val selectedPosition = MutableLiveData<Int>()
     val selectedDiary = selectedPosition.map {
         diaryList.value?.get(it)
     }
@@ -44,24 +50,31 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()): View
         selectedPosition.value = position
     }
 
-    fun deleteDocument(currentDocument: String){
+    fun deleteDocument(currentDocument: String) {
         val db = Firebase.firestore
         db.collection("Diary items").document(currentDocument)
                 .delete()
 
     }
 
-    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit){
+    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         val storageRef = Firebase.storage.reference
-        if (diaryList.value != null && selectedPosition.value != null){
+        if (diaryList.value != null && selectedPosition.value != null) {
             storageRef.child("horanikki-video/${diaryList.value!!.get(selectedPosition.value!!).videoFileName}").downloadUrl.addOnSuccessListener {
                 uri(it)
             }
         } else {
-            fallBack.invoke()
+            fallBack()
         }
 
     }
+
+    fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
+        DiaryRepository().createEntriesInfo(thum, localVideo, binding)
+        setList()
+    }
+
+
 }
 
 

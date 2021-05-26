@@ -1,21 +1,18 @@
 package com.example.horalife.diary
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
-import java.lang.IllegalArgumentException
 
-class DiaryFragment: Fragment() {
+class DiaryFragment : Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
@@ -32,16 +29,16 @@ class DiaryFragment: Fragment() {
             findNavController().navigate(action)
         }
         binding.diaryRecycler.adapter = adapter
-
-        viewModel.diaryList.observe(viewLifecycleOwner){
+        viewModel.setList()
+        viewModel.diaryList.observe(viewLifecycleOwner) {
             adapter.notifyDataSetChanged()
         }
 
         return binding.root
     }
 
-     fun showEntries(){
+    fun showEntries() {
         findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
-     }
+    }
 
 }
