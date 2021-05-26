@@ -40,7 +40,6 @@ class EntrieFragment : Fragment() {
     ): View? {
         if (Build.VERSION.SDK_INT >= 23) {
             val permissions = arrayOf(
-                    Manifest.permission.RECORD_AUDIO,
                     Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE
             )
@@ -114,16 +113,6 @@ class EntrieFragment : Fragment() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(takePictureIntent,
-                        REQUEST_CODE
-                )
-            }
-        }
-    }
-
-    private fun openMicIntent() {
-        Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION).also { takeSoundIntent ->
-            takeSoundIntent.resolveActivity(this.requireContext().packageManager).also {
-                startActivityForResult(takeSoundIntent,
                         REQUEST_CODE
                 )
             }

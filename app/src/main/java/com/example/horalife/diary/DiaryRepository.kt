@@ -19,7 +19,6 @@ class DiaryRepository {
 
 
     fun createEntriesInfo(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
-        println("あああああああああああああ")
         val baos = ByteArrayOutputStream()
         thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
@@ -30,7 +29,6 @@ class DiaryRepository {
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
         uploadVideoRef.putFile(localVideo)
         val contents = DiaryContent(
-                //正しくidを取得できてないよ
                 binding.dateText.text.toString(),
                 binding.diaryText.text.toString(),
                 path,
@@ -78,6 +76,3 @@ class DiaryRepository {
     }
 
 }
-
-//fireStoreに保存するときはDiaryContentのセットで保存する
-//readDiaryInfoで読み取るときはDiaryDetailContentとして取得する

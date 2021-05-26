@@ -56,13 +56,3 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         return bitmapDrawable.bitmap
     }
 }
-
-
-
-
-
-
-
-
-
-
