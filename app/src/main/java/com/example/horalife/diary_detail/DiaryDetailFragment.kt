@@ -57,7 +57,10 @@ class DiaryDetailFragment() : Fragment() {
             }) {
                 Toast.makeText(context, "読み込みに失敗しました", Toast.LENGTH_SHORT).show()
             }
+
         }
+
         return binding.root
     }
+
 }

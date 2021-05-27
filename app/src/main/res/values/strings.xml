@@ -9,6 +9,11 @@
     <string name="yuri">揺り</string>
     <string name="tome">止め</string>
     <string name="delete">この日記を削除</string>
+    <string name="ots_atari">乙あたり</string>
+    <string name="ots_ots_atari">乙乙あたり</string>
+    <string name="ots_yurisori">乙揺りそり</string>
+    <string name="kan_hira_yuri">甲平揺り</string>
+    <string name="betsu_yuri">別揺り</string>
 
 
 </resources>

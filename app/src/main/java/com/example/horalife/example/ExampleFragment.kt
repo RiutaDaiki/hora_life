@@ -3,15 +3,11 @@ package com.example.horalife.example
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
 import com.example.horalife.Sound
 import com.example.horalife.databinding.ExampleFragmentBinding
@@ -20,7 +16,12 @@ class ExampleFragment : Fragment() {
     private lateinit var adapter: RecyclerViewAdapter
     val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe),
             Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan),
-            Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome))
+            Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome),
+            Sound(R.string.ots_atari, R.raw.otsu_atari),
+            Sound(R.string.ots_ots_atari, R.raw.ots_ots_atari),
+            Sound(R.string.ots_yurisori, R.raw.ots_yurisori),
+            Sound(R.string.kan_hira_yuri, R.raw.kan_hira_yuri),
+            Sound(R.string.betsu_yuri, R.raw.betsu_yuri))
     lateinit var player: MediaPlayer
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
@@ -28,7 +29,7 @@ class ExampleFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
-        binding.recyclerView.layoutManager= GridLayoutManager(context, 2)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
 
@@ -42,7 +43,7 @@ class ExampleFragment : Fragment() {
 
     }
 
-    fun playMedia(file: Int, ct: Context){
+    fun playMedia(file: Int, ct: Context) {
         player = MediaPlayer.create(ct, file)
         player.isLooping = false
         player.start()
