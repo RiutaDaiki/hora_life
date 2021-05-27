@@ -11,12 +11,16 @@ import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class DiaryViewModel : ViewModel() {
+class DiaryViewModel() : ViewModel() {
+
+    object Repository {
+        val repository = DiaryRepository()
+    }
 
     val diaryList = MutableLiveData<List<DiaryDetailContent>>()
 
     fun setList() {
-        DiaryRepository().readDiaryInfo {
+        Repository.repository.readDiaryInfo {
             diaryList.value = it
         }
     }
@@ -31,12 +35,12 @@ class DiaryViewModel : ViewModel() {
     }
 
     fun callDelete() {
-        DiaryRepository().deleteDiary(selectedDiary.value!!.diaryId.toString())
+        Repository.repository.deleteDiary(selectedDiary.value!!.diaryId.toString())
     }
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         if (diaryList.value != null && selectedPosition.value != null) {
-            DiaryRepository().readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName) {
+            Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName) {
                 uri(it)
             }
         } else {
@@ -45,7 +49,7 @@ class DiaryViewModel : ViewModel() {
     }
 
     fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
-        DiaryRepository().createEntriesInfo(thum, localVideo, binding)
+        Repository.repository.createEntriesInfo(thum, localVideo, binding)
         setList()
     }
 
@@ -60,27 +64,3 @@ class DiaryViewModel : ViewModel() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

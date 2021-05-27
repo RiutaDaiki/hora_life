@@ -17,6 +17,7 @@ import java.util.*
 class DiaryRepository {
     private val db = Firebase.firestore
     private val storageRef = Firebase.storage.reference
+    private val diaries = "diaries"
 
 
     fun createEntriesInfo(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
@@ -35,7 +36,7 @@ class DiaryRepository {
                 Timestamp(System.currentTimeMillis()),
                 localVideo.lastPathSegment.toString()
         )
-        db.collection("Diary items")
+        db.collection(diaries)
                 .add(contents)
 
     }
@@ -43,7 +44,7 @@ class DiaryRepository {
 
     fun readDiaryInfo(list: (MutableList<DiaryDetailContent>) -> Unit) {
 
-        db.collection("Diary items")
+        db.collection(diaries)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
 
@@ -71,8 +72,9 @@ class DiaryRepository {
     }
 
     fun deleteDiary(id: String) {
-        db.collection("Diary items").document(id)
+        db.collection(diaries).document(id)
                 .delete()
+        //動画、サムネも消さなきゃ
     }
 
     fun readVideoUri(videoFileName: String, uri: (Uri) -> Unit) {

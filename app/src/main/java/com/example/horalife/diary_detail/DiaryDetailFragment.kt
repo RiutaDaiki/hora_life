@@ -1,7 +1,6 @@
 package com.example.horalife.diary_detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -47,8 +46,6 @@ class DiaryDetailFragment() : Fragment() {
         }
 
         binding.playBtn.setOnClickListener() {
-//            Log.d("ビデオ", viewModel.selectedDiary.value!!.pngFileName.toString())
-            Log.d("ポジション", viewModel.selectedPosition.value.toString())
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
             viewModel.getVideoUri({
                 monitor.setVideoURI(it)
