@@ -33,6 +33,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     }
 
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
+
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         val content = DiaryContent(viewModel.diaryList.value?.get(position)!!.recordedDate,
                 viewModel.diaryList.value?.get(position)!!.comment,
@@ -43,8 +44,6 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }
-
-
 
         viewModel.getBitMap(position) {
             holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())

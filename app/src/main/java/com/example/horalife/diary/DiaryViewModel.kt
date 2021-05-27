@@ -11,7 +11,7 @@ import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
-class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : ViewModel() {
+class DiaryViewModel : ViewModel() {
 
     val diaryList = MutableLiveData<List<DiaryDetailContent>>()
 
@@ -21,8 +21,7 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         }
     }
 
-
-    private val selectedPosition = MutableLiveData<Int>()
+    val selectedPosition = MutableLiveData<Int>()
     val selectedDiary = selectedPosition.map {
         diaryList.value?.get(it)
     }
@@ -43,7 +42,6 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         } else {
             fallBack()
         }
-
     }
 
     fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
@@ -60,7 +58,6 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         }.addOnFailureListener {
             bitmap(null)
         }
-
     }
 }
 

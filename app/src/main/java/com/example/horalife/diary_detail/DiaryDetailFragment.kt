@@ -40,14 +40,21 @@ class DiaryDetailFragment() : Fragment() {
         val monitor = binding.videoView
         binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
         setHasOptionsMenu(true)
+        if (viewModel.selectedPosition.value != null) {
+            viewModel.getBitMap(viewModel.selectedPosition.value!!) {
+                binding.thumView.setImageBitmap(it)
+            }
+        }
 
         binding.playBtn.setOnClickListener() {
-            Log.d("diary id", viewModel.selectedDiary.value!!.comment)
+//            Log.d("ビデオ", viewModel.selectedDiary.value!!.pngFileName.toString())
+            Log.d("ポジション", viewModel.selectedPosition.value.toString())
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
             viewModel.getVideoUri({
                 monitor.setVideoURI(it)
                 monitor.setOnPreparedListener {
                     binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
+                    binding.thumView.visibility = android.widget.ImageView.INVISIBLE
                     monitor.start()
                 }
             }) {
