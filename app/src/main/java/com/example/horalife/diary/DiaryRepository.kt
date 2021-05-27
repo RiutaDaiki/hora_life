@@ -15,7 +15,8 @@ import java.sql.Timestamp
 import java.util.*
 
 class DiaryRepository {
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
+    private val storageRef = Firebase.storage.reference
 
 
     fun createEntriesInfo(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
@@ -23,7 +24,6 @@ class DiaryRepository {
         thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
         val path = UUID.randomUUID().toString() + ".png"
-        val storageRef = Firebase.storage.reference
         val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
         uploadImageRef.putBytes(data)
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")

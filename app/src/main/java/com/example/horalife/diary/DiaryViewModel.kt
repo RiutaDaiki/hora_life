@@ -21,18 +21,6 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         }
     }
 
-    fun diaryBitMap(position: Int, lamda: (Bitmap?) -> Unit) {
-        val storageRef = Firebase.storage.reference
-        val thumbnailRef = storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
-        val ONE_MEGABYTE: Long = 1024 * 1024
-        thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-            lamda(BitmapFactory.decodeByteArray(it, 0, it.size))
-        }.addOnFailureListener {
-            lamda(null)
-        }
-
-    }
-
 
     private val selectedPosition = MutableLiveData<Int>()
     val selectedDiary = selectedPosition.map {
@@ -64,7 +52,17 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
         setList()
     }
 
+    fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit) {
+        val storageRef = Firebase.storage.reference
+        val thumbnailRef = storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
+        val ONE_MEGABYTE: Long = 1024 * 1024
+        thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+            bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
+        }.addOnFailureListener {
+            bitmap(null)
+        }
 
+    }
 }
 
 

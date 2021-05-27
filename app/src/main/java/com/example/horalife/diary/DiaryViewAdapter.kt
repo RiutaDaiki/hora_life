@@ -44,7 +44,9 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
             onClickRow(position)
         }
 
-        viewModel.diaryBitMap(position) {
+
+
+        viewModel.getBitMap(position) {
             holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())
         }
         holder.binding.lifecycleOwner = lifecycleOwner
