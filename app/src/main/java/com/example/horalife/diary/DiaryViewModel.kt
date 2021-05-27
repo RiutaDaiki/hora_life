@@ -36,9 +36,8 @@ class DiaryViewModel(diaryRepository: DiaryRepository = DiaryRepository()) : Vie
     }
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
-        val storageRef = Firebase.storage.reference
         if (diaryList.value != null && selectedPosition.value != null) {
-            storageRef.child("horanikki-video/${diaryList.value!!.get(selectedPosition.value!!).videoFileName}").downloadUrl.addOnSuccessListener {
+            DiaryRepository().readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName) {
                 uri(it)
             }
         } else {

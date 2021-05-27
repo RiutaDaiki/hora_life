@@ -75,4 +75,11 @@ class DiaryRepository {
                 .delete()
     }
 
+    fun readVideoUri(videoFileName: String, uri: (Uri) -> Unit) {
+        storageRef.child("horanikki-video/$videoFileName").downloadUrl.addOnSuccessListener {
+            uri(it)
+        }
+
+    }
+
 }
