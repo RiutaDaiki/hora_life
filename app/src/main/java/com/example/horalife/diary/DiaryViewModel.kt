@@ -55,7 +55,8 @@ class DiaryViewModel() : ViewModel() {
 
     fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit) {
         val storageRef = Firebase.storage.reference
-        val thumbnailRef = storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
+        val thumbnailRef =
+            storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
         val ONE_MEGABYTE: Long = 1024 * 1024
         thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
             bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
@@ -63,4 +64,5 @@ class DiaryViewModel() : ViewModel() {
             bitmap(null)
         }
     }
+
 }

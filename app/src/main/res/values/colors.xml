@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="oudoiro">#d2b73a</color>
     <color name="oudoiro_dark">#d2b713</color>
+    <color name="dark_gray">#a9a9a9</color>
 </resources>

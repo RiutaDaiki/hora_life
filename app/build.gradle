@@ -11,8 +11,6 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: "androidx.navigation.safeargs"
 
 
-
-
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -79,6 +77,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.firebaseui:firebase-ui-auth:6.4.0'
 
     def lifecycle_version = "2.2.0"
 
