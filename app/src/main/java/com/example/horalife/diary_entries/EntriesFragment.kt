@@ -37,18 +37,18 @@ class EntrieFragment : Fragment() {
     private val viewModel: DiaryViewModel by activityViewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         if (Build.VERSION.SDK_INT >= 23) {
             val permissions = arrayOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
             )
             checkPermission(
-                permissions,
-                REQUEST_CODE
+                    permissions,
+                    REQUEST_CODE
             )
         }
 
@@ -59,15 +59,6 @@ class EntrieFragment : Fragment() {
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
         binding.view = this
-
-        val currentUser = Firebase.auth.currentUser
-        if (currentUser != null) {
-            println("ログインしています")
-        } else {
-            AuthDialog().show(parentFragmentManager, null)
-        }
-
-//        AuthDialog().show(parentFragmentManager, null)
 
         binding.dateText.setText(LocalDate.now().toString())
 
@@ -80,9 +71,9 @@ class EntrieFragment : Fragment() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
+            requestCode: Int,
+            permissions: Array<String>,
+            grantResults: IntArray
     ) {
         when (requestCode) {
             REQUEST_CODE -> for (i in 0..permissions.size) {
@@ -108,8 +99,8 @@ class EntrieFragment : Fragment() {
                         cursor?.moveToFirst()
                         path = cursor?.getString(0)!!
                         thum = ThumbnailUtils.createVideoThumbnail(
-                            path!!,
-                            MediaStore.Video.Thumbnails.MINI_KIND
+                                path!!,
+                                MediaStore.Video.Thumbnails.MINI_KIND
                         )!!
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)
@@ -129,25 +120,30 @@ class EntrieFragment : Fragment() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(
-                    takePictureIntent,
-                    REQUEST_CODE
+                        takePictureIntent,
+                        REQUEST_CODE
                 )
             }
         }
     }
 
     fun openGallery() {
-        Intent(
-            Intent.ACTION_PICK,
-            MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-        ).also { galleryIntent ->
-            galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
-                startActivityForResult(
-                    galleryIntent,
-                    REQUEST_CODE
-                )
+        val currentUser = Firebase.auth.currentUser
+
+        if (currentUser != null) {
+            Intent(
+                    Intent.ACTION_PICK,
+                    MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+            ).also { galleryIntent ->
+                galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
+                    startActivityForResult(
+                            galleryIntent,
+                            REQUEST_CODE
+                    )
+                }
             }
-        }
+        } else Toast.makeText(context, "ログインしていません", Toast.LENGTH_SHORT).show()
+
     }
 
     fun backToDiary() {
