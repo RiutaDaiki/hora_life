@@ -5,47 +5,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
-class DiaryFragment: Fragment() {
+class DiaryFragment : Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
+    private val viewModel: DiaryViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
-        val fab = binding.root.findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener(){
-            showEntries()
-        }
-
-        val db = Firebase.firestore
-        db.collection("Diary items")
-                .get()
-                .addOnSuccessListener { result ->
-                    var contentList = mutableListOf<DiaryContent>()
-
-                    for(document in result){
-                        val d =  document.data
-                        val addContent = DiaryContent(d["dateTime"].toString(), d["comment"].toString())
-                        contentList.add(addContent)
-                    }
-                    adapter = DiaryViewAdapter(viewLifecycleOwner, contentList)
-                    binding.diaryRecycler.adapter = adapter
-                }
-        
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
+        binding.lifecycleOwner = viewLifecycleOwner
+        //↓日記画面のfabはこのクラスのshowEntries()を起動します。diary_fragment.xmlでandroid:onClick="@{() -> view.showEntries()}"としているので、この記述は必要だと思います。
+        binding.view = this
+
+        adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+            viewModel.onClickRow(it)
+            val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
+            findNavController().navigate(action)
+        }
+        binding.diaryRecycler.adapter = adapter
+        viewModel.setList()
+        viewModel.diaryList.observe(viewLifecycleOwner) {
+            adapter.notifyDataSetChanged()
+        }
 
         return binding.root
     }
-    private fun showEntries(){
-        val entries = EntrieFragment()
-        val fragmentTransaction = parentFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, entries)
-        fragmentTransaction.commit()
+
+    fun showEntries() {
+        findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
     }
+
 }

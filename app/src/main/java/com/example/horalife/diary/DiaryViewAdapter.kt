@@ -1,19 +1,28 @@
 package com.example.horalife.diary
 
-import android.util.Log
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.example.horalife.R
 import com.example.horalife.databinding.ItemDiaryBinding
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlin.properties.Delegates
+import java.sql.Timestamp
 
-class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val contentList: List<DiaryContent>)
+
+class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
+                       private val viewModel: DiaryViewModel,
+                       private val context: Context,
+                       private val onClickRow: (Int) -> Unit)
+
+// TODO: private val contentList: List<DiaryContent>はListを直接渡すのではなく、ViewModelごと渡してしまう
+
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
 
-    inner class DiaryViewHolder(val binding: ItemDiaryBinding): RecyclerView.ViewHolder(binding.root){
+    inner class DiaryViewHolder(val binding: ItemDiaryBinding) : RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryViewHolder {
@@ -23,23 +32,28 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner, private val c
         return DiaryViewHolder(listItemBinding)
     }
 
-    override fun getItemCount(): Int = contentList.size
+    override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        holder.binding.content = contentList[position]
+        val content = DiaryContent(viewModel.diaryList.value?.get(position)!!.recordedDate,
+                viewModel.diaryList.value?.get(position)!!.comment,
+                viewModel.diaryList.value?.get(position)!!.pngFileName,
+                Timestamp(System.currentTimeMillis()),
+                viewModel.diaryList.value?.get(position)!!.videoFileName)
+        holder.binding.content = content
+        holder.binding.wrapper.setOnClickListener {
+            onClickRow(position)
+        }
 
+        viewModel.getBitMap(position) {
+            holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())
+        }
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 
-
+    private fun createNoImage(): Bitmap {
+        val drawable = ContextCompat.getDrawable(context, R.drawable.no_image)
+        val bitmapDrawable = drawable as BitmapDrawable
+        return bitmapDrawable.bitmap
+    }
 }
-
-
-
-
-
-
-
-
-
-

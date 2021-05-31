@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
 import com.example.horalife.Sound
 import com.example.horalife.databinding.ItemExampleRecyclerBinding
+import com.example.horalife.diary.DiaryViewModel
 
 class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lifecycleOwner: LifecycleOwner, private val context: Context?): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
     inner class MyViewHolder(val binding: ItemExampleRecyclerBinding): RecyclerView.ViewHolder(binding.root){
