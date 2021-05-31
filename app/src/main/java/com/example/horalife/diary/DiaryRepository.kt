@@ -6,6 +6,7 @@ import android.net.Uri
 import android.util.Log
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.diary_detail.DiaryDetailContent
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -18,6 +19,8 @@ class DiaryRepository {
     private val db = Firebase.firestore
     private val storageRef = Firebase.storage.reference
     private val diaries = "diaries"
+    private val users = "users"
+    private val user = Firebase.auth.currentUser
 
 
     fun createEntriesInfo(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
@@ -36,7 +39,9 @@ class DiaryRepository {
                 Timestamp(System.currentTimeMillis()),
                 localVideo.lastPathSegment.toString()
         )
-        db.collection(diaries)
+        db.collection(users)
+                .document(user.uid)
+                .collection(diaries)
                 .add(contents)
 
     }
@@ -44,10 +49,11 @@ class DiaryRepository {
 
     fun readDiaryInfo(list: (MutableList<DiaryDetailContent>) -> Unit) {
 
-        db.collection(diaries)
+        db.collection(users)
+                .document(user.uid)
+                .collection(diaries)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .get()
-
                 .addOnSuccessListener { result ->
 
                     val storingList = mutableListOf<DiaryDetailContent>()
@@ -65,6 +71,28 @@ class DiaryRepository {
                     }
                     list(storingList)
                 }
+
+//        db.collection(users)
+//                .orderBy("timestamp", Query.Direction.DESCENDING)
+//                .get()
+//
+//                .addOnSuccessListener { result ->
+//
+//                    val storingList = mutableListOf<DiaryDetailContent>()
+//
+//                    for (document in result) {
+//                        val d = document.data
+//                        Log.d("id", document.id)
+//                        val content = DiaryDetailContent(
+//                                document.id,
+//                                d["recordedDate"].toString(),
+//                                d["comment"].toString(),
+//                                d["pngFileName"].toString(),
+//                                d["videoFileName"].toString())
+//                        storingList.add(content)
+//                    }
+//                    list(storingList)
+//                }
     }
 
     fun updateDiary() {

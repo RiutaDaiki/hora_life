@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.horalife.R
 import com.example.horalife.databinding.YouFragmentBinding
 import com.firebase.ui.auth.AuthUI
@@ -17,6 +18,7 @@ import com.google.firebase.ktx.Firebase
 class YouFragment : Fragment() {
     private lateinit var binding: YouFragmentBinding
     private val SIGN_IN = 9001
+    private val viewModel: YouViewModel by viewModels()
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -54,8 +56,7 @@ class YouFragment : Fragment() {
                                 .createSignInIntentBuilder()
                                 .setAvailableProviders(providers)
                                 .build(),
-                        SIGN_IN
-                )
+                        SIGN_IN)
             }
         }
         return binding.root
@@ -67,7 +68,11 @@ class YouFragment : Fragment() {
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
             if (user != null) Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
-
+            //ここでログインしたユーザーが既存のユーザなのか新規登録したユーザなのか判定
+            //新規ユーザーならfirestoreに保存する
+            if (viewModel.callExisting(user.uid)) {
+                viewModel.callCreateUser(user.email, user.uid, user.displayName)
+            }
         }
     }
 
