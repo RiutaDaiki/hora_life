@@ -71,28 +71,6 @@ class DiaryRepository {
                     }
                     list(storingList)
                 }
-
-//        db.collection(users)
-//                .orderBy("timestamp", Query.Direction.DESCENDING)
-//                .get()
-//
-//                .addOnSuccessListener { result ->
-//
-//                    val storingList = mutableListOf<DiaryDetailContent>()
-//
-//                    for (document in result) {
-//                        val d = document.data
-//                        Log.d("id", document.id)
-//                        val content = DiaryDetailContent(
-//                                document.id,
-//                                d["recordedDate"].toString(),
-//                                d["comment"].toString(),
-//                                d["pngFileName"].toString(),
-//                                d["videoFileName"].toString())
-//                        storingList.add(content)
-//                    }
-//                    list(storingList)
-//                }
     }
 
     fun updateDiary() {

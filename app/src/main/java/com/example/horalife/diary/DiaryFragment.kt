@@ -11,28 +11,35 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryFragmentBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
     private lateinit var adapter: DiaryViewAdapter
     private lateinit var binding: DiaryFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private val user = Firebase.auth.currentUser
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
         //↓日記画面のfabはこのクラスのshowEntries()を起動します。diary_fragment.xmlでandroid:onClick="@{() -> view.showEntries()}"としているので、この記述は必要だと思います。
         binding.view = this
 
-        adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
-            viewModel.onClickRow(it)
-            val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
-            findNavController().navigate(action)
-        }
-        binding.diaryRecycler.adapter = adapter
-        viewModel.setList()
-        viewModel.diaryList.observe(viewLifecycleOwner) {
-            adapter.notifyDataSetChanged()
-        }
+        //ログインしていない状態でRecyclerViewを呼び出すと落ちるので
+        if (user != null) {
+            adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+                viewModel.onClickRow(it)
+                val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
+                findNavController().navigate(action)
+            }
+            binding.diaryRecycler.adapter = adapter
+            viewModel.setList()
+            viewModel.diaryList.observe(viewLifecycleOwner) {
+                adapter.notifyDataSetChanged()
+            }
+        } else binding.noLoginTxt.text = resources.getString(R.string.no_login_diary)
+
 
         return binding.root
     }
