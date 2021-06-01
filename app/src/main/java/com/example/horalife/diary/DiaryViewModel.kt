@@ -38,7 +38,7 @@ class DiaryViewModel() : ViewModel() {
     }
 
     fun callDelete() {
-        Repository.repository.deleteDiary(selectedDiary.value!!.diaryId.toString())
+        Repository.repository.deleteDiary(currentAccount.value, selectedDiary.value!!)
     }
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {

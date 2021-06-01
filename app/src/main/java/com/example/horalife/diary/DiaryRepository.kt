@@ -52,7 +52,6 @@ class DiaryRepository {
 
 
     fun readDiaryInfo(user: FirebaseUser?, list: (MutableList<DiaryDetailContent>) -> Unit) {
-//        Log.d("ユーザーA", user?.displayName ?: "じぇじぇじぇ")
 
         if (user != null) {
             db.collection(users)
@@ -107,10 +106,22 @@ class DiaryRepository {
 
     }
 
-    fun deleteDiary(id: String) {
-        db.collection(diaries).document(id)
+    fun deleteDiary(user: FirebaseUser?, diary: DiaryDetailContent) {
+        db.collection(users).document(alreadyLoginUser.uid)
+                .collection(diaries)
+                .document(diary.diaryId)
                 .delete()
+
+
+
+        storageRef.child("horanikki-thumbnail/${diary.videoFileName}")
+                .delete()
+
+        storageRef.child("horanikki-thumbnail/${diary.pngFileName}")
+                .delete()
+
         //動画、サムネも消さなきゃ
+
     }
 
     fun readVideoUri(videoFileName: String, uri: (Uri) -> Unit) {
