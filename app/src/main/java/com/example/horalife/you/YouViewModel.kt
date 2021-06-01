@@ -7,7 +7,7 @@ class YouViewModel : ViewModel() {
     object Repository {
         val repository = YouRepository()
     }
-
+    
     fun callCreateUser(email: String, id: String, name: String) {
         val newUser = User(email, id, name)
         Repository.repository.createUser(newUser)

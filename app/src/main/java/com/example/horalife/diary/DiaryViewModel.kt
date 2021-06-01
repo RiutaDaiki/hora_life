@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.diary_detail.DiaryDetailContent
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 
@@ -19,8 +20,10 @@ class DiaryViewModel() : ViewModel() {
 
     val diaryList = MutableLiveData<List<DiaryDetailContent>>()
 
+    val currentAccount = MutableLiveData<FirebaseUser>()
+
     fun setList() {
-        Repository.repository.readDiaryInfo {
+        Repository.repository.readDiaryInfo(currentAccount.value) {
             diaryList.value = it
         }
     }
@@ -49,14 +52,14 @@ class DiaryViewModel() : ViewModel() {
     }
 
     fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
-        Repository.repository.createEntriesInfo(thum, localVideo, binding)
+        Repository.repository.createEntriesInfo(currentAccount.value, thum, localVideo, binding)
         setList()
     }
 
     fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit) {
         val storageRef = Firebase.storage.reference
         val thumbnailRef =
-            storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
+                storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
         val ONE_MEGABYTE: Long = 1024 * 1024
         thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
             bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
