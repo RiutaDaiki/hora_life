@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.YouFragmentBinding
 import com.example.horalife.diary.DiaryViewModel
@@ -37,8 +38,7 @@ class YouFragment : Fragment() {
                 AuthUI.IdpConfig.EmailBuilder().build()
         )
 
-        if (currentUser != null) {
-            //ログインしている状態　
+        fun showLogoutTxt() {
             binding.user.text = currentUser.displayName
             binding.statusText.text = "ログアウト"
             binding.statusText.setTextColor(resources.getColor(R.color.red))
@@ -46,10 +46,13 @@ class YouFragment : Fragment() {
                 AuthUI.getInstance()
                         .signOut(this.requireContext())
                         .addOnCompleteListener {
+                            findNavController().navigate(R.id.nav_example)
                             Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
                         }
             }
-        } else {
+        }
+
+        fun showLoginTxt() {
             binding.user.text = "ログインしてません"
             binding.statusText.text = "ログイン・登録"
             binding.statusText.setTextColor(resources.getColor(R.color.blue))
@@ -62,6 +65,13 @@ class YouFragment : Fragment() {
                         SIGN_IN)
             }
         }
+
+        if (currentUser != null) {
+            showLogoutTxt()
+        } else {
+            showLoginTxt()
+        }
+
         return binding.root
     }
 
@@ -73,6 +83,7 @@ class YouFragment : Fragment() {
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
+                findNavController().navigate(R.id.nav_example)
                 Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
             }
             if (viewModel.callExisting(user.uid)) {
