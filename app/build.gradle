@@ -88,5 +88,10 @@ dependencies {
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
+    //twitter4j
+    implementation 'org.twitter4j:twitter4j-core:4.0.7'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.2"
+
 }
 

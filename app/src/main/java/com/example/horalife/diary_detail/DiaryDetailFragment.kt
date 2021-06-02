@@ -29,9 +29,11 @@ class DiaryDetailFragment() : Fragment() {
         return true
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DiaryDetailBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
@@ -43,6 +45,25 @@ class DiaryDetailFragment() : Fragment() {
             viewModel.getBitMap(viewModel.selectedPosition.value!!) {
                 binding.thumView.setImageBitmap(it)
             }
+        }
+
+        binding.twitterBtn.setOnClickListener {
+//            launch {
+//
+//                async(context = Dispatchers.IO) {
+//                    val cb = ConfigurationBuilder()
+//                    cb.setDebugEnabled(true)
+//                        .setOAuthConsumerKey("8ljdNrEJB0b374khutuGggzve")
+//                        .setOAuthConsumerSecret("yvnPkRYAxASWNJzw3GQGEC7ulDAFR7runNsS0iOPaunOHf7Z50")
+//                        .setOAuthAccessToken("1253319552970047489-cqYQ41Mf6tgk9x8ziTm5gAHXOBwglR")
+//                        .setOAuthAccessTokenSecret("U6qzoX9kFFV7q93F3n36ejWoBCmU3wTgmzyHEIvEfYbAk")                //各種キーの設定
+//
+//                    val tf = TwitterFactory(cb.build())
+//                    val twitter = tf.getInstance()
+//                    twitter.updateStatus("Test2 tweet from Twitter4J  #twitter4j")    //ツイートの投稿
+//                }.await()
+//
+//            }
         }
 
         binding.playBtn.setOnClickListener() {
