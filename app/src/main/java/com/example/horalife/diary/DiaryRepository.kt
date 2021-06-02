@@ -40,7 +40,12 @@ class DiaryRepository {
                 Timestamp(System.currentTimeMillis()),
                 localVideo.lastPathSegment.toString()
         )
-        if (user != null) {
+        if (user == null) {
+            db.collection(users)
+                    .document(alreadyLoginUser.uid)
+                    .collection(diaries)
+                    .add(contents)
+        } else {
             db.collection(users)
                     .document(user.uid)
                     .collection(diaries)
@@ -53,9 +58,10 @@ class DiaryRepository {
 
     fun readDiaryInfo(user: FirebaseUser?, list: (MutableList<DiaryDetailContent>) -> Unit) {
 
-        if (user != null) {
+        if (user == null) {
+
             db.collection(users)
-                    .document(user.uid)
+                    .document(alreadyLoginUser.uid)
                     .collection(diaries)
                     .orderBy("timestamp", Query.Direction.DESCENDING)
                     .get()
@@ -78,7 +84,7 @@ class DiaryRepository {
                     }
         } else {
             db.collection(users)
-                    .document(alreadyLoginUser.uid)
+                    .document(user.uid)
                     .collection(diaries)
                     .orderBy("timestamp", Query.Direction.DESCENDING)
                     .get()
@@ -107,10 +113,20 @@ class DiaryRepository {
     }
 
     fun deleteDiary(user: FirebaseUser?, diary: DiaryDetailContent) {
-        db.collection(users).document(alreadyLoginUser.uid)
-                .collection(diaries)
-                .document(diary.diaryId)
-                .delete()
+        if (user == null) {
+            println(diary.diaryId)
+            println(alreadyLoginUser.uid)
+            db.collection(users)
+                    .document(alreadyLoginUser.uid)
+                    .collection(diaries)
+                    .document(diary.diaryId)
+                    .delete()
+        } else {
+            db.collection(users).document(user.uid)
+                    .collection(diaries)
+                    .document(diary.diaryId)
+                    .delete()
+        }
 
 
 
