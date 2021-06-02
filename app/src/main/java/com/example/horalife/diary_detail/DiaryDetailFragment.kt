@@ -8,6 +8,12 @@ import androidx.fragment.app.activityViewModels
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryDetailBinding
 import com.example.horalife.diary.DiaryViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import twitter4j.TwitterFactory
+import twitter4j.conf.ConfigurationBuilder
 
 class DiaryDetailFragment() : Fragment() {
     private lateinit var binding: DiaryDetailBinding
@@ -46,24 +52,24 @@ class DiaryDetailFragment() : Fragment() {
                 binding.thumView.setImageBitmap(it)
             }
         }
-
+        val twitterScope = CoroutineScope(Dispatchers.IO)
         binding.twitterBtn.setOnClickListener {
-//            launch {
-//
-//                async(context = Dispatchers.IO) {
-//                    val cb = ConfigurationBuilder()
-//                    cb.setDebugEnabled(true)
-//                        .setOAuthConsumerKey("8ljdNrEJB0b374khutuGggzve")
-//                        .setOAuthConsumerSecret("yvnPkRYAxASWNJzw3GQGEC7ulDAFR7runNsS0iOPaunOHf7Z50")
-//                        .setOAuthAccessToken("1253319552970047489-cqYQ41Mf6tgk9x8ziTm5gAHXOBwglR")
-//                        .setOAuthAccessTokenSecret("U6qzoX9kFFV7q93F3n36ejWoBCmU3wTgmzyHEIvEfYbAk")                //各種キーの設定
-//
-//                    val tf = TwitterFactory(cb.build())
-//                    val twitter = tf.getInstance()
-//                    twitter.updateStatus("Test2 tweet from Twitter4J  #twitter4j")    //ツイートの投稿
-//                }.await()
-//
-//            }
+            twitterScope.launch {
+
+                async(context = Dispatchers.IO) {
+                    val cb = ConfigurationBuilder()
+                    cb.setDebugEnabled(true)
+                        .setOAuthConsumerKey("8ljdNrEJB0b374khutuGggzve")
+                        .setOAuthConsumerSecret("yvnPkRYAxASWNJzw3GQGEC7ulDAFR7runNsS0iOPaunOHf7Z50")
+                        .setOAuthAccessToken("1253319552970047489-cqYQ41Mf6tgk9x8ziTm5gAHXOBwglR")
+                        .setOAuthAccessTokenSecret("U6qzoX9kFFV7q93F3n36ejWoBCmU3wTgmzyHEIvEfYbAk")                //各種キーの設定
+
+                    val tf = TwitterFactory(cb.build())
+                    val twitter = tf.getInstance()
+                    twitter.updateStatus("Test2 tweet from Twitter4J  #twitter4j")    //ツイートの投稿
+                }.await()
+
+            }
         }
 
         binding.playBtn.setOnClickListener() {
