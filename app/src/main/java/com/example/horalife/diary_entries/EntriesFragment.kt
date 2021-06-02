@@ -25,7 +25,6 @@ import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.diary.DiaryViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import java.time.LocalDate
 
 private val REQUEST_CODE = 1000
 
@@ -59,8 +58,6 @@ class EntrieFragment : Fragment() {
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
         binding.view = this
-
-        binding.dateText.setText(LocalDate.now().toString())
 
         binding.diaryBtn.setOnClickListener() {
             viewModel.passEntries(thum, videoUri, binding)

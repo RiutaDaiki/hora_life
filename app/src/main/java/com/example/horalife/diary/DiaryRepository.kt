@@ -33,8 +33,9 @@ class DiaryRepository {
         uploadImageRef.putBytes(data)
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
         uploadVideoRef.putFile(localVideo)
+        val date = (binding.datePicker.month + 1).toString() + " " + "/" + " " + binding.datePicker.dayOfMonth.toString()
         val contents = DiaryContent(
-                binding.dateText.text.toString(),
+                date,
                 binding.diaryText.text.toString(),
                 path,
                 Timestamp(System.currentTimeMillis()),
