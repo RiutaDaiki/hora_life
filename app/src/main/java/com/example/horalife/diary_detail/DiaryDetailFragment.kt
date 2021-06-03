@@ -2,6 +2,7 @@ package com.example.horalife.diary_detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -82,11 +83,31 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
     }
 
     fun postToTwitter() {
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.putExtra(Intent.EXTRA_TEXT, "熊さん")
-        intent.setType("text/plain")
-        intent.setPackage("com.twitter.android")
+
+
+        val intent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "video/*"
+            println("ううううううううううううう")
+            viewModel.getVideoUri({
+                putExtra(Intent.EXTRA_STREAM, it)
+                Log.d("びでおURI", it.toString())
+            }) {
+                Toast.makeText(context, "動画の添付に失敗しました", Toast.LENGTH_SHORT).show()
+            }
+
+            `package` = "com.twitter.android"
+        }
         startActivity(intent)
+
+//        val intent = Intent(Intent.ACTION_SEND)
+//        val message = viewModel.selectedDiary.value?.comment + "#HORALIFE"
+//        intent.putExtra(Intent.EXTRA_TEXT, message)
+//        intent.setType("text/plain")
+//        intent.putExtra(Intent.EXTRA_STREAM, )
+//        intent.setType()
+//        intent.setPackage("com.twitter.android")
+//        startActivity(intent)
     }
 
     override fun onDestroy() {
