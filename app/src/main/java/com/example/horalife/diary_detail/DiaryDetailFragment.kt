@@ -1,5 +1,6 @@
 package com.example.horalife.diary_detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -10,12 +11,16 @@ import com.example.horalife.databinding.DiaryDetailBinding
 import com.example.horalife.diary.DiaryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import twitter4j.TwitterFactory
-import twitter4j.conf.ConfigurationBuilder
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
-class DiaryDetailFragment() : Fragment() {
+
+class DiaryDetailFragment() : Fragment(), CoroutineScope {
+
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     private lateinit var binding: DiaryDetailBinding
     private val viewModel: DiaryViewModel by activityViewModels()
 
@@ -36,9 +41,9 @@ class DiaryDetailFragment() : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DiaryDetailBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -52,24 +57,10 @@ class DiaryDetailFragment() : Fragment() {
                 binding.thumView.setImageBitmap(it)
             }
         }
-        val twitterScope = CoroutineScope(Dispatchers.IO)
+
+
         binding.twitterBtn.setOnClickListener {
-            twitterScope.launch {
-
-                async(context = Dispatchers.IO) {
-                    val cb = ConfigurationBuilder()
-                    cb.setDebugEnabled(true)
-                        .setOAuthConsumerKey("8ljdNrEJB0b374khutuGggzve")
-                        .setOAuthConsumerSecret("yvnPkRYAxASWNJzw3GQGEC7ulDAFR7runNsS0iOPaunOHf7Z50")
-                        .setOAuthAccessToken("1253319552970047489-cqYQ41Mf6tgk9x8ziTm5gAHXOBwglR")
-                        .setOAuthAccessTokenSecret("U6qzoX9kFFV7q93F3n36ejWoBCmU3wTgmzyHEIvEfYbAk")                //各種キーの設定
-
-                    val tf = TwitterFactory(cb.build())
-                    val twitter = tf.getInstance()
-                    twitter.updateStatus("Test2 tweet from Twitter4J  #twitter4j")    //ツイートの投稿
-                }.await()
-
-            }
+            postToTwitter()
         }
 
         binding.playBtn.setOnClickListener() {
@@ -88,6 +79,19 @@ class DiaryDetailFragment() : Fragment() {
         }
 
         return binding.root
+    }
+
+    fun postToTwitter() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_TEXT, "熊さん")
+        intent.setType("text/plain")
+        intent.setPackage("com.twitter.android")
+        startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
     }
 
 }
