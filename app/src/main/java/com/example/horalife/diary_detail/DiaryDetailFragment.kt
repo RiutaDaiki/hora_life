@@ -90,6 +90,10 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
             type = "video/*"
             println("ううううううううううううう")
             viewModel.getVideoUri({
+                binding.videoView.setVideoURI(it)
+                binding.thumView.visibility = android.widget.ImageView.INVISIBLE
+                //動画のuriはしっかり取得できている
+//                binding.videoView.start()
                 putExtra(Intent.EXTRA_STREAM, it)
                 Log.d("びでおURI", it.toString())
             }) {
