@@ -1,6 +1,7 @@
 package com.example.horalife.diary_detail
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -59,7 +60,6 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
             }
         }
 
-
         binding.twitterBtn.setOnClickListener {
             postToTwitter()
         }
@@ -84,39 +84,39 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
     fun postToTwitter() {
 
+        viewModel.getVideoUri({
+            //ツイート機能に関する処理をこのスコープの中に集約する
+//            val intent: Intent = Intent().apply {
+//                val uri = it
+//                action = Intent.ACTION_SEND
+//                putExtra(Intent.EXTRA_TEXT, (viewModel.selectedDiary.value?.comment ?: "") + "\n#HORALIFE")
+//                putExtra(Intent.EXTRA_STREAM, uri)
+//                Log.d("いいいいい", uri.toString())
+//                type = "video/*"
+//                `package` = "com.twitter.android"
+//            }
 
-        val intent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            type = "video/*"
-            println("ううううううううううううう")
-            viewModel.getVideoUri({
-                binding.videoView.setVideoURI(it)
-                binding.thumView.visibility = android.widget.ImageView.INVISIBLE
-                //動画のuriはしっかり取得できている
-//                binding.videoView.start()
-                putExtra(Intent.EXTRA_STREAM, it)
-                Log.d("びでおURI", it.toString())
-            }) {
-                Toast.makeText(context, "動画の添付に失敗しました", Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_SEND)
+                    .setType("video/*")
+                    .putExtra(Intent.EXTRA_STREAM, it)
+                    .putExtra(Intent.EXTRA_TEXT, "tweet text")
+                    .setPackage("com.twitter.android")
+            try {
+                startActivity(intent)
+            } catch (e: Exception){
+                println(e)
             }
-
-            `package` = "com.twitter.android"
+        }) {
+            Toast.makeText(context, "Twitterの起動に失敗しました", Toast.LENGTH_SHORT).show()
         }
-        startActivity(intent)
-
-//        val intent = Intent(Intent.ACTION_SEND)
-//        val message = viewModel.selectedDiary.value?.comment + "#HORALIFE"
-//        intent.putExtra(Intent.EXTRA_TEXT, message)
-//        intent.setType("text/plain")
-//        intent.putExtra(Intent.EXTRA_STREAM, )
-//        intent.setType()
-//        intent.setPackage("com.twitter.android")
-//        startActivity(intent)
-    }
+}
 
     override fun onDestroy() {
         job.cancel()
         super.onDestroy()
     }
-
 }
+
+
+
+

@@ -42,6 +42,7 @@ class DiaryViewModel() : ViewModel() {
         Repository.repository.deleteDiary(currentAccount.value, selectedDiary.value!!)
     }
 
+
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         if (diaryList.value != null && selectedPosition.value != null) {
             Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName) {
@@ -51,6 +52,7 @@ class DiaryViewModel() : ViewModel() {
             fallBack()
         }
     }
+
 
     fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
         Repository.repository.createEntriesInfo(currentAccount.value, thum, localVideo, binding)

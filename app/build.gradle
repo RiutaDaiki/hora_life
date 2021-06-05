@@ -10,6 +10,9 @@ apply plugin: 'com.google.gms.google-services'
 
 apply plugin: "androidx.navigation.safeargs"
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '5.0'
+}
 
 android {
     compileSdkVersion 30

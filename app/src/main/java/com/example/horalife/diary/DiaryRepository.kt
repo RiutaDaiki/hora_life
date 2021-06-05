@@ -23,7 +23,6 @@ class DiaryRepository {
     private val users = "users"
     private val alreadyLoginUser = Firebase.auth.currentUser
 
-
     fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
         val baos = ByteArrayOutputStream()
         thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
@@ -52,10 +51,7 @@ class DiaryRepository {
                     .collection(diaries)
                     .add(contents)
         }
-
-
     }
-
 
     fun readDiaryInfo(user: FirebaseUser?, list: (MutableList<DiaryDetailContent>) -> Unit) {
 
@@ -128,16 +124,11 @@ class DiaryRepository {
                     .document(diary.diaryId)
                     .delete()
         }
-
-
-
         storageRef.child("horanikki-thumbnail/${diary.videoFileName}")
                 .delete()
 
         storageRef.child("horanikki-thumbnail/${diary.pngFileName}")
                 .delete()
-
-        //動画、サムネも消さなきゃ
 
     }
 
@@ -145,7 +136,5 @@ class DiaryRepository {
         storageRef.child("horanikki-video/$videoFileName").downloadUrl.addOnSuccessListener {
             uri(it)
         }
-
     }
-
 }
