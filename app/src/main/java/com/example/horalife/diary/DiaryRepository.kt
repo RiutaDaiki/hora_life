@@ -105,10 +105,6 @@ class DiaryRepository {
         }
     }
 
-    fun updateDiary() {
-
-    }
-
     fun deleteDiary(user: FirebaseUser?, diary: DiaryDetailContent) {
         if (user == null) {
             println(diary.diaryId)

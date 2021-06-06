@@ -14,6 +14,7 @@ import com.example.horalife.diary.DiaryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import java.io.File
 import kotlin.coroutines.CoroutineContext
 
 
@@ -83,23 +84,11 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
     }
 
     fun postToTwitter() {
-
         viewModel.getVideoUri({
-            //ツイート機能に関する処理をこのスコープの中に集約する
-//            val intent: Intent = Intent().apply {
-//                val uri = it
-//                action = Intent.ACTION_SEND
-//                putExtra(Intent.EXTRA_TEXT, (viewModel.selectedDiary.value?.comment ?: "") + "\n#HORALIFE")
-//                putExtra(Intent.EXTRA_STREAM, uri)
-//                Log.d("いいいいい", uri.toString())
-//                type = "video/*"
-//                `package` = "com.twitter.android"
-//            }
-
             val intent = Intent(Intent.ACTION_SEND)
-                    .setType("video/*")
-                    .putExtra(Intent.EXTRA_STREAM, it)
                     .putExtra(Intent.EXTRA_TEXT, "tweet text")
+                    .putExtra(Intent.EXTRA_STREAM, it)
+                    .setType("video/*")
                     .setPackage("com.twitter.android")
             try {
                 startActivity(intent)
