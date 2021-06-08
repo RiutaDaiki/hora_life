@@ -85,7 +85,10 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
     }
 
     fun launchTwitter(){
-        val tweetText = viewModel.selectedDiary.value?.comment ?: ""
+        val comment = viewModel.selectedDiary.value?.comment!! ?: ""
+        val tweetText = if (comment.length > 130) comment.substring(0..125) + "..."
+        else comment
+        val tweetext = viewModel.selectedDiary.value?.comment ?: ""
 
         val intent = Intent(Intent.ACTION_SEND)
                     .putExtra(Intent.EXTRA_TEXT, "$tweetText\n#HORALIFE")

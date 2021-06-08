@@ -38,19 +38,16 @@
 
             <TextView
                 android:id="@+id/comment_text"
-                android:layout_width="360dp"
-                android:layout_height="217dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginBottom="92dp"
                 android:text="@{viewmodel.selectedDiary.comment}"
-                android:textSize="18dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detail_date_text" />
+                app:layout_constrainedWidth="true"
+
+                android:textSize="18dp" />
 
         </androidx.core.widget.NestedScrollView>
 
