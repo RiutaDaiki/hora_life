@@ -24,6 +24,7 @@ import kotlin.coroutines.CoroutineContext
 
 class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
+    private val TWITTER_CODE = 140
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
@@ -66,7 +67,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         }
 
         binding.twitterBtn.setOnClickListener {
-            createOutPutFile()
+            twitter()
         }
 
         binding.playBtn.setOnClickListener() {
@@ -87,24 +88,18 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         return binding.root
     }
 
-    fun twitter(uri: Uri){
+    fun twitter(){
+        val tweetText = viewModel.selectedDiary.value?.comment ?: ""
 
         val intent = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, "tweet text")
-                    .putExtra(Intent.EXTRA_STREAM, uri)
+                    .putExtra(Intent.EXTRA_TEXT, "$tweetText\n#HORALIFE")
+                    .putExtra(Intent.EXTRA_STREAM, createOutPutFile())
                     .setType("video/*")
                     .setPackage("com.twitter.android")
-        startActivity(intent)
+        startActivityForResult(intent, TWITTER_CODE)
     }
 
-    fun createOutPutFile() {
-//        val timeStamp = Timestamp(System.currentTimeMillis())
-//        val fileName = timeStamp.year.toString() +
-//                (timeStamp.month + 1).toString() +
-//                timeStamp.date.toString() +
-//                timeStamp.hours.toString() +
-//                timeStamp.minutes.toString() +
-//                timeStamp.seconds.toString()
+    fun createOutPutFile(): Uri {
         val selectedVideo = viewModel.selectedDiary.value?.videoPath
         val file = File(selectedVideo)
 
@@ -113,25 +108,14 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
                 this.requireContext().packageName + ".provider",
                 file
         )
-        twitter(uri)
+        return uri
     }
 
-    fun postToTwitter(videoFile: File) {
-        viewModel.getVideoUri({
-            val intent = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, "tweet text")
-                    .putExtra(Intent.EXTRA_STREAM, videoFile)
-                    .setType("video/*")
-                    .setPackage("com.twitter.android")
-            try {
-                startActivity(intent)
-            } catch (e: Exception){
-                println(e)
-            }
-        }) {
-            Toast.makeText(context, "Twitterの起動に失敗しました", Toast.LENGTH_SHORT).show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode){
+//            TWITTER_CODE -> ここでツイート完了したか判定してトースト出したい
         }
-}
+    }
 
     override fun onDestroy() {
         job.cancel()
