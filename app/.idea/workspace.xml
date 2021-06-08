@@ -32,8 +32,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryContent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryViewAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryViewAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary/DiaryViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary_detail/DiaryDetailContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary_detail/DiaryDetailContent.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary_detail/DiaryDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/diary_detail/DiaryDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_example_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_example_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/you_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/you_fragment.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

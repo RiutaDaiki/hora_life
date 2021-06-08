@@ -3,14 +3,11 @@ package com.example.horalife.diary_detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.horalife.BuildConfig
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryDetailBinding
 import com.example.horalife.diary.DiaryViewModel
@@ -18,7 +15,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import java.io.File
-import java.sql.Timestamp
 import kotlin.coroutines.CoroutineContext
 
 
@@ -67,7 +63,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         }
 
         binding.twitterBtn.setOnClickListener {
-            twitter()
+            launchTwitter()
         }
 
         binding.playBtn.setOnClickListener() {
@@ -88,7 +84,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         return binding.root
     }
 
-    fun twitter(){
+    fun launchTwitter(){
         val tweetText = viewModel.selectedDiary.value?.comment ?: ""
 
         val intent = Intent(Intent.ACTION_SEND)
@@ -115,11 +111,6 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         when(requestCode){
 //            TWITTER_CODE -> ここでツイート完了したか判定してトースト出したい
         }
-    }
-
-    override fun onDestroy() {
-        job.cancel()
-        super.onDestroy()
     }
 }
 

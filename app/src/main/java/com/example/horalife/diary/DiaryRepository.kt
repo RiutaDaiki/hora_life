@@ -39,7 +39,6 @@ class DiaryRepository {
                 path,
                 Timestamp(System.currentTimeMillis()),
                 localVideo.lastPathSegment.toString(),
-                localVideo.toString(),
                 videoPath
         )
         if (user == null) {
@@ -77,7 +76,6 @@ class DiaryRepository {
                                     d["comment"].toString(),
                                     d["pngFileName"].toString(),
                                     d["videoFileName"].toString(),
-                                    d["videoInMediaStore"].toString(),
                                     d["videoPath"].toString())
                             storingList.add(content)
 
@@ -103,7 +101,6 @@ class DiaryRepository {
                                     d["comment"].toString(),
                                     d["pngFileName"].toString(),
                                     d["videoFileName"].toString(),
-                                    d["videoInMediaStore"].toString(),
                                     d["videoPath"].toString())
                             storingList.add(content)
                         }

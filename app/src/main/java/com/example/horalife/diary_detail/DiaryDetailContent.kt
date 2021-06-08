@@ -7,5 +7,4 @@ data class DiaryDetailContent(val diaryId: String,
                               val comment: String,
                               val pngFileName: String,
                               val videoFileName: String,
-                              val videoInMediaStore: String,
                               val videoPath: String)

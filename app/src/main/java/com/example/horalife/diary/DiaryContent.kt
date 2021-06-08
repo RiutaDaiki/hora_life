@@ -7,5 +7,4 @@ data class DiaryContent(val recordedDate: String,
                         val pngFileName: String,
                         val timestamp: Timestamp,
                         val videoFileName: String,
-                        val videoInMediaStore: String,
                         val videoPath: String)
