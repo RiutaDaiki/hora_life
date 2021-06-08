@@ -11,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,10 +30,10 @@ import com.google.firebase.ktx.Firebase
 private val REQUEST_CODE = 1000
 
 class EntrieFragment : Fragment() {
-    lateinit var thum: Bitmap
-    lateinit var path: String
-    lateinit var videoUri: Uri
-    lateinit var binding: EntriesFragmentBinding
+    private lateinit var thum: Bitmap
+    private lateinit var path: String
+    private lateinit var videoUri: Uri
+    private lateinit var binding: EntriesFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -99,6 +100,8 @@ class EntrieFragment : Fragment() {
                                 path!!,
                                 MediaStore.Video.Thumbnails.MINI_KIND
                         )!!
+                        Log.d("path", path)
+                        Log.d("ビデオuri", uri.toString())
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)
                     }

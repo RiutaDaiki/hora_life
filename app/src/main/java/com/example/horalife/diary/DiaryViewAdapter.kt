@@ -41,7 +41,8 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
                 rowComment,
                 viewModel.diaryList.value?.get(position)!!.pngFileName,
                 Timestamp(System.currentTimeMillis()),
-                viewModel.diaryList.value?.get(position)!!.videoFileName)
+                viewModel.diaryList.value?.get(position)!!.videoFileName,
+                viewModel.diaryList.value?.get(position)!!.videoInMediaStore)
         holder.binding.content = content
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)

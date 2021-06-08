@@ -25,7 +25,7 @@ class DiaryRepository {
 
     fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
         val baos = ByteArrayOutputStream()
-        thum?.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        thum.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
         val path = UUID.randomUUID().toString() + ".png"
         val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
@@ -38,7 +38,8 @@ class DiaryRepository {
                 binding.diaryText.text.toString(),
                 path,
                 Timestamp(System.currentTimeMillis()),
-                localVideo.lastPathSegment.toString()
+                localVideo.lastPathSegment.toString(),
+                localVideo.toString()
         )
         if (user == null) {
             db.collection(users)
@@ -74,8 +75,10 @@ class DiaryRepository {
                                     d["recordedDate"].toString(),
                                     d["comment"].toString(),
                                     d["pngFileName"].toString(),
-                                    d["videoFileName"].toString())
+                                    d["videoFileName"].toString(),
+                                    d["videoInMediaStore"].toString())
                             storingList.add(content)
+
                         }
                         list(storingList)
                     }
@@ -97,7 +100,8 @@ class DiaryRepository {
                                     d["recordedDate"].toString(),
                                     d["comment"].toString(),
                                     d["pngFileName"].toString(),
-                                    d["videoFileName"].toString())
+                                    d["videoFileName"].toString(),
+                                    d["videoInMediaStore"].toString())
                             storingList.add(content)
                         }
                         list(storingList)
@@ -125,7 +129,6 @@ class DiaryRepository {
 
         storageRef.child("horanikki-thumbnail/${diary.pngFileName}")
                 .delete()
-
     }
 
     fun readVideoUri(videoFileName: String, uri: (Uri) -> Unit) {
