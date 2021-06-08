@@ -61,7 +61,7 @@ class EntrieFragment : Fragment() {
         binding.view = this
 
         binding.diaryBtn.setOnClickListener() {
-            viewModel.passEntries(thum, videoUri, binding)
+            viewModel.passEntries(thum, videoUri, binding, path)
             backToDiary()
         }
 

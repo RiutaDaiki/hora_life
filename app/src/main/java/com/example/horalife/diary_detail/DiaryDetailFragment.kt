@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -97,14 +98,15 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
     }
 
     fun createOutPutFile() {
-        val timeStamp = Timestamp(System.currentTimeMillis())
-        val fileName = timeStamp.year.toString() +
-                (timeStamp.month + 1).toString() +
-                timeStamp.date.toString() +
-                timeStamp.hours.toString() +
-                timeStamp.minutes.toString() +
-                timeStamp.seconds.toString()
-        val file = File("/storage/emulated/0/DCIM/Camera/VID_20210603_171113.mp4")
+//        val timeStamp = Timestamp(System.currentTimeMillis())
+//        val fileName = timeStamp.year.toString() +
+//                (timeStamp.month + 1).toString() +
+//                timeStamp.date.toString() +
+//                timeStamp.hours.toString() +
+//                timeStamp.minutes.toString() +
+//                timeStamp.seconds.toString()
+        val selectedVideo = viewModel.selectedDiary.value?.videoPath
+        val file = File(selectedVideo)
 
         val uri = FileProvider.getUriForFile(
                 this.requireContext(),

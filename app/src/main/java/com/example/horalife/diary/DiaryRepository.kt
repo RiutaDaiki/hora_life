@@ -23,7 +23,7 @@ class DiaryRepository {
     private val users = "users"
     private val alreadyLoginUser = Firebase.auth.currentUser
 
-    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
+    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding, videoPath: String) {
         val baos = ByteArrayOutputStream()
         thum.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
@@ -39,7 +39,8 @@ class DiaryRepository {
                 path,
                 Timestamp(System.currentTimeMillis()),
                 localVideo.lastPathSegment.toString(),
-                localVideo.toString()
+                localVideo.toString(),
+                videoPath
         )
         if (user == null) {
             db.collection(users)
@@ -76,7 +77,8 @@ class DiaryRepository {
                                     d["comment"].toString(),
                                     d["pngFileName"].toString(),
                                     d["videoFileName"].toString(),
-                                    d["videoInMediaStore"].toString())
+                                    d["videoInMediaStore"].toString(),
+                                    d["videoPath"].toString())
                             storingList.add(content)
 
                         }
@@ -101,7 +103,8 @@ class DiaryRepository {
                                     d["comment"].toString(),
                                     d["pngFileName"].toString(),
                                     d["videoFileName"].toString(),
-                                    d["videoInMediaStore"].toString())
+                                    d["videoInMediaStore"].toString(),
+                                    d["videoPath"].toString())
                             storingList.add(content)
                         }
                         list(storingList)

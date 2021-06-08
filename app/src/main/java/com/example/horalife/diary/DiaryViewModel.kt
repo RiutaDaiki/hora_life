@@ -55,8 +55,8 @@ class DiaryViewModel() : ViewModel() {
     }
 
 
-    fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding) {
-        Repository.repository.createEntriesInfo(currentAccount.value, thum, localVideo, binding)
+    fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding, videoPath: String) {
+        Repository.repository.createEntriesInfo(currentAccount.value, thum, localVideo, binding, videoPath)
         setList()
     }
 
