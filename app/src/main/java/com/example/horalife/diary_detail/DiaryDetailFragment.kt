@@ -68,6 +68,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
         binding.playBtn.setOnClickListener() {
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
+
             viewModel.getVideoUri({
                 monitor.setVideoURI(it)
                 monitor.setOnPreparedListener {
@@ -81,24 +82,19 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
         }
 
-        binding.detailDateText.setOnClickListener{
-            println("ウホホーイ")
-        }
-
         return binding.root
     }
 
-    fun launchTwitter(){
+    fun launchTwitter() {
         val comment = viewModel.selectedDiary.value?.comment!! ?: ""
         val tweetText = if (comment.length > 130) comment.substring(0..125) + "..."
         else comment
-        val tweetext = viewModel.selectedDiary.value?.comment ?: ""
 
         val intent = Intent(Intent.ACTION_SEND)
-                    .putExtra(Intent.EXTRA_TEXT, "$tweetText\n#HORALIFE")
-                    .putExtra(Intent.EXTRA_STREAM, createOutPutFile())
-                    .setType("video/*")
-                    .setPackage("com.twitter.android")
+                .putExtra(Intent.EXTRA_TEXT, "$tweetText\n#HORALIFE")
+                .putExtra(Intent.EXTRA_STREAM, createOutPutFile())
+                .setType("video/*")
+                .setPackage("com.twitter.android")
         startActivityForResult(intent, TWITTER_CODE)
     }
 
@@ -115,7 +111,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when(requestCode){
+        when (requestCode) {
 //            TWITTER_CODE -> ここでツイート完了したか判定してトースト出したい
         }
     }

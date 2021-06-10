@@ -3,22 +3,19 @@ package com.example.horalife.diary
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.diary_detail.DiaryDetailContent
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 
 class DiaryViewModel() : ViewModel() {
@@ -26,10 +23,6 @@ class DiaryViewModel() : ViewModel() {
     object Repository {
         val repository = DiaryRepository()
     }
-
-
-
-
 
     val diaryList = MutableLiveData<List<DiaryDetailContent>>()
 
@@ -43,7 +36,7 @@ class DiaryViewModel() : ViewModel() {
                         diaryList.value =  it
                     }
                     .onFailure {
-
+                        callBack
                     }
         }
     }
@@ -63,13 +56,14 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-
-    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
+    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit){
         viewModelScope.launch {
         if (diaryList.value != null && selectedPosition.value != null) {
-            Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName) {
-                uri(it)
-            }
+            Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
+                    .onSuccess {
+                        uri(it)
+                    }
+                    .onFailure {  }
         } else {
             fallBack()
         }
@@ -82,18 +76,28 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-    fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit) {
+    fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit){
         viewModelScope.launch {
+            getByteArray(position)
+                    .onSuccess {
+                        bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
+                    }
+                    .onFailure {  }
+        }
+    }
 
-
-            val storageRef = Firebase.storage.reference
-            val thumbnailRef =
-                    storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
-            val ONE_MEGABYTE: Long = 1024 * 1024
-            thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
-            }.addOnFailureListener {
-                bitmap(null)
+    suspend fun getByteArray(position: Int): Result<ByteArray> {
+        return kotlin.runCatching {
+            suspendCoroutine { continuation ->
+                val storageRef = Firebase.storage.reference
+                val thumbnailRef =
+                        storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
+                val ONE_MEGABYTE: Long = 1024 * 1024
+                thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                    continuation.resume(it)
+                }.addOnFailureListener {
+                    continuation.resumeWithException(it)
+                }
             }
         }
     }

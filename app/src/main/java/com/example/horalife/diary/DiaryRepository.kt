@@ -145,9 +145,20 @@ class DiaryRepository {
                 .delete()
     }
 
-    fun readVideoUri(videoFileName: String, uri: (Uri) -> Unit) {
-        storageRef.child("horanikki-video/$videoFileName").downloadUrl.addOnSuccessListener {
-            uri(it)
+   suspend fun readVideoUri(videoFileName: String): Result<Uri> {
+        val result: Result<Uri> = kotlin.runCatching {
+            suspendCoroutine { continuation ->
+                storageRef.child("horanikki-video/$videoFileName").downloadUrl
+                        .addOnSuccessListener {
+                            continuation.resume(it)
+                        }
+                        .addOnFailureListener {
+                            continuation.resumeWithException(it)
+                        }
+
+            }
         }
+        return result
     }
+
 }
