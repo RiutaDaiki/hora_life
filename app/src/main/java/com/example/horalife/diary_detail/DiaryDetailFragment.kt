@@ -81,6 +81,10 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
         }
 
+        binding.detailDateText.setOnClickListener{
+            println("ウホホーイ")
+        }
+
         return binding.root
     }
 

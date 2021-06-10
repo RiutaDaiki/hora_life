@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -34,7 +35,9 @@ class DiaryFragment : Fragment() {
                 findNavController().navigate(action)
             }
             binding.diaryRecycler.adapter = adapter
-            viewModel.setList()
+            viewModel.setList{
+                Toast.makeText(context, "日記の取得に失敗しました", Toast.LENGTH_SHORT).show()
+            }
             viewModel.diaryList.observe(viewLifecycleOwner) {
                 adapter.notifyDataSetChanged()
             }

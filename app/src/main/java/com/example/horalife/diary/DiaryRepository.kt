@@ -15,6 +15,9 @@ import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
 import java.sql.Timestamp
 import java.util.*
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class DiaryRepository {
     private val db = Firebase.firestore
@@ -54,59 +57,70 @@ class DiaryRepository {
         }
     }
 
-    fun readDiaryInfo(user: FirebaseUser?, list: (MutableList<DiaryDetailContent>) -> Unit) {
+    suspend fun readDiaryInfo(user: FirebaseUser?): Result<List<DiaryDetailContent>> {
+        val result: Result<List<DiaryDetailContent>> = runCatching {
+            suspendCoroutine { continuation ->
+                if (user == null) {
 
-        if (user == null) {
 
-            db.collection(users)
-                    .document(alreadyLoginUser.uid)
-                    .collection(diaries)
-                    .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .get()
-                    .addOnSuccessListener { result ->
+                    db.collection(users)
+                            .document(alreadyLoginUser.uid)
+                            .collection(diaries)
+                            .orderBy("timestamp", Query.Direction.DESCENDING)
+                            .get()
+                            .addOnSuccessListener { result ->
 
-                        val storingList = mutableListOf<DiaryDetailContent>()
+                                val storingList = mutableListOf<DiaryDetailContent>()
 
-                        for (document in result) {
-                            val d = document.data
-                            Log.d("id", document.id)
-                            val content = DiaryDetailContent(
-                                    document.id,
-                                    d["recordedDate"].toString(),
-                                    d["comment"].toString(),
-                                    d["pngFileName"].toString(),
-                                    d["videoFileName"].toString(),
-                                    d["videoPath"].toString())
-                            storingList.add(content)
+                                for (document in result) {
+                                    val d = document.data
+                                    val content = DiaryDetailContent(
+                                            document.id,
+                                            d["recordedDate"].toString(),
+                                            d["comment"].toString(),
+                                            d["pngFileName"].toString(),
+                                            d["videoFileName"].toString(),
+                                            d["videoPath"].toString())
+                                    storingList.add(content)
 
-                        }
-                        list(storingList)
-                    }
-        } else {
-            db.collection(users)
-                    .document(user.uid)
-                    .collection(diaries)
-                    .orderBy("timestamp", Query.Direction.DESCENDING)
-                    .get()
-                    .addOnSuccessListener { result ->
+                                }
+                                continuation.resume(storingList)
+                            }
+                            .addOnFailureListener {
+                                continuation.resumeWithException(it)
+                            }
+                } else {
+                    db.collection(users)
+                            .document(user.uid)
+                            .collection(diaries)
+                            .orderBy("timestamp", Query.Direction.DESCENDING)
+                            .get()
+                            .addOnSuccessListener { result ->
 
-                        val storingList = mutableListOf<DiaryDetailContent>()
+                                val storingList = mutableListOf<DiaryDetailContent>()
 
-                        for (document in result) {
-                            val d = document.data
-                            Log.d("id", document.id)
-                            val content = DiaryDetailContent(
-                                    document.id,
-                                    d["recordedDate"].toString(),
-                                    d["comment"].toString(),
-                                    d["pngFileName"].toString(),
-                                    d["videoFileName"].toString(),
-                                    d["videoPath"].toString())
-                            storingList.add(content)
-                        }
-                        list(storingList)
-                    }
+                                for (document in result) {
+                                    val d = document.data
+                                    Log.d("id", document.id)
+                                    val content = DiaryDetailContent(
+                                            document.id,
+                                            d["recordedDate"].toString(),
+                                            d["comment"].toString(),
+                                            d["pngFileName"].toString(),
+                                            d["videoFileName"].toString(),
+                                            d["videoPath"].toString())
+                                    storingList.add(content)
+                                }
+                                continuation.resume(storingList)
+                            }
+                            .addOnFailureListener {
+                                continuation.resumeWithException(it)
+                            }
+                }
+            }
+
         }
+        return result
     }
 
     fun deleteDiary(user: FirebaseUser?, diary: DiaryDetailContent) {
