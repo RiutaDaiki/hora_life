@@ -56,17 +56,33 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit){
+//    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit){
+//        viewModelScope.launch {
+//        if (diaryList.value != null && selectedPosition.value != null) {
+//            Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
+//                    .onSuccess {
+//                        uri(it)
+//                    }
+//                    .onFailure {  }
+//        } else {
+//            fallBack()
+//        }
+//        }
+//    }
+
+    val selectedDiaryVideo = MutableLiveData<Uri>()
+
+    fun getVideoUri(fallBack: () -> Unit){
         viewModelScope.launch {
-        if (diaryList.value != null && selectedPosition.value != null) {
-            Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
-                    .onSuccess {
-                        uri(it)
-                    }
-                    .onFailure {  }
-        } else {
-            fallBack()
-        }
+            if (diaryList.value != null && selectedPosition.value != null) {
+                Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
+                        .onSuccess {
+                            selectedDiaryVideo.value = it
+                        }
+                        .onFailure { fallBack }
+            } else {
+                fallBack()
+            }
         }
     }
 

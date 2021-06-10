@@ -68,17 +68,16 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
         binding.playBtn.setOnClickListener() {
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
+            viewModel.getVideoUri{
+                Toast.makeText(context, "読み込みに失敗しました", Toast.LENGTH_SHORT).show()
+            }
 
-            viewModel.getVideoUri({
-                monitor.setVideoURI(it)
+            monitor.setVideoURI(viewModel.selectedDiaryVideo.value)
                 monitor.setOnPreparedListener {
                     binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
                     binding.thumView.visibility = android.widget.ImageView.INVISIBLE
                     monitor.start()
                 }
-            }) {
-                Toast.makeText(context, "読み込みに失敗しました", Toast.LENGTH_SHORT).show()
-            }
 
         }
 
