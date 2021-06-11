@@ -61,7 +61,7 @@ class DiaryViewModel() : ViewModel() {
         viewModelScope.launch {
             Log.d("ビデオURえる", diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
             if (diaryList.value != null && selectedPosition.value != null) {
-                Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
+                Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
                         .onSuccess {
                             uri(it)
                         }
