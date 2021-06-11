@@ -1,6 +1,5 @@
 package com.example.horalife.diary
 
-
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
@@ -18,7 +17,7 @@ import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-//viewModel及びrepositoryがbindingクラスを知っているべきではない
+
 class DiaryRepository {
     private val db = Firebase.firestore
     private val storageRef = Firebase.storage.reference
@@ -26,7 +25,7 @@ class DiaryRepository {
     private val users = "users"
     private val alreadyLoginUser = Firebase.auth.currentUser
 
-    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, content: DiaryContent) {
+    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, content: DiaryContent, localVideo: Uri) {
         val baos = ByteArrayOutputStream()
         thum.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
@@ -34,14 +33,15 @@ class DiaryRepository {
         val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
         uploadImageRef.putBytes(data)
         val videoUri = content.videoPath.toUri()
-        val uploadVideoRef = storageRef.child("horanikki-video/${videoUri.lastPathSegment}")
+        val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
+        Log.d("ラストパスセグメント", localVideo.lastPathSegment!!)
         uploadVideoRef.putFile(videoUri)
         val contents = DiaryContent(
                 content.recordedDate,
                 content.comment,
                 path,
                 Timestamp(System.currentTimeMillis()),
-                videoUri.lastPathSegment.toString(),
+                localVideo.lastPathSegment!!,
                 videoUri.toString()
         )
         if (user == null) {
@@ -145,8 +145,8 @@ class DiaryRepository {
                 .delete()
     }
 
-   suspend fun readVideoUri(videoFileName: String): Result<Uri> {
-        val result: Result<Uri> = kotlin.runCatching {
+    suspend fun readVideoUri(videoFileName: String): Result<Uri> {
+        return kotlin.runCatching {
             suspendCoroutine { continuation ->
                 storageRef.child("horanikki-video/$videoFileName").downloadUrl
                         .addOnSuccessListener {
@@ -158,7 +158,22 @@ class DiaryRepository {
 
             }
         }
-        return result
+    }
+
+    suspend fun getByteArray(pngFileName: String): Result<ByteArray> {
+        return kotlin.runCatching {
+            suspendCoroutine { continuation ->
+                val storageRef = Firebase.storage.reference
+                val thumbnailRef =
+                        storageRef.child("horanikki-thumbnail/$pngFileName")
+                val ONE_MEGABYTE: Long = 1024 * 1024
+                thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
+                    continuation.resume(it)
+                }.addOnFailureListener {
+                    continuation.resumeWithException(it)
+                }
+            }
+        }
     }
 
 }

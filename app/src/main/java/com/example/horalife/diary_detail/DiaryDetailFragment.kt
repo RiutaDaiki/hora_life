@@ -3,6 +3,7 @@ package com.example.horalife.diary_detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -57,7 +58,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
         setHasOptionsMenu(true)
         if (viewModel.selectedPosition.value != null) {
-            viewModel.getBitMap(viewModel.selectedPosition.value!!){
+            viewModel.getBitMap(viewModel.selectedPosition.value!!) {
                 binding.thumView.setImageBitmap(it)
             }
         }
@@ -68,16 +69,27 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
         binding.playBtn.setOnClickListener() {
             binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
-            viewModel.getVideoUri(binding) {
+            binding.videoProgressBar.visibility = android.widget.ProgressBar.VISIBLE
+
+            viewModel.getVideoUri({
+                monitor.setVideoURI(it)
+
+                monitor.setOnPreparedListener {
+                    binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
+                    binding.thumView.visibility = android.widget.ImageView.INVISIBLE
+                    monitor.start()
+                }
+            }) {
                 Toast.makeText(context, "読み込みに失敗しました", Toast.LENGTH_SHORT).show()
             }
         }
+
 
         return binding.root
     }
 
     fun launchTwitter() {
-        val comment = viewModel.selectedDiary.value?.comment!! ?: ""
+        val comment = viewModel.selectedDiary.value?.comment ?: ""
         val tweetText = if (comment.length > 130) comment.substring(0..125) + "..."
         else comment
 

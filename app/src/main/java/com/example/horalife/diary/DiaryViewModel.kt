@@ -3,6 +3,8 @@ package com.example.horalife.diary
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
+import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
@@ -28,11 +30,11 @@ class DiaryViewModel() : ViewModel() {
 
     val currentAccount = MutableLiveData<FirebaseUser>()
 
-    fun setList(fallBack :() -> Unit) {
+    fun setList(fallBack: () -> Unit) {
         viewModelScope.launch {
             Repository.repository.readDiaryInfo(currentAccount.value)
                     .onSuccess {
-                        diaryList.value =  it
+                        diaryList.value = it
                     }
                     .onFailure {
                         fallBack
@@ -50,23 +52,18 @@ class DiaryViewModel() : ViewModel() {
     }
 
     fun callDelete() {
-        viewModelScope.launch{
+        viewModelScope.launch {
             Repository.repository.deleteDiary(currentAccount.value, selectedDiary.value!!)
         }
     }
 
-    fun getVideoUri(binding: DiaryDetailBinding, fallBack: () -> Unit){
+    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         viewModelScope.launch {
+            Log.d("ビデオURえる", diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
             if (diaryList.value != null && selectedPosition.value != null) {
                 Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
                         .onSuccess {
-                            val monitor = binding.videoView
-                            monitor.setVideoURI(it)
-                            monitor.setOnPreparedListener {
-                                binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
-                                binding.thumView.visibility = android.widget.ImageView.INVISIBLE
-                                monitor.start()
-                            }
+                            uri(it)
                         }
                         .onFailure { fallBack }
             } else {
@@ -75,21 +72,22 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-    fun passEntries(thum: Bitmap, content: DiaryContent, navToDiary: () -> Unit) {
+    fun passEntries(thum: Bitmap, content: DiaryContent, localVideo: Uri) {
         viewModelScope.launch {
-            Repository.repository.createEntriesInfo(currentAccount.value, thum, content)
+            Repository.repository.createEntriesInfo(currentAccount.value, thum, content, localVideo)
         }
-        navToDiary
-        setList { println("bug") }
     }
 
-    fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit){
+    fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit) {
         viewModelScope.launch {
-            getByteArray(position)
-                    .onSuccess {
-                        bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
-                    }
-                    .onFailure {  }
+            val pngFileName = diaryList.value?.get(position)?.pngFileName
+            if (pngFileName != null) {
+                Repository.repository.getByteArray(pngFileName)
+                        .onSuccess {
+                            bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
+                        }
+                        .onFailure { }
+            }
         }
     }
 

@@ -54,9 +54,6 @@ class EntrieFragment : Fragment() {
             )
         }
 
-        val noImageDrawable = ContextCompat.getDrawable(this.requireContext(), R.drawable.no_image)
-        val bitmapDrawable = noImageDrawable as BitmapDrawable
-        thum = bitmapDrawable.bitmap
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
@@ -73,9 +70,7 @@ class EntrieFragment : Fragment() {
                     videoUri.lastPathSegment.toString(),
                     videoPath
             )
-            viewModel.passEntries(thum, contents){
-                backToDiary()
-            }
+            viewModel.passEntries(thum, contents, videoUri)
             backToDiary()
         }
 
