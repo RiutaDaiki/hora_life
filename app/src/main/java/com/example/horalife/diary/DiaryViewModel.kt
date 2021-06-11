@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import com.example.horalife.databinding.DiaryDetailBinding
+import com.example.horalife.databinding.DiaryDetailBindingImpl
 import com.example.horalife.databinding.EntriesFragmentBinding
 import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
@@ -71,13 +73,19 @@ class DiaryViewModel() : ViewModel() {
 //    }
 
     val selectedDiaryVideo = MutableLiveData<Uri>()
-
-    fun getVideoUri(fallBack: () -> Unit){
+//getVideoUriにbindingを渡す？
+    fun getVideoUri(binding: DiaryDetailBinding, fallBack: () -> Unit){
         viewModelScope.launch {
             if (diaryList.value != null && selectedPosition.value != null) {
                 Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
                         .onSuccess {
-                            selectedDiaryVideo.value = it
+                            val monitor = binding.videoView
+                            monitor.setVideoURI(it)
+                            monitor.setOnPreparedListener {
+                                binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
+                                binding.thumView.visibility = android.widget.ImageView.INVISIBLE
+                                monitor.start()
+                            }
                         }
                         .onFailure { fallBack }
             } else {
