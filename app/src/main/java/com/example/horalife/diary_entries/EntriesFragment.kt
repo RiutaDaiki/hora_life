@@ -23,15 +23,17 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
+import com.example.horalife.diary.DiaryContent
 import com.example.horalife.diary.DiaryViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.security.Timestamp
 
 private val REQUEST_CODE = 1000
 
 class EntrieFragment : Fragment() {
     private lateinit var thum: Bitmap
-    private lateinit var path: String
+    private lateinit var videoPath: String
     private lateinit var videoUri: Uri
     private lateinit var binding: EntriesFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
@@ -61,7 +63,19 @@ class EntrieFragment : Fragment() {
         binding.view = this
 
         binding.diaryBtn.setOnClickListener() {
-            viewModel.passEntries(thum, videoUri, binding, path)
+            val date = (binding.datePicker.month + 1).toString() + " " + "/" + " " + binding.datePicker.dayOfMonth.toString()
+
+            val contents = DiaryContent(
+                    date,
+                    binding.diaryText.text.toString(),
+                    "",
+                    java.sql.Timestamp(System.currentTimeMillis()),
+                    videoUri.lastPathSegment.toString(),
+                    videoPath
+            )
+            viewModel.passEntries(thum, contents){
+                backToDiary()
+            }
             backToDiary()
         }
 
@@ -95,12 +109,12 @@ class EntrieFragment : Fragment() {
                         val columns: Array<String> = arrayOf(MediaStore.Video.Media.DATA)
                         val cursor = context?.contentResolver?.query(uri, columns, null, null, null)
                         cursor?.moveToFirst()
-                        path = cursor?.getString(0)!!
+                        videoPath = cursor?.getString(0)!!
                         thum = ThumbnailUtils.createVideoThumbnail(
-                                path!!,
+                                videoPath!!,
                                 MediaStore.Video.Thumbnails.MINI_KIND
                         )!!
-                        Log.d("path", path)
+                        Log.d("path", videoPath)
                         Log.d("ビデオuri", uri.toString())
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)

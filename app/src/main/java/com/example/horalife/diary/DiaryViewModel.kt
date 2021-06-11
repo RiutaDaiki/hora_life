@@ -7,9 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.example.horalife.databinding.DiaryDetailBinding
-import com.example.horalife.databinding.DiaryDetailBindingImpl
-import com.example.horalife.databinding.EntriesFragmentBinding
+import com.example.horalife.databinding.*
 import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.ktx.Firebase
@@ -30,15 +28,14 @@ class DiaryViewModel() : ViewModel() {
 
     val currentAccount = MutableLiveData<FirebaseUser>()
 
-    fun setList(callBack :() -> Unit) {
+    fun setList(fallBack :() -> Unit) {
         viewModelScope.launch {
-
             Repository.repository.readDiaryInfo(currentAccount.value)
                     .onSuccess {
                         diaryList.value =  it
                     }
                     .onFailure {
-                        callBack
+                        fallBack
                     }
         }
     }
@@ -58,22 +55,6 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-//    fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit){
-//        viewModelScope.launch {
-//        if (diaryList.value != null && selectedPosition.value != null) {
-//            Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName)
-//                    .onSuccess {
-//                        uri(it)
-//                    }
-//                    .onFailure {  }
-//        } else {
-//            fallBack()
-//        }
-//        }
-//    }
-
-    val selectedDiaryVideo = MutableLiveData<Uri>()
-//getVideoUriにbindingを渡す？
     fun getVideoUri(binding: DiaryDetailBinding, fallBack: () -> Unit){
         viewModelScope.launch {
             if (diaryList.value != null && selectedPosition.value != null) {
@@ -94,10 +75,12 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-    fun passEntries(thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding, videoPath: String) {
+    fun passEntries(thum: Bitmap, content: DiaryContent, navToDiary: () -> Unit) {
         viewModelScope.launch {
-            Repository.repository.createEntriesInfo(currentAccount.value, thum, localVideo, binding, videoPath)
+            Repository.repository.createEntriesInfo(currentAccount.value, thum, content)
         }
+        navToDiary
+        setList { println("bug") }
     }
 
     fun getBitMap(position: Int, bitmap: (Bitmap?) -> Unit){

@@ -57,7 +57,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
         binding.videoProgressBar.visibility = android.widget.ProgressBar.INVISIBLE
         setHasOptionsMenu(true)
         if (viewModel.selectedPosition.value != null) {
-            viewModel.getBitMap(viewModel.selectedPosition.value!!) {
+            viewModel.getBitMap(viewModel.selectedPosition.value!!){
                 binding.thumView.setImageBitmap(it)
             }
         }

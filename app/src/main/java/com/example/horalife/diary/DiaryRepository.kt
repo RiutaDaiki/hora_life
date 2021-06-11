@@ -4,7 +4,7 @@ package com.example.horalife.diary
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
-import com.example.horalife.databinding.EntriesFragmentBinding
+import androidx.core.net.toUri
 import com.example.horalife.diary_detail.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
-
+//viewModel及びrepositoryがbindingクラスを知っているべきではない
 class DiaryRepository {
     private val db = Firebase.firestore
     private val storageRef = Firebase.storage.reference
@@ -26,23 +26,23 @@ class DiaryRepository {
     private val users = "users"
     private val alreadyLoginUser = Firebase.auth.currentUser
 
-    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, localVideo: Uri, binding: EntriesFragmentBinding, videoPath: String) {
+    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, content: DiaryContent) {
         val baos = ByteArrayOutputStream()
         thum.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
         val path = UUID.randomUUID().toString() + ".png"
         val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
         uploadImageRef.putBytes(data)
-        val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
-        uploadVideoRef.putFile(localVideo)
-        val date = (binding.datePicker.month + 1).toString() + " " + "/" + " " + binding.datePicker.dayOfMonth.toString()
+        val videoUri = content.videoPath.toUri()
+        val uploadVideoRef = storageRef.child("horanikki-video/${videoUri.lastPathSegment}")
+        uploadVideoRef.putFile(videoUri)
         val contents = DiaryContent(
-                date,
-                binding.diaryText.text.toString(),
+                content.recordedDate,
+                content.comment,
                 path,
                 Timestamp(System.currentTimeMillis()),
-                localVideo.lastPathSegment.toString(),
-                videoPath
+                videoUri.lastPathSegment.toString(),
+                videoUri.toString()
         )
         if (user == null) {
             db.collection(users)

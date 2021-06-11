@@ -18,6 +18,8 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
                        private val context: Context,
                        private val onClickRow: (Int) -> Unit)
     : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
+    private lateinit var binding: ItemDiaryBinding
+
 
     inner class DiaryViewHolder(val binding: ItemDiaryBinding) : RecyclerView.ViewHolder(binding.root) {
     }
@@ -25,8 +27,9 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
 
-        val listItemBinding = ItemDiaryBinding.inflate(inflater, parent, false)
-        return DiaryViewHolder(listItemBinding)
+        binding = ItemDiaryBinding.inflate(inflater, parent, false)
+        binding.lifecycleOwner = lifecycleOwner
+        return DiaryViewHolder(binding)
     }
 
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
@@ -51,7 +54,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 
-    private fun createNoImage(): Bitmap {
+    fun createNoImage(): Bitmap {
         val drawable = ContextCompat.getDrawable(context, R.drawable.no_image)
         val bitmapDrawable = drawable as BitmapDrawable
         return bitmapDrawable.bitmap
