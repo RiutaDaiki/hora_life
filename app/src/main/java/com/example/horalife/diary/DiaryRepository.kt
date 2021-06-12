@@ -34,8 +34,7 @@ class DiaryRepository {
         uploadImageRef.putBytes(data)
         val videoUri = content.videoPath.toUri()
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
-        Log.d("ラストパスセグメント", localVideo.lastPathSegment!!)
-        uploadVideoRef.putFile(videoUri)
+        uploadVideoRef.putFile(localVideo)
         val contents = DiaryContent(
                 content.recordedDate,
                 content.comment,

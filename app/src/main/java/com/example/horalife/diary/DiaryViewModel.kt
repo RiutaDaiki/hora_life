@@ -72,9 +72,9 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
-    fun passEntries(thum: Bitmap, content: DiaryContent, localVideo: Uri) {
+    fun passEntries(thumb: Bitmap, content: DiaryContent, localVideo: Uri) {
         viewModelScope.launch {
-            Repository.repository.createEntriesInfo(currentAccount.value, thum, content, localVideo)
+            Repository.repository.createEntriesInfo(currentAccount.value, thumb, content, localVideo)
         }
     }
 
@@ -87,22 +87,6 @@ class DiaryViewModel() : ViewModel() {
                             bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
                         }
                         .onFailure { }
-            }
-        }
-    }
-
-    suspend fun getByteArray(position: Int): Result<ByteArray> {
-        return kotlin.runCatching {
-            suspendCoroutine { continuation ->
-                val storageRef = Firebase.storage.reference
-                val thumbnailRef =
-                        storageRef.child("horanikki-thumbnail/${diaryList.value?.get(position)?.pngFileName}")
-                val ONE_MEGABYTE: Long = 1024 * 1024
-                thumbnailRef.getBytes(ONE_MEGABYTE).addOnSuccessListener {
-                    continuation.resume(it)
-                }.addOnFailureListener {
-                    continuation.resumeWithException(it)
-                }
             }
         }
     }
