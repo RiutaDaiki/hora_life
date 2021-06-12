@@ -41,8 +41,8 @@ class DiaryRepository {
                 path,
                 Timestamp(System.currentTimeMillis()),
                 localVideo.lastPathSegment!!,
-                videoUri.toString()
-        )
+                content.videoPath
+                )
         if (user == null) {
             db.collection(users)
                     .document(alreadyLoginUser.uid)
