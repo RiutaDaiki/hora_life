@@ -26,7 +26,6 @@ class DiaryFragment : Fragment() {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.view = this
 
         if (user != null) {
             adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
@@ -42,6 +41,8 @@ class DiaryFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         } else binding.noLoginTxt.text = resources.getString(R.string.no_login_diary)
+
+        binding.fab.setOnClickListener { showEntries() }
 
         return binding.root
     }
