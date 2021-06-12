@@ -1,10 +1,11 @@
-package com.example.horalife.diary
+package com.example.horalife.model
 
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
-import com.example.horalife.diary_detail.DiaryDetailContent
+import com.example.horalife.dataClass.DiaryContent
+import com.example.horalife.dataClass.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query

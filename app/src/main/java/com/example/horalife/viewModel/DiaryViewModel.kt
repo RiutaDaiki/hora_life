@@ -1,4 +1,4 @@
-package com.example.horalife.diary
+package com.example.horalife.viewModel
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -9,15 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.example.horalife.databinding.*
-import com.example.horalife.diary_detail.DiaryDetailContent
+import com.example.horalife.dataClass.DiaryContent
+import com.example.horalife.model.DiaryRepository
+import com.example.horalife.dataClass.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.launch
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 
 class DiaryViewModel() : ViewModel() {

@@ -1,4 +1,4 @@
-package com.example.horalife.diary_detail
+package com.example.horalife.dialog
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -7,7 +7,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
-import com.example.horalife.diary.DiaryViewModel
+import com.example.horalife.viewModel.DiaryViewModel
 
 class ConfirmDeleteDialog : DialogFragment() {
     private val viewModel: DiaryViewModel by activityViewModels()

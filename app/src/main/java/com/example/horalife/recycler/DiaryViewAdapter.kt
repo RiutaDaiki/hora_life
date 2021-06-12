@@ -1,4 +1,4 @@
-package com.example.horalife.diary
+package com.example.horalife.recycler
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -9,6 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
+import com.example.horalife.dataClass.DiaryContent
+import com.example.horalife.viewModel.DiaryViewModel
 import com.example.horalife.databinding.ItemDiaryBinding
 import java.sql.Timestamp
 

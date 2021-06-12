@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/nav_example"
         tools:layout="@layout/example_fragment"
-        android:name="com.example.horalife.example.ExampleFragment"
+        android:name="com.example.horalife.fragments.ExampleFragment"
         android:label="お手本" />
 
     <fragment
         android:id="@+id/nav_diary"
         tools:layout="@layout/library_fragment"
-        android:name="com.example.horalife.diary.DiaryFragment"
+        android:name="com.example.horalife.fragments.DiaryFragment"
         android:label="法螺日記">
 
         <action
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/nav_you"
         tools:layout="@layout/you_fragment"
-        android:name="com.example.horalife.you.YouFragment"
+        android:name="com.example.horalife.fragments.YouFragment"
         android:label="あなた" />
 
     <fragment
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/diary_detail_fragment"
-        android:name="com.example.horalife.diary_detail.DiaryDetailFragment"
+        android:name="com.example.horalife.fragments.DiaryDetailFragment"
         android:label="ディテール">
         <action
             android:id="@+id/action_diary_detail_to_diary"

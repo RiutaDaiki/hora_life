@@ -1,14 +1,13 @@
-package com.example.horalife.example
+package com.example.horalife.recycler
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.horalife.R
-import com.example.horalife.Sound
+import com.example.horalife.dataClass.Sound
 import com.example.horalife.databinding.ItemExampleRecyclerBinding
-import com.example.horalife.diary.DiaryViewModel
+import com.example.horalife.fragments.ExampleFragment
 
 class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lifecycleOwner: LifecycleOwner, private val context: Context?): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
     inner class MyViewHolder(val binding: ItemExampleRecyclerBinding): RecyclerView.ViewHolder(binding.root){
@@ -23,7 +22,7 @@ class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lif
 
     override fun getItemCount(): Int = displayData.size
 
-    override fun onBindViewHolder(holder: RecyclerViewAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.binding.sound = displayData[position]
         val exampleFragment = ExampleFragment()
         holder.binding.soundArea.setOnClickListener {

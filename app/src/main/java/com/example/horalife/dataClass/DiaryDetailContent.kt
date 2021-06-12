@@ -1,4 +1,4 @@
-package com.example.horalife.diary_detail
+package com.example.horalife.dataClass
 
 data class DiaryDetailContent(val diaryId: String,
                               val recordedDate: String,

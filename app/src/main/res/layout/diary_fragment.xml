@@ -6,11 +6,11 @@
 
         <variable
             name="adapter"
-            type="com.example.horalife.diary.DiaryViewAdapter" />
+            type="com.example.horalife.recycler.DiaryViewAdapter" />
 
         <variable
             name="view"
-            type="com.example.horalife.diary.DiaryFragment" />
+            type="com.example.horalife.fragments.DiaryFragment" />
 
     </data>
 

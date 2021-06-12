@@ -1,11 +1,10 @@
-package com.example.horalife.diary_entries
+package com.example.horalife.fragments
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.media.ThumbnailUtils
 import android.net.Uri
 import android.os.Build
@@ -17,17 +16,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
-import com.example.horalife.diary.DiaryContent
-import com.example.horalife.diary.DiaryViewModel
+import com.example.horalife.dataClass.DiaryContent
+import com.example.horalife.viewModel.DiaryViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import java.security.Timestamp
+import java.sql.Timestamp
 
 private val REQUEST_CODE = 1000
 
@@ -57,7 +55,14 @@ class EntrieFragment : Fragment() {
         binding = EntriesFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryBtn.isEnabled = false
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.view = this
+
+        binding.camera.setOnClickListener {
+            openVideoIntent()
+        }
+
+        binding.galleryBtn.setOnClickListener {
+            openGallery()
+        }
 
         binding.diaryBtn.setOnClickListener() {
             val date = (binding.datePicker.month + 1).toString() + " " + "/" + " " + binding.datePicker.dayOfMonth.toString()
@@ -66,7 +71,7 @@ class EntrieFragment : Fragment() {
                     date,
                     binding.diaryText.text.toString(),
                     "",
-                    java.sql.Timestamp(System.currentTimeMillis()),
+                    Timestamp(System.currentTimeMillis()),
                     videoUri.lastPathSegment.toString(),
                     videoPath
             )

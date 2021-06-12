@@ -1,4 +1,4 @@
-package com.example.horalife.diary
+package com.example.horalife.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,9 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.horalife.R
+import com.example.horalife.viewModel.DiaryViewModel
 import com.example.horalife.databinding.DiaryFragmentBinding
+import com.example.horalife.recycler.DiaryViewAdapter
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 

@@ -1,9 +1,8 @@
-package com.example.horalife.diary_detail
+package com.example.horalife.fragments
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -11,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.horalife.R
 import com.example.horalife.databinding.DiaryDetailBinding
-import com.example.horalife.diary.DiaryViewModel
+import com.example.horalife.dialog.ConfirmDeleteDialog
+import com.example.horalife.viewModel.DiaryViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

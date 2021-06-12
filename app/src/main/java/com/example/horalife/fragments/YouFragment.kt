@@ -1,4 +1,4 @@
-package com.example.horalife.you
+package com.example.horalife.fragments
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,7 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.YouFragmentBinding
-import com.example.horalife.diary.DiaryViewModel
+import com.example.horalife.viewModel.DiaryViewModel
+import com.example.horalife.viewModel.YouViewModel
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

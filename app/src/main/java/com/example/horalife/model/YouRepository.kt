@@ -1,5 +1,6 @@
-package com.example.horalife.you
+package com.example.horalife.model
 
+import com.example.horalife.dataClass.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 

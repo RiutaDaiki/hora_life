@@ -1,4 +1,4 @@
-package com.example.horalife.example
+package com.example.horalife.fragments
 
 import android.content.Context
 import android.media.MediaPlayer
@@ -9,8 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.horalife.R
-import com.example.horalife.Sound
+import com.example.horalife.dataClass.Sound
 import com.example.horalife.databinding.ExampleFragmentBinding
+import com.example.horalife.recycler.RecyclerViewAdapter
 
 class ExampleFragment : Fragment() {
     private lateinit var adapter: RecyclerViewAdapter

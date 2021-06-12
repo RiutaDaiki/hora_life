@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.horalife.diary.DiaryViewModel" />
+            type="com.example.horalife.viewModel.DiaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

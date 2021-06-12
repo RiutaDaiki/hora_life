@@ -1,4 +1,4 @@
-package com.example.horalife.diary
+package com.example.horalife.dataClass
 
 import java.sql.Timestamp
 

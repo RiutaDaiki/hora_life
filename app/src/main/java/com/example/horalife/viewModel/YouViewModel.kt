@@ -1,6 +1,8 @@
-package com.example.horalife.you
+package com.example.horalife.viewModel
 
 import androidx.lifecycle.ViewModel
+import com.example.horalife.dataClass.User
+import com.example.horalife.model.YouRepository
 
 class YouViewModel : ViewModel() {
 
