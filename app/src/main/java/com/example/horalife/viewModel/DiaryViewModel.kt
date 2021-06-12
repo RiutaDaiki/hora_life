@@ -82,7 +82,6 @@ class DiaryViewModel() : ViewModel() {
                         .onSuccess {
                             bitmap(BitmapFactory.decodeByteArray(it, 0, it.size))
                         }
-                        .onFailure { }
             }
         }
     }

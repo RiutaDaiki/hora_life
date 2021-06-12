@@ -26,10 +26,8 @@ class DiaryFragment : Fragment() {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
-        //↓日記画面のfabはこのクラスのshowEntries()を起動します。diary_fragment.xmlでandroid:onClick="@{() -> view.showEntries()}"としているので、この記述は必要だと思います。
         binding.view = this
 
-        //ログインしていない状態でRecyclerViewを呼び出すと落ちるので
         if (user != null) {
             adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
                 viewModel.onClickRow(it)
@@ -44,7 +42,6 @@ class DiaryFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             }
         } else binding.noLoginTxt.text = resources.getString(R.string.no_login_diary)
-
 
         return binding.root
     }

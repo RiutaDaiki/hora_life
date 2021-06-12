@@ -3,7 +3,6 @@ package com.example.horalife.model
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
-import androidx.core.net.toUri
 import com.example.horalife.dataClass.DiaryContent
 import com.example.horalife.dataClass.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
@@ -26,14 +25,13 @@ class DiaryRepository {
     private val users = "users"
     private val alreadyLoginUser = Firebase.auth.currentUser
 
-    fun createEntriesInfo(user: FirebaseUser?, thum: Bitmap, content: DiaryContent, localVideo: Uri) {
+    fun createEntriesInfo(user: FirebaseUser?, thumb: Bitmap, content: DiaryContent, localVideo: Uri) {
         val baos = ByteArrayOutputStream()
-        thum.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        thumb.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
         val path = UUID.randomUUID().toString() + ".png"
         val uploadImageRef = storageRef.child("horanikki-thumbnail/$path")
         uploadImageRef.putBytes(data)
-        val videoUri = content.videoPath.toUri()
         val uploadVideoRef = storageRef.child("horanikki-video/${localVideo.lastPathSegment}")
         uploadVideoRef.putFile(localVideo)
         val contents = DiaryContent(
@@ -58,11 +56,9 @@ class DiaryRepository {
     }
 
     suspend fun readDiaryInfo(user: FirebaseUser?): Result<List<DiaryDetailContent>> {
-        val result: Result<List<DiaryDetailContent>> = runCatching {
+        return runCatching {
             suspendCoroutine { continuation ->
                 if (user == null) {
-
-
                     db.collection(users)
                             .document(alreadyLoginUser.uid)
                             .collection(diaries)
@@ -120,7 +116,6 @@ class DiaryRepository {
             }
 
         }
-        return result
     }
 
     fun deleteDiary(user: FirebaseUser?, diary: DiaryDetailContent) {
@@ -175,5 +170,4 @@ class DiaryRepository {
             }
         }
     }
-
 }
