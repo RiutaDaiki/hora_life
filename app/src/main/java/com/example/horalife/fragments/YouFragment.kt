@@ -40,7 +40,6 @@ class YouFragment : Fragment() {
         )
 
         fun showLogoutTxt() {
-            //bindingをviewModelに渡すことでviewModelからviewを変更することができるよ
             binding.user.text = currentUser.displayName
             binding.statusText.text = "ログアウト"
             binding.statusText.setTextColor(resources.getColor(R.color.red))
@@ -72,6 +71,10 @@ class YouFragment : Fragment() {
             showLogoutTxt()
         } else {
             showLoginTxt()
+        }
+
+        binding.settingText.setOnClickListener{
+
         }
 
         return binding.root
