@@ -1,11 +1,11 @@
 package com.example.horalife.fragments
 
-import android.accounts.Account
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
@@ -27,7 +27,9 @@ class SettingFragment: Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.deleteText.setOnClickListener {
-            val dialog = AccountDeleteDialog()
+            val dialog = AccountDeleteDialog {
+
+            }
             val user = Firebase.auth.currentUser
             if (user != null) dialog.show(parentFragmentManager, null)
 
@@ -37,4 +39,6 @@ class SettingFragment: Fragment() {
     fun moveToExample(){
         findNavController().navigate(R.id.action_setting_to_example)
     }
+
+
 }
