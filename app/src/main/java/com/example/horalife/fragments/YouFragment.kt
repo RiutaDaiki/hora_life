@@ -74,11 +74,13 @@ class YouFragment : Fragment() {
         }
 
         binding.settingText.setOnClickListener{
-
+            findNavController().navigate(R.id.action_nav_you_to_setting)
         }
 
         return binding.root
     }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

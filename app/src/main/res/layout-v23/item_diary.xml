@@ -27,7 +27,7 @@
             android:id="@+id/date_area"
             android:layout_width="411dp"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
+            android:background="@color/dark_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -37,6 +37,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:text="@{content.recordedDate}"
+                android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

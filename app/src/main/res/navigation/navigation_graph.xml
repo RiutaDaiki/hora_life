@@ -30,12 +30,17 @@
         android:id="@+id/nav_you"
         tools:layout="@layout/you_fragment"
         android:name="com.example.horalife.fragments.YouFragment"
-        android:label="あなた" />
+        android:label="あなた" >
+        <action
+            android:id="@+id/action_nav_you_to_setting"
+            app:destination="@+id/setting_fragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/entries_fragment"
+        tools:layout="@layout/entries_fragment"
         android:name="com.example.horalife.fragments.EntrieFragment"
-        android:label="EntriesFragment">
+        android:label="">
         <action
             android:id="@+id/action_entries_to_diary"
             app:destination="@+id/nav_diary" />
@@ -43,11 +48,23 @@
 
     <fragment
         android:id="@+id/diary_detail_fragment"
+        tools:layout="@layout/diary_detail"
         android:name="com.example.horalife.fragments.DiaryDetailFragment"
         android:label="ディテール">
         <action
             android:id="@+id/action_diary_detail_to_diary"
             app:destination="@+id/nav_diary" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/setting_fragment"
+        tools:layout="@layout/setting_fragment"
+        android:name="com.example.horalife.fragments.SettingFragment"
+        android:label="設定">
+        <action
+            android:id="@+id/action_setting_to_example"
+            app:destination="@+id/nav_example"/>
 
     </fragment>
 
