@@ -29,18 +29,18 @@ class YouRepository {
                     existing(false)
                 }
     }
-
+//
     suspend fun deleteUser(): kotlinx.coroutines.flow.Flow<Boolean>{
-            suspendCoroutine { continuation ->
-                user.delete()
-                    .addOnCompleteListener { task ->
-                        continuation.resume(true)
-                    }
-                    .addOnFailureListener {
-                        continuation.resumeWithException(it)
-                    }
-            }
-
+//            suspendCoroutine { continuation ->
+//                user.delete()
+//                    .addOnCompleteListener { task ->
+//                        continuation.resume(true)
+//                    }
+//                    .addOnFailureListener {
+//                        continuation.resumeWithException(it)
+//                    }
+//            }
+//
     }
 
 }
