@@ -39,10 +39,6 @@ class YouFragment : Fragment() {
                 AuthUI.IdpConfig.EmailBuilder().build()
         )
 
-        viewModel.isDeleteAccount.observe(viewLifecycleOwner){
-            if (it == true) Toast.makeText(context, "ss削除", Toast.LENGTH_LONG).show()
-        }
-
         fun showLogoutTxt() {
             binding.user.text = currentUser.displayName
             binding.statusText.text = "ログアウト"

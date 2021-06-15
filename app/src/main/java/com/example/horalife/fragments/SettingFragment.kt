@@ -30,9 +30,6 @@ class SettingFragment: Fragment() {
         binding = SettingFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.isDeleteAccount.observe(viewLifecycleOwner){
-            Toast.makeText(context, "成功", Toast.LENGTH_LONG).show()
-        }
         val user = Firebase.auth.currentUser
         if (user != null){
             binding.deleteText.setOnClickListener {

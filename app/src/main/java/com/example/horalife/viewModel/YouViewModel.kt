@@ -1,6 +1,5 @@
 package com.example.horalife.viewModel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horalife.dataClass.User
@@ -14,23 +13,12 @@ class YouViewModel : ViewModel() {
         val repository = YouRepository()
     }
 
-    var isDeleteAccount = MutableLiveData<Boolean>()
     fun deleteAccount(){
         viewModelScope.launch {
-            Repository.repository.deleteUser()
-                .onSuccess {
-                    isDeleteAccount.value = true
-                }
-                .onFailure {
-                    isDeleteAccount.value = false
-                }
-
             val bool : Flow<Boolean> = Repository.repository.deleteUser()
             bool.collect {
                 println(it)
             }
-
-            Repository.repository.deleteUser().
         }
     }
 
