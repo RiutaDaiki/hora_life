@@ -21,13 +21,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.EntriesFragmentBinding
-import com.example.horalife.dataClass.DiaryContent
+import com.example.horalife.entity.DiaryContent
 import com.example.horalife.viewModel.DiaryViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 
-private val REQUEST_CODE = 1000
 
 class EntrieFragment : Fragment() {
     private lateinit var thum: Bitmap
@@ -35,6 +34,7 @@ class EntrieFragment : Fragment() {
     private lateinit var videoUri: Uri
     private lateinit var binding: EntriesFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
+    private val REQUEST_CODE = 1000
 
     override fun onCreateView(
             inflater: LayoutInflater,

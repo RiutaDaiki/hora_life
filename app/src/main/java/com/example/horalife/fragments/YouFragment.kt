@@ -21,10 +21,13 @@ import com.google.firebase.ktx.Firebase
 
 class YouFragment : Fragment() {
     private lateinit var binding: YouFragmentBinding
-    private val SIGN_IN = 9001
     private val viewModel: YouViewModel by viewModels()
     private val currentUser = Firebase.auth.currentUser
     private val diaryViewModel: DiaryViewModel by activityViewModels()
+
+    companion object{
+        private val SIGN_IN = 9001
+    }
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(

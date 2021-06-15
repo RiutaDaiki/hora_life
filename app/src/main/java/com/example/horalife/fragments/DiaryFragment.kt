@@ -18,11 +18,17 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
-    private lateinit var adapter: DiaryViewAdapter
-    private lateinit var binding: DiaryFragmentBinding
-    private val viewModel: DiaryViewModel by activityViewModels()
-    private val user = Firebase.auth.currentUser
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        lateinit var adapter: DiaryViewAdapter
+        lateinit var binding: DiaryFragmentBinding
+        val viewModel: DiaryViewModel by activityViewModels()
+        val user = Firebase.auth.currentUser
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -34,7 +40,7 @@ class DiaryFragment : Fragment() {
                 findNavController().navigate(action)
             }
             binding.diaryRecycler.adapter = adapter
-            viewModel.setList{
+            viewModel.setList {
                 Toast.makeText(context, "日記の取得に失敗しました", Toast.LENGTH_SHORT).show()
             }
             viewModel.diaryList.observe(viewLifecycleOwner) {

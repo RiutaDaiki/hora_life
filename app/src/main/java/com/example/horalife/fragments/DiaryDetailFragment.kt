@@ -19,12 +19,11 @@ import java.io.File
 import kotlin.coroutines.CoroutineContext
 
 
-class DiaryDetailFragment() : Fragment(), CoroutineScope {
+class DiaryDetailFragment() : Fragment() {
 
-    private val TWITTER_CODE = 140
-    private val job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+    companion object{
+        private val TWITTER_CODE = 140
+    }
 
     private lateinit var binding: DiaryDetailBinding
     private val viewModel: DiaryViewModel by activityViewModels()
