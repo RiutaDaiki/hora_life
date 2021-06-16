@@ -67,6 +67,7 @@ class YouFragment : Fragment() {
             }
         }
 
+
         if (currentUser != null) {
             showLogoutTxt()
         } else {
@@ -93,7 +94,7 @@ class YouFragment : Fragment() {
                 findNavController().navigate(R.id.nav_example)
                 Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
             }
-            if (viewModel.callExisting(user.uid)) {
+            if (user != null && viewModel.callExisting(user.uid)) {
                 viewModel.callCreateUser(user.email, user.uid, user.displayName)
             }
         }

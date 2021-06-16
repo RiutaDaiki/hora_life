@@ -32,7 +32,7 @@ class YouRepository {
             }
     }
 
-    suspend fun deleteUser(): kotlinx.coroutines.flow.Flow<Boolean> = flow<Boolean> {
+    suspend fun deleteUserFunction(): kotlinx.coroutines.flow.Flow<Boolean> = flow<Boolean> {
         Log.d("", "ログログ")
 //        if (deleteUserFun().getOrNull() == true) this.emit(true)
         deleteUserFun()
@@ -43,17 +43,25 @@ class YouRepository {
             .onFailure {
                 this.emit(false)
             }
+
     }
 
-    private suspend fun deleteUserFun(): Result<Boolean> {
+    suspend fun deleteUser(): Boolean{
+        return deleteUserFun().getOrNull() ?: false
+    }
+
+     private suspend fun deleteUserFun(): Result<Boolean> {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
                 user.delete()
-                    .addOnCompleteListener { task ->
+                    .addOnSuccessListener {
+                        println("サクセス")
                         continuation.resume(true)
                     }
                     .addOnFailureListener {
+                        println("フェイル")
                         continuation.resumeWithException(it)
+                        Log.d("onFailure", it.toString())
                     }
             }
         }
