@@ -22,9 +22,9 @@ import kotlinx.coroutines.flow.collect
 @SuppressLint("StaticFieldLeak")
 private lateinit var binding: SettingFragmentBinding
 
-
 class SettingFragment : Fragment() {
     private val viewModel: YouViewModel by activityViewModels()
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,29 +35,30 @@ class SettingFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val user = Firebase.auth.currentUser
-        if (user == null){
+        if (user == null) {
             binding.constraintLayout.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
             binding.notLoginText.text = "設定する項目がありません、\nログインしてください"
         }
-            binding.deleteText.setOnClickListener {
-                viewLifecycleOwner.lifecycleScope.launch {
-                    val dialog = AccountDeleteDialog()
-                    dialog.show(parentFragmentManager, null)
-                    viewModel.isDeleteUser.collect {
-                        if (it) Toast.makeText(context, "アカウントを削除しました", Toast.LENGTH_LONG).show()
-                        else Toast.makeText(
-                            context,
-                            "アカウントを削除できませんでした。再度ログイン後削除してください",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        navToYou()
-                    }
+
+        binding.deleteText.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val dialog = AccountDeleteDialog()
+                dialog.show(parentFragmentManager, null)
+                viewModel.isDeleteUser.collect {
+                    if (it) Toast.makeText(context, "アカウントを削除しました", Toast.LENGTH_LONG).show()
+                    else Toast.makeText(
+                        context,
+                        "アカウントを削除できませんでした。再度ログイン後削除してください",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    navToYou()
                 }
             }
+        }
         return binding.root
     }
 
-    private fun navToYou(){
+    private fun navToYou() {
         findNavController().navigate(R.id.action_setting_to_you)
     }
 }

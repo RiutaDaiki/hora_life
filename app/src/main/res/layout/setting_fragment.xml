@@ -40,42 +40,19 @@
             app:layout_constraintTop_toBottomOf="@+id/account_text" />
 
         <TextView
-            android:id="@+id/update_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:text="アカウント情報の更新"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/dark_gray"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/update_text" />
-
-        <TextView
             android:id="@+id/delete_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:foreground="?attr/selectableItemBackground"
+            android:paddingLeft="8sp"
+            android:paddingTop="8sp"
+            android:paddingRight="8sp"
+            android:paddingBottom="8sp"
             android:text="アカウントを削除"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/update_text"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
-
+            app:layout_constraintStart_toStartOf="@+id/account_text"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

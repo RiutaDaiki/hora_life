@@ -39,6 +39,7 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         val comment = viewModel.diaryList.value?.get(position)!!.comment
         val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
+
         val content = DiaryContent(viewModel.diaryList.value?.get(position)!!.recordedDate,
                 rowComment,
                 viewModel.diaryList.value?.get(position)!!.pngFileName,
