@@ -65,6 +65,9 @@
         <action
             android:id="@+id/action_setting_to_example"
             app:destination="@+id/nav_example"/>
+        <action
+            android:id="@+id/action_setting_to_you"
+            app:destination="@+id/nav_you"/>
 
     </fragment>
 

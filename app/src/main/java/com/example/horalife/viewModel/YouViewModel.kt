@@ -19,7 +19,7 @@ class YouViewModel : ViewModel() {
     private val _isDeleteUser = MutableSharedFlow<Boolean>()
     val isDeleteUser: Flow<Boolean> = _isDeleteUser
     fun deleteUser() {
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             val result = Repository.repository.deleteUser()
             _isDeleteUser.emit(result)
         }

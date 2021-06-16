@@ -22,7 +22,11 @@ class DiaryFragment : Fragment() {
     private lateinit var binding: DiaryFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
     private val user = Firebase.auth.currentUser
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -34,7 +38,7 @@ class DiaryFragment : Fragment() {
                 findNavController().navigate(action)
             }
             binding.diaryRecycler.adapter = adapter
-            viewModel.setList{
+            viewModel.setList {
                 Toast.makeText(context, "日記の取得に失敗しました", Toast.LENGTH_SHORT).show()
             }
             viewModel.diaryList.observe(viewLifecycleOwner) {
