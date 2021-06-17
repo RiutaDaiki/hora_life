@@ -10,18 +10,16 @@
         <variable
             name="viewmodel"
             type="com.example.horalife.viewModel.DiaryViewModel" />
-        <variable
-            name="view"
-            type="com.example.horalife.fragments.DiaryFragment" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:foreground="?attr/selectableItemBackground"
         android:id="@+id/wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:foreground="?attr/selectableItemBackground">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/date_area"
@@ -35,9 +33,9 @@
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
                 android:text="@{content.recordedDate}"
                 android:textColor="@color/black"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -46,25 +44,26 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <TextView
+            android:id="@+id/diary_text"
+            android:layout_width="195dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:paddingRight="16dp"
+            android:text="@{content.comment}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_area" />
+
         <ImageView
             android:id="@+id/thumbnail"
-            android:layout_width="0dp"
-            android:layout_height="108dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toStartOf="@+id/diary_text"
+            android:layout_width="wrap_content"
+            android:layout_height="80sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_area"
             tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/diary_text"
-            android:layout_width="0dp"
-            android:layout_height="94dp"
-            android:layout_marginEnd="5dp"
-            android:text="@{content.comment}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/thumbnail" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

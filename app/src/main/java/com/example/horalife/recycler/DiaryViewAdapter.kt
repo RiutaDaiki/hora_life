@@ -15,15 +15,16 @@ import com.example.horalife.databinding.ItemDiaryBinding
 import java.sql.Timestamp
 
 
-class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
-                       private val viewModel: DiaryViewModel,
-                       private val context: Context,
-                       private val onClickRow: (Int) -> Unit)
-    : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
+class DiaryViewAdapter(
+    private val lifecycleOwner: LifecycleOwner,
+    private val viewModel: DiaryViewModel,
+    private val context: Context,
+    private val onClickRow: (Int) -> Unit
+) : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
     private lateinit var binding: ItemDiaryBinding
 
-
-    inner class DiaryViewHolder(val binding: ItemDiaryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class DiaryViewHolder(val binding: ItemDiaryBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiaryViewHolder {
@@ -40,12 +41,14 @@ class DiaryViewAdapter(private val lifecycleOwner: LifecycleOwner,
         val comment = viewModel.diaryList.value?.get(position)!!.comment
         val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
 
-        val content = DiaryContent(viewModel.diaryList.value?.get(position)!!.recordedDate,
-                rowComment,
-                viewModel.diaryList.value?.get(position)!!.pngFileName,
-                Timestamp(System.currentTimeMillis()),
-                viewModel.diaryList.value?.get(position)!!.videoFileName,
-                viewModel.diaryList.value?.get(position)!!.videoPath)
+        val content = DiaryContent(
+            viewModel.diaryList.value?.get(position)!!.recordedDate,
+            rowComment,
+            viewModel.diaryList.value?.get(position)!!.pngFileName,
+            Timestamp(System.currentTimeMillis()),
+            viewModel.diaryList.value?.get(position)!!.videoFileName,
+            viewModel.diaryList.value?.get(position)!!.videoPath
+        )
         holder.binding.content = content
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)

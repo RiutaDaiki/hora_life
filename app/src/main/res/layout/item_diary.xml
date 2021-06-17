@@ -47,7 +47,7 @@
         <ImageView
             android:id="@+id/thumbnail"
             android:layout_width="wrap_content"
-            android:layout_height="108dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_area"
@@ -55,13 +55,14 @@
 
         <TextView
             android:id="@+id/diary_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:paddingRight="16dp"
             android:text="@{content.comment}"
-            app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/thumbnail"
-            app:layout_constraintTop_toTopOf="@+id/thumbnail" />
+            app:layout_constraintTop_toBottomOf="@+id/date_area" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
