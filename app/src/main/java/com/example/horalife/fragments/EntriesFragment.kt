@@ -27,7 +27,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 
-private val REQUEST_CODE = 1000
+private const val REQUEST_CODE = 1000
 
 class EntrieFragment : Fragment() {
     private lateinit var thum: Bitmap

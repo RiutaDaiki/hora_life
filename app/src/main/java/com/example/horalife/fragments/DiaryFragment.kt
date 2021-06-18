@@ -18,8 +18,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
-    private lateinit var adapter: DiaryViewAdapter
-    private lateinit var binding: DiaryFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
     private val user = Firebase.auth.currentUser
     override fun onCreateView(
@@ -27,12 +25,12 @@ class DiaryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
+       val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
 
         if (user != null) {
-            adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+           val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
                 viewModel.onClickRow(it)
                 val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
                 findNavController().navigate(action)
