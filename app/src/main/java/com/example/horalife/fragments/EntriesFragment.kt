@@ -27,6 +27,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.sql.Timestamp
 
+private const val REQUEST_CODE = 1000
 
 class EntrieFragment : Fragment() {
     private lateinit var thum: Bitmap
@@ -34,21 +35,20 @@ class EntrieFragment : Fragment() {
     private lateinit var videoUri: Uri
     private lateinit var binding: EntriesFragmentBinding
     private val viewModel: DiaryViewModel by activityViewModels()
-    private val REQUEST_CODE = 1000
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         if (Build.VERSION.SDK_INT >= 23) {
             val permissions = arrayOf(
-                    Manifest.permission.CAMERA,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE
             )
             checkPermission(
-                    permissions,
-                    REQUEST_CODE
+                permissions,
+                REQUEST_CODE
             )
         }
 
@@ -65,15 +65,16 @@ class EntrieFragment : Fragment() {
         }
 
         binding.diaryBtn.setOnClickListener() {
-            val date = (binding.datePicker.month + 1).toString() + " " + "/" + " " + binding.datePicker.dayOfMonth.toString()
+            val date =
+                (binding.datePicker.month + 1).toString() + " " + "/" + " " + binding.datePicker.dayOfMonth.toString()
 
             val contents = DiaryContent(
-                    date,
-                    binding.diaryText.text.toString(),
-                    "",
-                    Timestamp(System.currentTimeMillis()),
-                    videoUri.lastPathSegment.toString(),
-                    videoPath
+                date,
+                binding.diaryText.text.toString(),
+                "",
+                Timestamp(System.currentTimeMillis()),
+                videoUri.lastPathSegment.toString(),
+                videoPath
             )
             viewModel.passEntries(thum, contents, videoUri)
             backToDiary()
@@ -83,9 +84,9 @@ class EntrieFragment : Fragment() {
     }
 
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<String>,
-            grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
     ) {
         when (requestCode) {
             REQUEST_CODE -> for (i in 0..permissions.size) {
@@ -111,8 +112,8 @@ class EntrieFragment : Fragment() {
                         cursor?.moveToFirst()
                         videoPath = cursor?.getString(0)!!
                         thum = ThumbnailUtils.createVideoThumbnail(
-                                videoPath!!,
-                                MediaStore.Video.Thumbnails.MINI_KIND
+                            videoPath!!,
+                            MediaStore.Video.Thumbnails.MINI_KIND
                         )!!
                         Log.d("path", videoPath)
                         Log.d("ビデオuri", uri.toString())
@@ -134,8 +135,8 @@ class EntrieFragment : Fragment() {
         Intent(MediaStore.ACTION_VIDEO_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(this.requireContext().packageManager).also {
                 startActivityForResult(
-                        takePictureIntent,
-                        REQUEST_CODE
+                    takePictureIntent,
+                    REQUEST_CODE
                 )
             }
         }
@@ -146,13 +147,13 @@ class EntrieFragment : Fragment() {
 
         if (currentUser != null) {
             Intent(
-                    Intent.ACTION_PICK,
-                    MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                Intent.ACTION_PICK,
+                MediaStore.Video.Media.EXTERNAL_CONTENT_URI
             ).also { galleryIntent ->
                 galleryIntent.resolveActivity(this.requireActivity().packageManager).also {
                     startActivityForResult(
-                            galleryIntent,
-                            REQUEST_CODE
+                        galleryIntent,
+                        REQUEST_CODE
                     )
                 }
             }

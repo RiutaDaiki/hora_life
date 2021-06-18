@@ -19,22 +19,19 @@ import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        lateinit var adapter: DiaryViewAdapter
-        lateinit var binding: DiaryFragmentBinding
         val viewModel: DiaryViewModel by activityViewModels()
         val user = Firebase.auth.currentUser
-        binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
+        val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
 
         if (user != null) {
-            adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+            val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
                 viewModel.onClickRow(it)
                 val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
                 findNavController().navigate(action)
@@ -56,5 +53,4 @@ class DiaryFragment : Fragment() {
     fun showEntries() {
         findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
     }
-
 }
