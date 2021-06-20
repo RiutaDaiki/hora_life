@@ -31,26 +31,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/DiaryContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/entity/DiaryContent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/DiaryDetailContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/entity/DiaryDetailContent.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/Sound.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/entity/Sound.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/entity/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/DiaryDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/DiaryDetailFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/DiaryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/DiaryFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/EntriesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/EntriesFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/ExampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/ExampleFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/YouFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/YouFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/model/DiaryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/model/DiaryRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/model/YouRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/model/YouRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/recycler/DiaryViewAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/recycler/DiaryViewAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/recycler/RecyclerViewAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/recycler/RecyclerViewAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/viewModel/DiaryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/viewModel/DiaryViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/viewModel/YouViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/horalife/viewModel/YouViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout-v23/item_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout-v23/item_diary.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_diary.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_example_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_example_recycler.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
