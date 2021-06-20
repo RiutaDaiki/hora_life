@@ -6,13 +6,13 @@
     <data>
         <variable
             name="content"
-            type="com.example.horalife.diary.DiaryContent" />
+            type="com.example.horalife.entity.DiaryContent" />
         <variable
             name="viewmodel"
-            type="com.example.horalife.diary.DiaryViewModel" />
+            type="com.example.horalife.viewModel.DiaryViewModel" />
         <variable
             name="view"
-            type="com.example.horalife.diary.DiaryFragment" />
+            type="com.example.horalife.fragments.DiaryFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.horalife.diary.DiaryViewModel" />
+            type="com.example.horalife.viewModel.DiaryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,21 +26,30 @@
             app:layout_constraintTop_toBottomOf="@+id/play_btn"
             tools:text="4/5" />
 
-        <TextView
-            android:id="@+id/comment_text"
-            android:layout_width="360dp"
-            android:layout_height="217dp"
-            android:layout_marginStart="25dp"
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="92dp"
-            android:text="@{viewmodel.selectedDiary.comment}"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_date_text" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_date_text">
+
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="92dp"
+                android:text="@{viewmodel.selectedDiary.comment}"
+                app:layout_constrainedWidth="true"
+
+                android:textSize="18dp" />
+
+        </androidx.core.widget.NestedScrollView>
 
         <Button
             android:id="@+id/play_btn"
@@ -81,6 +90,17 @@
             app:layout_constraintEnd_toEndOf="@+id/video_view"
             app:layout_constraintStart_toStartOf="@+id/video_view"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/twitter_btn"
+            android:layout_width="69dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thum_view"
+            android:foreground="?attr/selectableItemBackground"
+            app:srcCompat="@drawable/twitter" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

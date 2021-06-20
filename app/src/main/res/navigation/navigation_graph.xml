@@ -5,46 +5,49 @@
     app:startDestination="@id/nav_example"
     android:id="@+id/navigation_graph">
 
-    <fragment android:id="@+id/nav_example"
+    <fragment
+        android:id="@+id/nav_example"
         tools:layout="@layout/example_fragment"
-        android:name="com.example.horalife.example.ExampleFragment"
-        android:label="お手本"/>
+        android:name="com.example.horalife.fragments.ExampleFragment"
+        android:label="お手本" />
 
-    <fragment android:id="@+id/nav_diary"
+    <fragment
+        android:id="@+id/nav_diary"
         tools:layout="@layout/library_fragment"
-        android:name="com.example.horalife.diary.DiaryFragment"
+        android:name="com.example.horalife.fragments.DiaryFragment"
         android:label="法螺日記">
 
         <action
             android:id="@+id/action_diary_to_diary_detail"
-            app:destination="@+id/diary_detail_fragment"/>
+            app:destination="@+id/diary_detail_fragment" />
         <action
             android:id="@+id/action_nav_diary_to_entriesFragment"
-            app:destination="@+id/entries_fragment"/>
+            app:destination="@+id/entries_fragment" />
 
     </fragment>
 
-    <fragment android:id="@+id/nav_you"
+    <fragment
+        android:id="@+id/nav_you"
         tools:layout="@layout/you_fragment"
-        android:name="com.example.horalife.You.YouFragment"
-        android:label="あなた"/>
+        android:name="com.example.horalife.fragments.YouFragment"
+        android:label="あなた" />
 
     <fragment
         android:id="@+id/entries_fragment"
-        android:name="com.example.horalife.diary_entries.EntrieFragment"
+        android:name="com.example.horalife.fragments.EntrieFragment"
         android:label="EntriesFragment">
         <action
             android:id="@+id/action_entries_to_diary"
-            app:destination="@+id/nav_diary"/>
+            app:destination="@+id/nav_diary" />
     </fragment>
 
     <fragment
         android:id="@+id/diary_detail_fragment"
-        android:name="com.example.horalife.diary_detail.DiaryDetailFragment"
+        android:name="com.example.horalife.fragments.DiaryDetailFragment"
         android:label="ディテール">
         <action
-        android:id="@+id/action_diary_detail_to_diary"
-        app:destination="@+id/nav_diary"/>
+            android:id="@+id/action_diary_detail_to_diary"
+            app:destination="@+id/nav_diary" />
 
     </fragment>
 
