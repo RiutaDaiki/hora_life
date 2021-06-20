@@ -1,5 +1,6 @@
 package com.example.horalife.model
 
+import android.util.Log
 import com.example.horalife.dataClass.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
@@ -29,7 +30,12 @@ class YouRepository {
     }
 
     suspend fun deleteUser(): Boolean {
-        return deleteUserFun().getOrNull() ?: false
+        val result = deleteUserFun().getOrThrow()
+        if(result) return true
+        else {
+            Log.e("Error", result.toString())
+            return false
+        }
     }
 
     private suspend fun deleteUserFun(): Result<Boolean> {
@@ -40,11 +46,22 @@ class YouRepository {
                         continuation.resume(true)
                     }
                     .addOnFailureListener {
+                        Log.e("えくせぷション", it.toString())
                         continuation.resumeWithException(it)
                     }
             }
         }
     }
+
+//    fun deleteUser(callBack: (Boolean) -> Unit) {
+//        user.delete()
+//            .addOnSuccessListener {
+//                callBack(true)
+//            }
+//            .addOnFailureListener {
+//                callBack(false)
+//            }
+//    }
 
 }
 

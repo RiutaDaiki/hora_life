@@ -1,6 +1,5 @@
 package com.example.horalife.viewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horalife.dataClass.User
@@ -8,7 +7,6 @@ import com.example.horalife.model.YouRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class YouViewModel : ViewModel() {
