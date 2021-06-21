@@ -3,6 +3,7 @@ package com.example.horalife.model
 import android.util.Log
 import com.example.horalife.dataClass.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.coroutines.resume
@@ -29,39 +30,41 @@ class YouRepository {
             }
     }
 
-    suspend fun deleteUser(): Boolean {
-        val result = deleteUserFun().getOrThrow()
-        if(result) return true
+    suspend fun deleteUser(currentAccount: FirebaseUser?): Boolean {
+        val result = deleteUserFun(currentAccount).getOrThrow()
+        return if(result) true
         else {
             Log.e("Error", result.toString())
-            return false
+            false
         }
     }
 
-    private suspend fun deleteUserFun(): Result<Boolean> {
+    private suspend fun deleteUserFun(currentAccount: FirebaseUser?): Result<Boolean> {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
-                user.delete()
-                    .addOnSuccessListener {
-                        continuation.resume(true)
-                    }
-                    .addOnFailureListener {
-                        Log.e("えくせぷション", it.toString())
-                        continuation.resumeWithException(it)
-                    }
+                if (currentAccount != null) {
+                    currentAccount.delete()
+                        .addOnSuccessListener {
+                            continuation.resume(true)
+                        }
+                        .addOnFailureListener {
+                            continuation.resumeWithException(it)
+                        }
+                }
+                else {
+                    user.delete()
+                        .addOnSuccessListener {
+                            continuation.resume(true)
+                        }
+                        .addOnFailureListener {
+                            Log.e("えくせぷション", it.toString())
+                            continuation.resumeWithException(it)
+                        }
+                }
+
             }
         }
     }
-
-//    fun deleteUser(callBack: (Boolean) -> Unit) {
-//        user.delete()
-//            .addOnSuccessListener {
-//                callBack(true)
-//            }
-//            .addOnFailureListener {
-//                callBack(false)
-//            }
-//    }
 
 }
 

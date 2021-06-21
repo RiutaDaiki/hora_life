@@ -40,6 +40,7 @@ class SettingFragment : Fragment() {
             binding.notLoginText.text = "設定する項目がありません、\nログインしてください"
         }
 
+
         binding.deleteText.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
                 val dialog = AccountDeleteDialog()

@@ -3,6 +3,7 @@ package com.example.horalife.fragments
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +68,6 @@ class YouFragment : Fragment() {
             }
         }
 
-
         if (currentUser != null) {
             showLogoutTxt()
         } else {
@@ -81,8 +81,6 @@ class YouFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -91,6 +89,7 @@ class YouFragment : Fragment() {
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
+                viewModel.currentAccount.value = user
                 findNavController().navigate(R.id.nav_example)
                 Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
             }
