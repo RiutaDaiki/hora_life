@@ -43,6 +43,7 @@ class YouRepository {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
                 if (currentAccount != null) {
+
                     currentAccount.delete()
                         .addOnSuccessListener {
                             continuation.resume(true)
@@ -61,7 +62,6 @@ class YouRepository {
                             continuation.resumeWithException(it)
                         }
                 }
-
             }
         }
     }
