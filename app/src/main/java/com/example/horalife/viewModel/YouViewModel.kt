@@ -20,11 +20,10 @@ class YouViewModel : ViewModel() {
     val isDeleteUser: Flow<Boolean> = _isDeleteUser
     fun deleteUser(firebaseUser: FirebaseUser?) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (firebaseUser != null){
+            if (firebaseUser != null) {
                 val result = Repository.repository.deleteUser(firebaseUser)
                 _isDeleteUser.emit(result)
-            }
-            else println("トースト出したい")
+            } else println("トースト出したい")
         }
     }
 

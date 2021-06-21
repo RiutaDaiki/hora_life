@@ -42,7 +42,6 @@ class SettingFragment : Fragment() {
 
 
         binding.deleteText.setOnClickListener {
-            val args = Bundle()
             viewLifecycleOwner.lifecycleScope.launch {
                 val dialog = AccountDeleteDialog()
                 dialog.show(parentFragmentManager, null)

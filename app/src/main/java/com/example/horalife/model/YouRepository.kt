@@ -32,10 +32,9 @@ class YouRepository {
 
     suspend fun deleteUser(currentAccount: FirebaseUser?): Boolean {
         val result = deleteUserFun(currentAccount).getOrThrow()
-        if(result) {
+        if (result) {
             return true
-        }
-        else {
+        } else {
             Log.e("Error", result.toString())
             return false
         }
@@ -53,8 +52,7 @@ class YouRepository {
                         .addOnFailureListener {
                             continuation.resumeWithException(it)
                         }
-                }
-                else {
+                } else {
                     user.delete()
                         .addOnSuccessListener {
                             continuation.resume(true)

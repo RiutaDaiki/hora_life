@@ -33,15 +33,15 @@ class YouFragment : Fragment() {
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         val providers = arrayListOf(
-                AuthUI.IdpConfig.EmailBuilder().build()
+            AuthUI.IdpConfig.EmailBuilder().build()
         )
 
 
@@ -51,7 +51,7 @@ class YouFragment : Fragment() {
             binding.statusText.setTextColor(resources.getColor(R.color.red))
             binding.statusText.setOnClickListener {
                 AuthUI.getInstance()
-                        .signOut(this.requireContext())
+                    .signOut(this.requireContext())
                     .addOnSuccessListener {
                         findNavController().navigate(R.id.nav_example)
                         Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
@@ -66,11 +66,12 @@ class YouFragment : Fragment() {
             binding.statusText.setTextColor(resources.getColor(R.color.blue))
             binding.statusText.setOnClickListener {
                 startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .build(),
-                        SIGN_IN)
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                    SIGN_IN
+                )
             }
         }
 
@@ -80,15 +81,12 @@ class YouFragment : Fragment() {
             showLoginTxt()
         }
 
-        binding.settingText.setOnClickListener{
+        binding.settingText.setOnClickListener {
             findNavController().navigate(R.id.action_nav_you_to_setting)
         }
 
         return binding.root
     }
-
-
-
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
