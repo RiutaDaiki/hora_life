@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.YouFragmentBinding
@@ -19,6 +20,9 @@ import com.example.horalife.viewModel.YouViewModel
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.GlobalScope
 
 class YouFragment : Fragment() {
     private lateinit var binding: YouFragmentBinding
@@ -40,6 +44,7 @@ class YouFragment : Fragment() {
                 AuthUI.IdpConfig.EmailBuilder().build()
         )
 
+
         fun showLogoutTxt() {
             binding.user.text = currentUser.displayName
             binding.statusText.text = "ログアウト"
@@ -47,10 +52,11 @@ class YouFragment : Fragment() {
             binding.statusText.setOnClickListener {
                 AuthUI.getInstance()
                         .signOut(this.requireContext())
-                        .addOnCompleteListener {
-                            findNavController().navigate(R.id.nav_example)
-                            Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
-                        }
+                    .addOnSuccessListener {
+                        findNavController().navigate(R.id.nav_example)
+                        Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
+                    }
+
             }
         }
 
@@ -81,6 +87,10 @@ class YouFragment : Fragment() {
         return binding.root
     }
 
+
+
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -89,7 +99,6 @@ class YouFragment : Fragment() {
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
-                viewModel.currentAccount.value = user
                 findNavController().navigate(R.id.nav_example)
                 Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
             }

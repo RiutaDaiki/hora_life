@@ -32,10 +32,12 @@ class YouRepository {
 
     suspend fun deleteUser(currentAccount: FirebaseUser?): Boolean {
         val result = deleteUserFun(currentAccount).getOrThrow()
-        return if(result) true
+        if(result) {
+            return true
+        }
         else {
             Log.e("Error", result.toString())
-            false
+            return false
         }
     }
 

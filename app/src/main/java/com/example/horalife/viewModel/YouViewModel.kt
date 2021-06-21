@@ -1,6 +1,6 @@
 package com.example.horalife.viewModel
 
-import androidx.lifecycle.MutableLiveData
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horalife.dataClass.User
@@ -15,14 +15,16 @@ class YouViewModel : ViewModel() {
     object Repository {
         val repository = YouRepository()
     }
-    val currentAccount = MutableLiveData<FirebaseUser>()
 
     private val _isDeleteUser = MutableSharedFlow<Boolean>()
     val isDeleteUser: Flow<Boolean> = _isDeleteUser
-    fun deleteUser() {
+    fun deleteUser(firebaseUser: FirebaseUser?) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = Repository.repository.deleteUser(currentAccount.value)
-            _isDeleteUser.emit(result)
+            if (firebaseUser != null){
+                val result = Repository.repository.deleteUser(firebaseUser)
+                _isDeleteUser.emit(result)
+            }
+            else println("トースト出したい")
         }
     }
 
