@@ -18,19 +18,33 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
+<<<<<<< HEAD
     private val viewModel: DiaryViewModel by activityViewModels()
     private val user = Firebase.auth.currentUser
+=======
+
+>>>>>>> 6087969eb42dd77f22fd6e9b5e3c0539a1f237d0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+<<<<<<< HEAD
        val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
+=======
+        val viewModel: DiaryViewModel by activityViewModels()
+        val user = Firebase.auth.currentUser
+        val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
+>>>>>>> 6087969eb42dd77f22fd6e9b5e3c0539a1f237d0
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
 
         if (user != null) {
+<<<<<<< HEAD
            val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+=======
+            val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+>>>>>>> 6087969eb42dd77f22fd6e9b5e3c0539a1f237d0
                 viewModel.onClickRow(it)
                 val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
                 findNavController().navigate(action)
@@ -52,5 +66,4 @@ class DiaryFragment : Fragment() {
     fun showEntries() {
         findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
     }
-
 }

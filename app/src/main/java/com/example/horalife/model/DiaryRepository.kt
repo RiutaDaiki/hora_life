@@ -3,8 +3,8 @@ package com.example.horalife.model
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
-import com.example.horalife.dataClass.DiaryContent
-import com.example.horalife.dataClass.DiaryDetailContent
+import com.example.horalife.entity.DiaryContent
+import com.example.horalife.entity.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query

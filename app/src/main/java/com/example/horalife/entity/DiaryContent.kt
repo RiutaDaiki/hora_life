@@ -1,4 +1,4 @@
-package com.example.horalife.dataClass
+package com.example.horalife.entity
 
 import java.sql.Timestamp
 

@@ -1,9 +1,13 @@
 package com.example.horalife.model
 
+<<<<<<< HEAD
 import android.util.Log
 import com.example.horalife.dataClass.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+=======
+import com.example.horalife.entity.User
+>>>>>>> 6087969eb42dd77f22fd6e9b5e3c0539a1f237d0
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlin.coroutines.resume
