@@ -30,40 +30,45 @@ class YouRepository {
             }
     }
 
-    suspend fun deleteUser(currentAccount: FirebaseUser?): Boolean {
-        val result = deleteUserFun(currentAccount).getOrThrow()
-        if (result) {
-            return true
-        } else {
-            Log.e("Error", result.toString())
-            return false
-        }
+    suspend fun deleteUser(currentAccount: FirebaseUser): Boolean {
+        return deleteUserFun(currentAccount).getOrNull() ?: false
     }
 
-    private suspend fun deleteUserFun(currentAccount: FirebaseUser?): Result<Boolean> {
+    private suspend fun deleteUserFun(currentAccount: FirebaseUser): Result<Boolean> {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
-                if (currentAccount != null) {
 
-                    currentAccount.delete()
-                        .addOnSuccessListener {
-                            continuation.resume(true)
-                        }
-                        .addOnFailureListener {
-                            continuation.resumeWithException(it)
-                        }
-                } else {
                     user.delete()
                         .addOnSuccessListener {
                             continuation.resume(true)
                         }
                         .addOnFailureListener {
-                            Log.e("えくせぷション", it.toString())
+                            Log.e("Exception", it.toString())
                             continuation.resumeWithException(it)
                         }
-                }
             }
         }
+    }
+
+    suspend fun sendVerify() : Boolean{
+        return sendVerifyFun().getOrNull() ?: false
+    }
+
+   private suspend fun sendVerifyFun(): Result<Boolean>{
+       return kotlin.runCatching {
+           suspendCoroutine { continuation ->
+               user.sendEmailVerification()
+                   .addOnSuccessListener {
+                       println("2")
+                       continuation.resume(true)
+                   }
+                   .addOnFailureListener {
+                       println("3")
+                       Log.e("error", it.toString())
+                       continuation.resumeWithException(it)
+                   }
+           }
+       }
     }
 
 }

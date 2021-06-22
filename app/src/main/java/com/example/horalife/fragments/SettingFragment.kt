@@ -2,6 +2,7 @@ package com.example.horalife.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,16 +31,16 @@ class SettingFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = SettingFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         val user = Firebase.auth.currentUser
         if (user == null) {
             binding.constraintLayout.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
             binding.notLoginText.text = "設定する項目がありません、\nログインしてください"
         }
-
 
         binding.deleteText.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
@@ -53,6 +54,14 @@ class SettingFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                     navToYou()
+                }
+            }
+        }
+        binding.verifyText.setOnClickListener {
+            viewModel.sendVerify()
+            viewLifecycleOwner.lifecycleScope.launch{
+                viewModel.isSendVerifyMail.collect {
+                    if (it) Toast.makeText(context, "認証用メールを送信しました", Toast.LENGTH_SHORT).show()
                 }
             }
         }

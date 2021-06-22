@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.example.horalife.viewModel.YouViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,6 +55,30 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/account_text"
             app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dark_gray"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/delete_text" />
+
+        <TextView
+            android:id="@+id/verify_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingLeft="8sp"
+            android:paddingTop="8sp"
+            android:paddingRight="8sp"
+            android:paddingBottom="8sp"
+            android:text="認証用メールを送信"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/delete_text"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

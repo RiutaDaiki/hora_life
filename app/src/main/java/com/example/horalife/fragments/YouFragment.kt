@@ -18,6 +18,7 @@ import com.example.horalife.databinding.YouFragmentBinding
 import com.example.horalife.viewModel.DiaryViewModel
 import com.example.horalife.viewModel.YouViewModel
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collect
@@ -94,11 +95,18 @@ class YouFragment : Fragment() {
 
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
+            val url = "http://www.example.com/verify?uid=" + user.uid
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
                 findNavController().navigate(R.id.nav_example)
-                Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
+                if (!user.isEmailVerified) user.sendEmailVerification()
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "登録したメールアドレス宛に認証用のメールを送信しました", Toast.LENGTH_SHORT).show()
+
+                    }
+
+
             }
             if (user != null && viewModel.callExisting(user.uid)) {
                 viewModel.callCreateUser(user.email, user.uid, user.displayName)

@@ -23,10 +23,7 @@ class AccountDeleteDialog() : DialogFragment() {
         val builder = AlertDialog.Builder(context)
             .setMessage("${user.displayName}\n${user.email}\nこのアカウントを削除しますか？")
             .setPositiveButton("削除する") { dialog, which ->
-
-                val user = Firebase.auth.currentUser
-                viewModel.deleteUser(user)
-
+                viewModel.deleteUser()
             }
             .setNegativeButton("キャンセル") { dialog, which ->
                 dialog.dismiss()
