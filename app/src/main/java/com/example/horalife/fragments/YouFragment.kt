@@ -102,7 +102,7 @@ class YouFragment : Fragment() {
                 findNavController().navigate(R.id.nav_example)
                 if (!user.isEmailVerified) user.sendEmailVerification()
                     .addOnSuccessListener {
-                        Toast.makeText(context, "登録したメールアドレス宛に認証用のメールを送信しました", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
 
                     }
 

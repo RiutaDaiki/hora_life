@@ -21,12 +21,13 @@ class YouViewModel : ViewModel() {
 
     private val user = Firebase.auth.currentUser
 
-
     private val _isDeleteUser = MutableSharedFlow<Boolean>()
     val isDeleteUser: Flow<Boolean> = _isDeleteUser
     fun deleteUser() {
+        println("0")
         viewModelScope.launch(Dispatchers.IO) {
             if (user != null) {
+                println("1")
                 val result = Repository.repository.deleteUser(user)
                 Log.d("VIEWMODEL", result.toString())
                 _isDeleteUser.emit(result)
@@ -46,15 +47,14 @@ class YouViewModel : ViewModel() {
         }
         return result
     }
+
     private val _isSendVerifyMail = MutableSharedFlow<Boolean>()
     val isSendVerifyMail = _isSendVerifyMail
 
-    fun sendVerify(){
-        if(user != null && !user.isEmailVerified){
-            println("1")
+    fun sendVerify() {
+        if (user != null && !user.isEmailVerified) {
             viewModelScope.launch(Dispatchers.IO) {
                 val bool = Repository.repository.sendVerify()
-                Log.d("bool", bool.toString())
                 _isSendVerifyMail.emit(bool)
             }
         }

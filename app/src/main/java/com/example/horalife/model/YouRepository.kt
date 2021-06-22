@@ -38,37 +38,37 @@ class YouRepository {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
 
-                    user.delete()
-                        .addOnSuccessListener {
-                            continuation.resume(true)
-                        }
-                        .addOnFailureListener {
-                            Log.e("Exception", it.toString())
-                            continuation.resumeWithException(it)
-                        }
+                user.delete()
+                    .addOnSuccessListener {
+                        println("2")
+                        continuation.resume(true)
+                    }
+                    .addOnFailureListener {
+                        println("3")
+                        Log.e("Exception", it.toString())
+                        continuation.resumeWithException(it)
+                    }
             }
         }
     }
 
-    suspend fun sendVerify() : Boolean{
+    suspend fun sendVerify(): Boolean {
         return sendVerifyFun().getOrNull() ?: false
     }
 
-   private suspend fun sendVerifyFun(): Result<Boolean>{
-       return kotlin.runCatching {
-           suspendCoroutine { continuation ->
-               user.sendEmailVerification()
-                   .addOnSuccessListener {
-                       println("2")
-                       continuation.resume(true)
-                   }
-                   .addOnFailureListener {
-                       println("3")
-                       Log.e("error", it.toString())
-                       continuation.resumeWithException(it)
-                   }
-           }
-       }
+    private suspend fun sendVerifyFun(): Result<Boolean> {
+        return kotlin.runCatching {
+            suspendCoroutine { continuation ->
+                user.sendEmailVerification()
+                    .addOnSuccessListener {
+                        continuation.resume(true)
+                    }
+                    .addOnFailureListener {
+                        Log.e("error", it.toString())
+                        continuation.resumeWithException(it)
+                    }
+            }
+        }
     }
 
 }

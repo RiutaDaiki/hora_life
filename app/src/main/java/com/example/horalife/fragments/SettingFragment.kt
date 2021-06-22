@@ -58,11 +58,15 @@ class SettingFragment : Fragment() {
             }
         }
         binding.verifyText.setOnClickListener {
-            viewModel.sendVerify()
-            viewLifecycleOwner.lifecycleScope.launch{
-                viewModel.isSendVerifyMail.collect {
-                    if (it) Toast.makeText(context, "認証用メールを送信しました", Toast.LENGTH_SHORT).show()
-                }
+            if(user != null){
+                if (!user.isEmailVerified) {
+                    viewModel.sendVerify()
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        viewModel.isSendVerifyMail.collect {
+                            if (it) Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                } else Toast.makeText(context, "メールアドレス認証済み", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root

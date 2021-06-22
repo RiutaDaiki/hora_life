@@ -3,19 +3,15 @@ package com.example.horalife.fragments
 import android.content.Context
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.horalife.R
 import com.example.horalife.dataClass.Sound
 import com.example.horalife.databinding.ExampleFragmentBinding
 import com.example.horalife.recycler.RecyclerViewAdapter
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class ExampleFragment : Fragment() {
     private lateinit var adapter: RecyclerViewAdapter
@@ -31,18 +27,6 @@ class ExampleFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
 
-        val user = Firebase.auth.currentUser
-        if(user != null){
-            if (user.isEmailVerified)  {
-                Toast.makeText(context, true.toString(), Toast.LENGTH_LONG).show()
-                user.sendEmailVerification()
-            } else {
-                Toast.makeText(context, false.toString(), Toast.LENGTH_LONG).show()
-
-                Log.d("", "ゔぉゔぉゔぉゔぉ")
-            }
-        }
-
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
@@ -54,16 +38,13 @@ class ExampleFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //これ↓
         adapter.notifyDataSetChanged()
-
     }
 
     fun playMedia(file: Int, ct: Context) {
         player = MediaPlayer.create(ct, file)
         player.isLooping = false
         player.start()
-
         player.setOnCompletionListener { mp -> player.stop() }
     }
 
