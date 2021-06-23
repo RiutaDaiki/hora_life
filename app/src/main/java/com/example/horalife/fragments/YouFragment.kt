@@ -48,7 +48,6 @@ class YouFragment : Fragment() {
             AuthUI.IdpConfig.EmailBuilder().build()
         )
 
-
         fun showLogoutTxt() {
             binding.user.text = currentUser.displayName
             binding.statusText.text = "ログアウト"
@@ -60,7 +59,6 @@ class YouFragment : Fragment() {
                         findNavController().navigate(R.id.nav_example)
                         Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
                     }
-
             }
         }
 
@@ -92,24 +90,18 @@ class YouFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
-            val url = "http://www.example.com/verify?uid=" + user.uid
-
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
                 findNavController().navigate(R.id.nav_example)
                 if (!user.isEmailVerified) user.sendEmailVerification()
                     .addOnSuccessListener {
                         Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
-
                     }
-
-
             }
             if (user != null && viewModel.callExisting(user.uid)) {
                 viewModel.callCreateUser(user.email, user.uid, user.displayName)

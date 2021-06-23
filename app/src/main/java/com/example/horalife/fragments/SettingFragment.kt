@@ -2,7 +2,6 @@ package com.example.horalife.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +56,7 @@ class SettingFragment : Fragment() {
                 }
             }
         }
+
         binding.verifyText.setOnClickListener {
             if(user != null){
                 if (!user.isEmailVerified) {

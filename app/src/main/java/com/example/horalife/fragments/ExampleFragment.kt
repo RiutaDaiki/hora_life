@@ -15,20 +15,24 @@ import com.example.horalife.recycler.RecyclerViewAdapter
 
 class ExampleFragment : Fragment() {
     private lateinit var adapter: RecyclerViewAdapter
-    val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe),
-            Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan),
-            Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome),
-            Sound(R.string.ots_atari, R.raw.otsu_atari),
-            Sound(R.string.ots_ots_atari, R.raw.ots_ots_atari),
-            Sound(R.string.ots_yurisori, R.raw.ots_yurisori),
-            Sound(R.string.kan_hira_yuri, R.raw.kan_hira_yuri),
-            Sound(R.string.betsu_yuri, R.raw.betsu_yuri))
+    val dataList = listOf<Sound>(
+        Sound(R.string.sirabe, R.raw.sirabe),
+        Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan),
+        Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome),
+        Sound(R.string.ots_atari, R.raw.otsu_atari),
+        Sound(R.string.ots_ots_atari, R.raw.ots_ots_atari),
+        Sound(R.string.ots_yurisori, R.raw.ots_yurisori),
+        Sound(R.string.kan_hira_yuri, R.raw.kan_hira_yuri),
+        Sound(R.string.betsu_yuri, R.raw.betsu_yuri)
+    )
     lateinit var player: MediaPlayer
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
-
         binding.lifecycleOwner = viewLifecycleOwner
-
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
@@ -47,5 +51,4 @@ class ExampleFragment : Fragment() {
         player.start()
         player.setOnCompletionListener { mp -> player.stop() }
     }
-
 }

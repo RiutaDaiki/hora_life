@@ -9,8 +9,13 @@ import com.example.horalife.entity.Sound
 import com.example.horalife.databinding.ItemExampleRecyclerBinding
 import com.example.horalife.fragments.ExampleFragment
 
-class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lifecycleOwner: LifecycleOwner, private val context: Context?): RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
-    inner class MyViewHolder(val binding: ItemExampleRecyclerBinding): RecyclerView.ViewHolder(binding.root){
+class RecyclerViewAdapter(
+    private val displayData: List<Sound>,
+    private val lifecycleOwner: LifecycleOwner,
+    private val context: Context?
+) : RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>() {
+    inner class MyViewHolder(val binding: ItemExampleRecyclerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -33,5 +38,3 @@ class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lif
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 }
-
-//item_recycler.xmlのTextViewのTextの記述を見る

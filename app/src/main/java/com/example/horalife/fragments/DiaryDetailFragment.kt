@@ -12,11 +12,7 @@ import com.example.horalife.R
 import com.example.horalife.databinding.DiaryDetailBinding
 import com.example.horalife.dialog.ConfirmDeleteDialog
 import com.example.horalife.viewModel.DiaryViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import java.io.File
-import kotlin.coroutines.CoroutineContext
 
 
 class DiaryDetailFragment() : Fragment() {
@@ -110,12 +106,6 @@ class DiaryDetailFragment() : Fragment() {
                 file
         )
         return uri
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        when (requestCode) {
-//            TWITTER_CODE -> ここでツイート完了したか判定してトースト出したい
-        }
     }
 }
 
