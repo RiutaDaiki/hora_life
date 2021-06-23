@@ -26,7 +26,6 @@ class ExampleFragment : Fragment() {
     lateinit var player: MediaPlayer
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
-        val root = inflater.inflate(R.layout.example_fragment, container, false)
 
         binding.lifecycleOwner = viewLifecycleOwner
 
@@ -39,16 +38,13 @@ class ExampleFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //これ↓
         adapter.notifyDataSetChanged()
-
     }
 
     fun playMedia(file: Int, ct: Context) {
         player = MediaPlayer.create(ct, file)
         player.isLooping = false
         player.start()
-
         player.setOnCompletionListener { mp -> player.stop() }
     }
 

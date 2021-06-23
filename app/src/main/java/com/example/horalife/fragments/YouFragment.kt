@@ -11,14 +11,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.horalife.R
 import com.example.horalife.databinding.YouFragmentBinding
 import com.example.horalife.viewModel.DiaryViewModel
 import com.example.horalife.viewModel.YouViewModel
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.GlobalScope
 
 class YouFragment : Fragment() {
     private lateinit var binding: YouFragmentBinding
@@ -32,16 +37,17 @@ class YouFragment : Fragment() {
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         val providers = arrayListOf(
-                AuthUI.IdpConfig.EmailBuilder().build()
+            AuthUI.IdpConfig.EmailBuilder().build()
         )
+
 
         fun showLogoutTxt() {
             binding.user.text = currentUser.displayName
@@ -49,11 +55,12 @@ class YouFragment : Fragment() {
             binding.statusText.setTextColor(resources.getColor(R.color.red))
             binding.statusText.setOnClickListener {
                 AuthUI.getInstance()
-                        .signOut(this.requireContext())
-                        .addOnCompleteListener {
-                            findNavController().navigate(R.id.nav_example)
-                            Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
-                        }
+                    .signOut(this.requireContext())
+                    .addOnSuccessListener {
+                        findNavController().navigate(R.id.nav_example)
+                        Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
+                    }
+
             }
         }
 
@@ -63,11 +70,12 @@ class YouFragment : Fragment() {
             binding.statusText.setTextColor(resources.getColor(R.color.blue))
             binding.statusText.setOnClickListener {
                 startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .build(),
-                        SIGN_IN)
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                    SIGN_IN
+                )
             }
         }
 
@@ -77,24 +85,31 @@ class YouFragment : Fragment() {
             showLoginTxt()
         }
 
-        binding.settingText.setOnClickListener{
+        binding.settingText.setOnClickListener {
             findNavController().navigate(R.id.action_nav_you_to_setting)
         }
 
         return binding.root
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
+            val url = "http://www.example.com/verify?uid=" + user.uid
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
-                viewModel.currentAccount.value = user
                 findNavController().navigate(R.id.nav_example)
-                Toast.makeText(context, "ログイン完了", Toast.LENGTH_SHORT).show()
+                if (!user.isEmailVerified) user.sendEmailVerification()
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
+
+                    }
+
+
             }
             if (user != null && viewModel.callExisting(user.uid)) {
                 viewModel.callCreateUser(user.email, user.uid, user.displayName)

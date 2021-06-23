@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.nav_example, R.id.nav_diary, R.id.nav_you))
         setupActionBarWithNavController(navController, appBarConfiguration)
+        NavigationUI.setupWithNavController(navView, navController)
         navView.setupWithNavController(navController)
     }
 

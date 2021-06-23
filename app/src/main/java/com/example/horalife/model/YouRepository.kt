@@ -31,38 +31,43 @@ class YouRepository {
             }
     }
 
-    suspend fun deleteUser(currentAccount: FirebaseUser?): Boolean {
-        val result = deleteUserFun(currentAccount).getOrThrow()
-        return if(result) true
-        else {
-            Log.e("Error", result.toString())
-            false
+    suspend fun deleteUser(currentAccount: FirebaseUser): Boolean {
+        return deleteUserFun(currentAccount).getOrNull() ?: false
+    }
+
+    private suspend fun deleteUserFun(currentAccount: FirebaseUser): Result<Boolean> {
+        return kotlin.runCatching {
+            suspendCoroutine { continuation ->
+
+                user.delete()
+                    .addOnSuccessListener {
+                        println("2")
+                        continuation.resume(true)
+                    }
+                    .addOnFailureListener {
+                        println("3")
+                        Log.e("Exception", it.toString())
+                        continuation.resumeWithException(it)
+                    }
+            }
         }
     }
 
-    private suspend fun deleteUserFun(currentAccount: FirebaseUser?): Result<Boolean> {
+    suspend fun sendVerify(): Boolean {
+        return sendVerifyFun().getOrNull() ?: false
+    }
+
+    private suspend fun sendVerifyFun(): Result<Boolean> {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
-                if (currentAccount != null) {
-
-                    currentAccount.delete()
-                        .addOnSuccessListener {
-                            continuation.resume(true)
-                        }
-                        .addOnFailureListener {
-                            continuation.resumeWithException(it)
-                        }
-                }
-                else {
-                    user.delete()
-                        .addOnSuccessListener {
-                            continuation.resume(true)
-                        }
-                        .addOnFailureListener {
-                            Log.e("えくせぷション", it.toString())
-                            continuation.resumeWithException(it)
-                        }
-                }
+                user.sendEmailVerification()
+                    .addOnSuccessListener {
+                        continuation.resume(true)
+                    }
+                    .addOnFailureListener {
+                        Log.e("error", it.toString())
+                        continuation.resumeWithException(it)
+                    }
             }
         }
     }
