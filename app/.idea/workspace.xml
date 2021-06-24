@@ -32,6 +32,36 @@
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/androidTest/java/com/example/horalife/ExampleInstrumentedTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/androidTest/java/com/riuta/horalife/ExampleInstrumentedTest.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/DiaryContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dataClass/DiaryContent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/DiaryDetailContent.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dataClass/DiaryDetailContent.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/Sound.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dataClass/Sound.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dataClass/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dataClass/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dialog/AccountDeleteDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dialog/AccountDeleteDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/dialog/ConfirmDeleteDialog.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dialog/ConfirmDeleteDialog.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/DiaryDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/DiaryDetailFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/DiaryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/DiaryFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/EntriesFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/EntriesFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/ExampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/ExampleFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/SettingFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/fragments/YouFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/YouFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/model/DiaryRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/model/DiaryRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/model/YouRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/model/YouRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/recycler/DiaryViewAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/recycler/DiaryViewAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/recycler/RecyclerViewAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/recycler/RecyclerViewAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/viewModel/DiaryViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/viewModel/DiaryViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/horalife/viewModel/YouViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/viewModel/YouViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout-v23/item_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout-v23/item_diary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/diary_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/diary_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/diary_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/diary_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_diary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_example_recycler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_example_recycler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/setting_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/setting_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/navigation/navigation_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/navigation/navigation_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/horalife/ExampleUnitTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/riuta/horalife/ExampleUnitTest.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,12 +133,17 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ApkExportedModule" value="HORA_LIFE.app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="SerialNumber@CHR7N18928013161" />
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-06-15T03:43:48.926041Z" />
+    <property name="ExportApk.ApkPath" value="$PROJECT_DIR$" />
+    <property name="ExportApk.BuildVariants" value="release" />
+    <property name="ExportApk.SignV1" value="true" />
+    <property name="ExportApk.SignV2" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1623728329422" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1624512767579" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -251,7 +286,7 @@
     <state x="376" y="-763" key="AndroidCreateResourceFileDialog/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623645584202" />
     <state x="376" y="-763" key="AndroidCreateResourceFileDialog/1748.-1055.1920.1055/0.25.1440.875/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624337873978" />
     <state x="376" y="-781" key="AndroidCreateResourceFileDialog/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623033340031" />
-    <state width="1871" height="661" key="GridCell.Tab.0.bottom" timestamp="1624503771815">
+    <state width="1871" height="307" key="GridCell.Tab.0.bottom" timestamp="1624505291374">
       <screen x="-195" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="369" key="GridCell.Tab.0.bottom/0.0.1440.900/1748.-1080.1920.1080/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624183420275" />
@@ -260,7 +295,7 @@
     <state width="1640" height="123" key="GridCell.Tab.0.bottom/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140072" />
     <state width="1640" height="837" key="GridCell.Tab.0.bottom/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006779" />
     <state width="1878" height="413" key="GridCell.Tab.0.bottom/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891129" />
-    <state width="1871" height="661" key="GridCell.Tab.0.bottom/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624503771815" />
+    <state width="1871" height="307" key="GridCell.Tab.0.bottom/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624505291374" />
     <state width="1640" height="456" key="GridCell.Tab.0.bottom/1748.-1055.1920.1055/0.25.1440.797/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624326544512" />
     <state width="1640" height="456" key="GridCell.Tab.0.bottom/1748.-1055.1920.1055/0.25.1440.799/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624331785444" />
     <state width="1398" height="287" key="GridCell.Tab.0.bottom/1748.-1055.1920.1055/0.25.1440.807/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623056649423" />
@@ -271,7 +306,7 @@
     <state width="1878" height="369" key="GridCell.Tab.0.bottom/1748.-1055.1920.970/0.25.1440.875/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624241059265" />
     <state width="1878" height="484" key="GridCell.Tab.0.bottom/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624242648923" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@0.0.1440.900" timestamp="1622780295829" />
-    <state width="1871" height="661" key="GridCell.Tab.0.center" timestamp="1624503771813">
+    <state width="1871" height="307" key="GridCell.Tab.0.center" timestamp="1624505291374">
       <screen x="-195" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="369" key="GridCell.Tab.0.center/0.0.1440.900/1748.-1080.1920.1080/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624183420273" />
@@ -280,7 +315,7 @@
     <state width="1640" height="123" key="GridCell.Tab.0.center/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140071" />
     <state width="1640" height="837" key="GridCell.Tab.0.center/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006779" />
     <state width="1878" height="413" key="GridCell.Tab.0.center/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891127" />
-    <state width="1871" height="661" key="GridCell.Tab.0.center/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624503771813" />
+    <state width="1871" height="307" key="GridCell.Tab.0.center/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624505291374" />
     <state width="1640" height="456" key="GridCell.Tab.0.center/1748.-1055.1920.1055/0.25.1440.797/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624326544511" />
     <state width="1640" height="456" key="GridCell.Tab.0.center/1748.-1055.1920.1055/0.25.1440.799/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624331785442" />
     <state width="1398" height="287" key="GridCell.Tab.0.center/1748.-1055.1920.1055/0.25.1440.807/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623056649422" />
@@ -291,7 +326,7 @@
     <state width="1878" height="369" key="GridCell.Tab.0.center/1748.-1055.1920.970/0.25.1440.875/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624241059263" />
     <state width="1878" height="484" key="GridCell.Tab.0.center/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624242648921" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@0.0.1440.900" timestamp="1622780295828" />
-    <state width="1871" height="661" key="GridCell.Tab.0.left" timestamp="1624503771812">
+    <state width="1871" height="307" key="GridCell.Tab.0.left" timestamp="1624505291373">
       <screen x="-195" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="369" key="GridCell.Tab.0.left/0.0.1440.900/1748.-1080.1920.1080/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624183420271" />
@@ -300,7 +335,7 @@
     <state width="1640" height="123" key="GridCell.Tab.0.left/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140070" />
     <state width="1640" height="837" key="GridCell.Tab.0.left/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006778" />
     <state width="1878" height="413" key="GridCell.Tab.0.left/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891126" />
-    <state width="1871" height="661" key="GridCell.Tab.0.left/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624503771812" />
+    <state width="1871" height="307" key="GridCell.Tab.0.left/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624505291373" />
     <state width="1640" height="456" key="GridCell.Tab.0.left/1748.-1055.1920.1055/0.25.1440.797/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624326544510" />
     <state width="1640" height="456" key="GridCell.Tab.0.left/1748.-1055.1920.1055/0.25.1440.799/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624331785440" />
     <state width="1398" height="287" key="GridCell.Tab.0.left/1748.-1055.1920.1055/0.25.1440.807/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623056649421" />
@@ -311,7 +346,7 @@
     <state width="1878" height="369" key="GridCell.Tab.0.left/1748.-1055.1920.970/0.25.1440.875/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624241059261" />
     <state width="1878" height="484" key="GridCell.Tab.0.left/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624242648920" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@0.0.1440.900" timestamp="1622780295827" />
-    <state width="1871" height="661" key="GridCell.Tab.0.right" timestamp="1624503771814">
+    <state width="1871" height="307" key="GridCell.Tab.0.right" timestamp="1624505291374">
       <screen x="-195" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="369" key="GridCell.Tab.0.right/0.0.1440.900/1748.-1080.1920.1080/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624183420274" />
@@ -320,7 +355,7 @@
     <state width="1640" height="123" key="GridCell.Tab.0.right/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140071" />
     <state width="1640" height="837" key="GridCell.Tab.0.right/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006779" />
     <state width="1878" height="413" key="GridCell.Tab.0.right/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891128" />
-    <state width="1871" height="661" key="GridCell.Tab.0.right/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624503771814" />
+    <state width="1871" height="307" key="GridCell.Tab.0.right/1725.-1055.1920.970/0.25.1440.875/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624505291374" />
     <state width="1640" height="456" key="GridCell.Tab.0.right/1748.-1055.1920.1055/0.25.1440.797/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624326544511" />
     <state width="1640" height="456" key="GridCell.Tab.0.right/1748.-1055.1920.1055/0.25.1440.799/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624331785443" />
     <state width="1398" height="287" key="GridCell.Tab.0.right/1748.-1055.1920.1055/0.25.1440.807/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623056649422" />

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="sound"
-            type="com.example.horalife.dataClass.Sound" />
+            type="com.riuta.horalife.dataClass.Sound" />
 
     </data>
 

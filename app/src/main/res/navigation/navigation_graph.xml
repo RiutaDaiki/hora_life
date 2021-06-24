@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/nav_example"
         tools:layout="@layout/example_fragment"
-        android:name="com.example.horalife.fragments.ExampleFragment"
+        android:name="com.riuta.horalife.fragments.ExampleFragment"
         android:label="お手本" />
 
     <fragment
         android:id="@+id/nav_diary"
         tools:layout="@layout/library_fragment"
-        android:name="com.example.horalife.fragments.DiaryFragment"
+        android:name="com.riuta.horalife.fragments.DiaryFragment"
         android:label="法螺日記">
 
         <action
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/nav_you"
         tools:layout="@layout/you_fragment"
-        android:name="com.example.horalife.fragments.YouFragment"
+        android:name="com.riuta.horalife.fragments.YouFragment"
         android:label="あなた" >
         <action
             android:id="@+id/action_nav_you_to_setting"
@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/entries_fragment"
         tools:layout="@layout/entries_fragment"
-        android:name="com.example.horalife.fragments.EntrieFragment"
+        android:name="com.riuta.horalife.fragments.EntrieFragment"
         android:label="">
         <action
             android:id="@+id/action_entries_to_diary"
@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/diary_detail_fragment"
         tools:layout="@layout/diary_detail"
-        android:name="com.example.horalife.fragments.DiaryDetailFragment"
+        android:name="com.riuta.horalife.fragments.DiaryDetailFragment"
         android:label="ディテール">
         <action
             android:id="@+id/action_diary_detail_to_diary"
@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/setting_fragment"
         tools:layout="@layout/setting_fragment"
-        android:name="com.example.horalife.fragments.SettingFragment"
+        android:name="com.riuta.horalife.fragments.SettingFragment"
         android:label="設定">
         <action
             android:id="@+id/action_setting_to_example"

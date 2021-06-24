@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.horalife.viewModel.YouViewModel" />
+            type="com.riuta.horalife.viewModel.YouViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

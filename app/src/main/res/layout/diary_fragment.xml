@@ -6,7 +6,7 @@
 
         <variable
             name="adapter"
-            type="com.example.horalife.recycler.DiaryViewAdapter" />
+            type="com.riuta.horalife.recycler.DiaryViewAdapter" />
 
 
     </data>

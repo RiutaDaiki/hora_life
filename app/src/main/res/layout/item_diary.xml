@@ -7,11 +7,11 @@
 
         <variable
             name="content"
-            type="com.example.horalife.dataClass.DiaryContent" />
+            type="com.riuta.horalife.dataClass.DiaryContent" />
 
         <variable
             name="viewmodel"
-            type="com.example.horalife.viewModel.DiaryViewModel" />
+            type="com.riuta.horalife.viewModel.DiaryViewModel" />
 
     </data>
 
