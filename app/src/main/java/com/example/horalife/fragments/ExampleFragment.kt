@@ -31,7 +31,7 @@ class ExampleFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
+        val binding = ExampleFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
