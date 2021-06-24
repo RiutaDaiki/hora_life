@@ -14,6 +14,7 @@ import com.example.horalife.viewModel.DiaryViewModel
 import com.example.horalife.databinding.ItemDiaryBinding
 import java.sql.Timestamp
 
+
 class DiaryViewAdapter(
     private val lifecycleOwner: LifecycleOwner,
     private val viewModel: DiaryViewModel,

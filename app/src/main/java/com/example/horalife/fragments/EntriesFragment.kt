@@ -115,6 +115,8 @@ class EntrieFragment : Fragment() {
                             videoPath!!,
                             MediaStore.Video.Thumbnails.MINI_KIND
                         )!!
+                        Log.d("path", videoPath)
+                        Log.d("ビデオuri", uri.toString())
                         binding.diaryBtn.isEnabled = true
                         binding.thumbnailView.setImageBitmap(thum)
                     }

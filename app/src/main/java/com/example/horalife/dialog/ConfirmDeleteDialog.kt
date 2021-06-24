@@ -20,7 +20,7 @@ class ConfirmDeleteDialog : DialogFragment() {
                     findNavController().navigate(R.id.nav_diary)
                 }
                 .setNegativeButton("キャンセル") { dialog, which ->
-                    dialog.dismiss()
+
                 }
         return builder.create()
     }

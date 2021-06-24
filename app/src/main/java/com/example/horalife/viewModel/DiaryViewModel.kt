@@ -3,6 +3,7 @@ package com.example.horalife.viewModel
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,7 @@ import com.example.horalife.model.DiaryRepository
 import com.example.horalife.entity.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
+
 
 class DiaryViewModel() : ViewModel() {
 
@@ -53,6 +55,7 @@ class DiaryViewModel() : ViewModel() {
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         viewModelScope.launch {
+            Log.d("ビデオURえる", diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
             if (diaryList.value != null && selectedPosition.value != null) {
                 Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
                         .onSuccess {

@@ -2,6 +2,8 @@ package com.example.horalife.model
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+
 import com.example.horalife.entity.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -29,19 +31,21 @@ class YouRepository {
             }
     }
 
-    suspend fun deleteUser(): Boolean {
-        return deleteUserFun().getOrNull() ?: false
+    suspend fun deleteUser(currentAccount: FirebaseUser): Boolean {
+        return deleteUserFun(currentAccount).getOrNull() ?: false
     }
 
-    private suspend fun deleteUserFun(): Result<Boolean> {
+    private suspend fun deleteUserFun(currentAccount: FirebaseUser): Result<Boolean> {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
 
                 user.delete()
                     .addOnSuccessListener {
+                        println("2")
                         continuation.resume(true)
                     }
                     .addOnFailureListener {
+                        println("3")
                         Log.e("Exception", it.toString())
                         continuation.resumeWithException(it)
                     }

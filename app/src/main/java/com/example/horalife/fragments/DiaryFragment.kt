@@ -19,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
