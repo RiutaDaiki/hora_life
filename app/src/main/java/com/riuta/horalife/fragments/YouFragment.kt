@@ -41,7 +41,7 @@ class YouFragment : Fragment() {
 
 
         fun showLogoutTxt() {
-            binding.user.text = currentUser.displayName
+            binding.user.text = currentUser?.displayName
             binding.statusText.text = "ログアウト"
             binding.statusText.setTextColor(resources.getColor(R.color.red))
             binding.statusText.setOnClickListener {
@@ -89,7 +89,7 @@ class YouFragment : Fragment() {
 
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
-            val url = "http://www.example.com/verify?uid=" + user.uid
+            val url = "http://www.example.com/verify?uid=" + user?.uid
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user

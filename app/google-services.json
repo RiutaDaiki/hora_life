@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "324313994614",
-    "project_id": "hora-life-29e9d",
-    "storage_bucket": "hora-life-29e9d.appspot.com"
+    "project_number": "377236479718",
+    "project_id": "new-hora-life",
+    "storage_bucket": "new-hora-life.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:324313994614:android:293a23306e64a07f8bd657",
+        "mobilesdk_app_id": "1:377236479718:android:76dcb5313cec2d63f3e527",
         "android_client_info": {
-          "package_name": "com.example.horalife"
+          "package_name": "com.riuta.horalife"
         }
       },
       "oauth_client": [
         {
-          "client_id": "324313994614-o8pd7eh4j0r0lai1cptcj6sqcq4obft9.apps.googleusercontent.com",
+          "client_id": "377236479718-dvm292m7h4rpkl670gj6m8h1oicfl5mn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDrVCpSO8OthO_4cX1Qhjc7Kc41-25dZmQ"
+          "current_key": "AIzaSyBifki1FUrImCVg2VSwORlYsaIjLpHhF0Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "324313994614-o8pd7eh4j0r0lai1cptcj6sqcq4obft9.apps.googleusercontent.com",
+              "client_id": "377236479718-dvm292m7h4rpkl670gj6m8h1oicfl5mn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
