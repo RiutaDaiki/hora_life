@@ -44,11 +44,14 @@ class DiaryViewModel() : ViewModel() {
         diaryList.value?.get(it)
     }
 
-    fun diaryContent(position: Int): DiaryContent {
+    val sammple = MutableLiveData<String>("ANC")
+    val content = MutableLiveData<DiaryContent>()
+
+    fun diaryContent(position: Int) {
         val comment = diaryList.value!!.get(position).comment
         val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
 
-        return DiaryContent(
+        content.value = DiaryContent(
             diaryList.value?.get(position)!!.recordedDate,
             rowComment,
             diaryList.value?.get(position)!!.pngFileName,

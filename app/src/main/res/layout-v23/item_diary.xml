@@ -33,7 +33,7 @@
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{content.recordedDate}"
+                android:text="@{viewmodel.sammple}"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"

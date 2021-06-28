@@ -39,7 +39,8 @@ class DiaryViewAdapter(
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
 
-        holder.binding.content = viewModel.diaryContent(position)
+        viewModel.diaryContent(position)
+//        holder.binding.content = viewModel.diaryContent(position)
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }
