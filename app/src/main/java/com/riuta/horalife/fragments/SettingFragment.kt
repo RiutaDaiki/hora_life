@@ -57,7 +57,8 @@ class SettingFragment : Fragment() {
         binding.verifyText.setOnClickListener {
             if(user != null){
                 if (!user.isEmailVerified) {
-                    viewModel.sendVerify()lifecycleScope.launch {
+                    viewModel.sendVerify()
+                    lifecycleScope.launch {
                         viewModel.isSendVerifyMail.collect {
                             if (it) Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
                         }
