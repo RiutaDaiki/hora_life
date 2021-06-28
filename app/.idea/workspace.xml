@@ -32,8 +32,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/app-release.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/YouFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/YouFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/model/YouRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/model/YouRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/viewModel/YouViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/viewModel/YouViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

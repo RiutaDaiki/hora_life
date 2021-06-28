@@ -1,6 +1,5 @@
 package com.riuta.horalife.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,13 +18,11 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
-@SuppressLint("StaticFieldLeak")
-private lateinit var binding: SettingFragmentBinding
-
 class SettingFragment : Fragment() {
+    private lateinit var binding: SettingFragmentBinding
+
     private val viewModel: YouViewModel by activityViewModels()
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,11 +35,12 @@ class SettingFragment : Fragment() {
         val user = Firebase.auth.currentUser
         if (user == null) {
             binding.constraintLayout.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
-            binding.notLoginText.text = "設定する項目がありません、\nログインしてください"
+            binding.notLoginText.text = resources.getString(R.string.no_setting)
+
         }
 
         binding.deleteText.setOnClickListener {
-            viewLifecycleOwner.lifecycleScope.launch {
+            lifecycleScope.launch {
                 val dialog = AccountDeleteDialog()
                 dialog.show(parentFragmentManager, null)
                 viewModel.isDeleteUser.collect {
@@ -59,8 +57,7 @@ class SettingFragment : Fragment() {
         binding.verifyText.setOnClickListener {
             if(user != null){
                 if (!user.isEmailVerified) {
-                    viewModel.sendVerify()
-                    viewLifecycleOwner.lifecycleScope.launch {
+                    viewModel.sendVerify()lifecycleScope.launch {
                         viewModel.isSendVerifyMail.collect {
                             if (it) Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
                         }

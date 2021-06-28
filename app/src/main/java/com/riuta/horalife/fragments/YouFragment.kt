@@ -89,7 +89,6 @@ class YouFragment : Fragment() {
 
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
-            val url = "http://www.example.com/verify?uid=" + user?.uid
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
@@ -97,7 +96,6 @@ class YouFragment : Fragment() {
                 if (!user.isEmailVerified) user.sendEmailVerification()
                     .addOnSuccessListener {
                         Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
-
                     }
 
 

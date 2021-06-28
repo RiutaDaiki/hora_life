@@ -13,14 +13,15 @@ import kotlin.coroutines.suspendCoroutine
 class YouRepository {
     private val db = Firebase.firestore
     private val user = FirebaseAuth.getInstance().currentUser
+    private val users = "users"
 
     fun createUser(user: User) {
-        db.collection("users").document(user.userId)
+        db.collection(users).document(user.userId)
             .set(user)
     }
 
     fun checkExisting(userId: String, existing: (Boolean) -> Unit) {
-        db.collection("users").document(userId)
+        db.collection(users).document(userId)
             .get()
             .addOnSuccessListener {
                 existing(true)
@@ -40,11 +41,9 @@ class YouRepository {
 
                 user.delete()
                     .addOnSuccessListener {
-                        println("2")
                         continuation.resume(true)
                     }
                     .addOnFailureListener {
-                        println("3")
                         Log.e("Exception", it.toString())
                         continuation.resumeWithException(it)
                     }
