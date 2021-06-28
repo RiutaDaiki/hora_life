@@ -14,6 +14,7 @@ import com.example.horalife.model.DiaryRepository
 import com.example.horalife.entity.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
 
 
 class DiaryViewModel() : ViewModel() {
@@ -42,6 +43,21 @@ class DiaryViewModel() : ViewModel() {
     val selectedDiary = selectedPosition.map {
         diaryList.value?.get(it)
     }
+
+    fun diaryContent(position: Int): DiaryContent {
+        val comment = diaryList.value!!.get(position).comment
+        val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
+
+        return DiaryContent(
+            diaryList.value?.get(position)!!.recordedDate,
+            rowComment,
+            diaryList.value?.get(position)!!.pngFileName,
+            Timestamp(System.currentTimeMillis()),
+            diaryList.value?.get(position)!!.videoFileName,
+            diaryList.value?.get(position)!!.videoPath
+        )
+    }
+
 
     fun onClickRow(position: Int) {
         selectedPosition.value = position

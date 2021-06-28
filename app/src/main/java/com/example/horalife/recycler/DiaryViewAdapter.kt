@@ -38,18 +38,8 @@ class DiaryViewAdapter(
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        val comment = viewModel.diaryList.value?.get(position)!!.comment
-        val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
 
-        val content = DiaryContent(
-            viewModel.diaryList.value?.get(position)!!.recordedDate,
-            rowComment,
-            viewModel.diaryList.value?.get(position)!!.pngFileName,
-            Timestamp(System.currentTimeMillis()),
-            viewModel.diaryList.value?.get(position)!!.videoFileName,
-            viewModel.diaryList.value?.get(position)!!.videoPath
-        )
-        holder.binding.content = content
+        holder.binding.content = viewModel.diaryContent(position)
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }

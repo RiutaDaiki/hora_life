@@ -98,7 +98,6 @@ class YouFragment : Fragment() {
 
         if (requestCode == SIGN_IN) {
             val user = Firebase.auth.currentUser
-            val url = "http://www.example.com/verify?uid=" + user.uid
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user

@@ -24,18 +24,8 @@ class ExampleFragment : Fragment() {
             Sound(R.string.kan_hira_yuri, R.raw.kan_hira_yuri),
             Sound(R.string.betsu_yuri, R.raw.betsu_yuri))
     lateinit var player: MediaPlayer
-//<<<<<<< HEAD
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        val binding = ExampleFragmentBinding.inflate(inflater, container, false)
-//=======
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
-
-//>>>>>>> parent of b293fc4 (コードを整えた)
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
