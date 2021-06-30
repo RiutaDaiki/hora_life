@@ -36,7 +36,7 @@
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewmodel.content.get(position).recordedDate}"
+                android:text="@{viewmodel.content[position].recordedDate}"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
