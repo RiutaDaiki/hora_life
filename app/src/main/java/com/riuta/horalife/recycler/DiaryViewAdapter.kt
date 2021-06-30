@@ -1,18 +1,16 @@
 package com.riuta.horalife.recycler
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.riuta.horalife.R
-import com.riuta.horalife.dataClass.DiaryContent
 import com.riuta.horalife.viewModel.DiaryViewModel
 import com.riuta.horalife.databinding.ItemDiaryBinding
-import java.sql.Timestamp
 
 
 class DiaryViewAdapter(
@@ -38,7 +36,9 @@ class DiaryViewAdapter(
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        holder.binding.content = viewModel.diaryContent(position)
+        binding.viewmodel = viewModel
+        binding.position = position
+        viewModel.setList {  }
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }
@@ -49,8 +49,9 @@ class DiaryViewAdapter(
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     fun createNoImage(): Bitmap {
-        val drawable = ContextCompat.getDrawable(context, R.drawable.no_image)
+        val drawable = context.getDrawable(R.drawable.no_image)
         val bitmapDrawable = drawable as BitmapDrawable
         return bitmapDrawable.bitmap
     }

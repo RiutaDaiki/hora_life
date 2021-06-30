@@ -45,22 +45,30 @@ class DiaryViewModel() : ViewModel() {
         diaryList.value?.get(it)
     }
 
-    fun diaryContent(position: Int): DiaryContent {
-        val comment = diaryList.value!!.get(position).comment
-        val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
+    val content = MutableLiveData<List<DiaryContent>>(diaryContent())
 
-        return DiaryContent(
-            diaryList.value?.get(position)!!.recordedDate,
-            rowComment,
-            diaryList.value?.get(position)!!.pngFileName,
-            Timestamp(System.currentTimeMillis()),
-            diaryList.value?.get(position)!!.videoFileName,
-            diaryList.value?.get(position)!!.videoPath
-        )
+    fun diaryContent(): List<DiaryContent>{
+        val result = mutableListOf<DiaryContent>()
+        setList{
+            println("えらぁぁぁっl")
+        }
+
+        val rowNumber = diaryList.value?.size ?: 0
+        for(i in 0..rowNumber){
+            val comment = diaryList.value?.get(i)?.comment ?: ""
+            val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
+            val content = DiaryContent(
+                diaryList.value?.get(i)!!.recordedDate,
+                rowComment,
+                diaryList.value?.get(i)!!.pngFileName,
+                Timestamp(System.currentTimeMillis()),
+                diaryList.value?.get(i)!!.videoFileName,
+                diaryList.value?.get(i)!!.videoPath
+            )
+            result.add(i, content)
+        }
+        return result
     }
-
-
-
 
     fun onClickRow(position: Int) {
         selectedPosition.value = position
