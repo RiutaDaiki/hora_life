@@ -3,12 +3,8 @@ package com.example.horalife.viewModel
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import androidx.core.net.toUri
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.horalife.entity.DiaryContent
 import com.example.horalife.model.DiaryRepository
 import com.example.horalife.entity.DiaryDetailContent
@@ -44,23 +40,31 @@ class DiaryViewModel() : ViewModel() {
         diaryList.value?.get(it)
     }
 
-    val sammple = MutableLiveData<String>("ANC")
-    val content = MutableLiveData<DiaryContent>()
+    val content = MutableLiveData<List<DiaryContent>>(diaryContent())
 
-    fun diaryContent(position: Int) {
-        val comment = diaryList.value!!.get(position).comment
-        val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
-
-        content.value = DiaryContent(
-            diaryList.value?.get(position)!!.recordedDate,
-            rowComment,
-            diaryList.value?.get(position)!!.pngFileName,
-            Timestamp(System.currentTimeMillis()),
-            diaryList.value?.get(position)!!.videoFileName,
-            diaryList.value?.get(position)!!.videoPath
-        )
+    fun diaryContent(): List<DiaryContent>{
+        val result = mutableListOf<DiaryContent>()
+        for(i in 0..diaryList.value!!.size){
+            val comment = diaryList.value!!.get(i).comment
+            val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
+            val content = DiaryContent(
+                diaryList.value?.get(i)!!.recordedDate,
+                rowComment,
+                diaryList.value?.get(i)!!.pngFileName,
+                Timestamp(System.currentTimeMillis()),
+                diaryList.value?.get(i)!!.videoFileName,
+                diaryList.value?.get(i)!!.videoPath
+            )
+            result.add(i, content)
+        }
+        return result
     }
+    //onBindからpositionを受け取らず、diaryListの要素数によってリストを生成
+    val contentList: LiveData<List<DiaryContent>> = diaryList.map {
+        for(i in 0..diaryList.value!!.size){
 
+    }
+    }
 
     fun onClickRow(position: Int) {
         selectedPosition.value = position
@@ -74,7 +78,6 @@ class DiaryViewModel() : ViewModel() {
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         viewModelScope.launch {
-            Log.d("ビデオURえる", diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
             if (diaryList.value != null && selectedPosition.value != null) {
                 Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
                         .onSuccess {

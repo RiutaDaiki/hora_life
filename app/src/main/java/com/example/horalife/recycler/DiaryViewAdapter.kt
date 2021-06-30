@@ -9,11 +9,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.horalife.R
-import com.example.horalife.entity.DiaryContent
 import com.example.horalife.viewModel.DiaryViewModel
 import com.example.horalife.databinding.ItemDiaryBinding
+import com.example.horalife.entity.DiaryContent
 import java.sql.Timestamp
-
 
 class DiaryViewAdapter(
     private val lifecycleOwner: LifecycleOwner,
@@ -32,15 +31,16 @@ class DiaryViewAdapter(
 
         binding = ItemDiaryBinding.inflate(inflater, parent, false)
         binding.lifecycleOwner = lifecycleOwner
+
         return DiaryViewHolder(binding)
     }
 
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-
-        viewModel.diaryContent(position)
-//        holder.binding.content = viewModel.diaryContent(position)
+        binding.viewmodel = viewModel
+        binding.position = position
+        
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }

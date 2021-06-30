@@ -2,6 +2,7 @@ package com.example.horalife.viewModel
 
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horalife.entity.User
@@ -20,7 +21,8 @@ class YouViewModel : ViewModel() {
     }
 
     private val user = Firebase.auth.currentUser
-
+    val displayName = MutableLiveData<String>(user.displayName)
+    val email = MutableLiveData<String>(user.email)
     private val _isDeleteUser = MutableSharedFlow<Boolean>()
     val isDeleteUser: Flow<Boolean> = _isDeleteUser
     fun deleteUser() {

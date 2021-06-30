@@ -8,6 +8,9 @@
             name="content"
             type="com.example.horalife.entity.DiaryContent" />
         <variable
+            name="position"
+            type="Integer" />
+        <variable
             name="viewmodel"
             type="com.example.horalife.viewModel.DiaryViewModel" />
 
@@ -33,7 +36,7 @@
                 android:id="@+id/date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewmodel.sammple}"
+                android:text="@{viewmodel.content.get(position).recordedDate}"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +54,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:paddingRight="16dp"
-            android:text="@{content.comment}"
+            android:text="@{viewmodel.content.comment}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date_area" />
 

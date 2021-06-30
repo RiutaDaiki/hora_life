@@ -33,6 +33,7 @@ class DiaryFragment : Fragment() {
 
         if (user != null) {
 
+
             val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
                 viewModel.onClickRow(it)
                 findNavController().navigate(R.id.action_diary_to_diary_detail)
