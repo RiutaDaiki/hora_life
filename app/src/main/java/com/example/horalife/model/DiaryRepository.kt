@@ -59,6 +59,7 @@ class DiaryRepository {
         return runCatching {
             suspendCoroutine { continuation ->
                     if (user == null) {
+                        
                     db.collection(users)
                             .document(alreadyLoginUser.uid)
                             .collection(diaries)

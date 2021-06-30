@@ -44,26 +44,25 @@ class DiaryViewModel() : ViewModel() {
 
     fun diaryContent(): List<DiaryContent>{
         val result = mutableListOf<DiaryContent>()
-        for(i in 0..diaryList.value!!.size){
-            val comment = diaryList.value!!.get(i).comment
-            val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
-            val content = DiaryContent(
-                diaryList.value?.get(i)!!.recordedDate,
-                rowComment,
-                diaryList.value?.get(i)!!.pngFileName,
-                Timestamp(System.currentTimeMillis()),
-                diaryList.value?.get(i)!!.videoFileName,
-                diaryList.value?.get(i)!!.videoPath
-            )
-            result.add(i, content)
-        }
-        return result
-    }
-    //onBindからpositionを受け取らず、diaryListの要素数によってリストを生成
-    val contentList: LiveData<List<DiaryContent>> = diaryList.map {
-        for(i in 0..diaryList.value!!.size){
+        setList{}
 
-    }
+        val rowNumber = diaryList.value?.size ?: 0
+            for(i in 0..rowNumber){
+                val comment = diaryList.value!!.get(i).comment
+                val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
+                val content = DiaryContent(
+                    diaryList.value?.get(i)!!.recordedDate,
+                    rowComment,
+                    diaryList.value?.get(i)!!.pngFileName,
+                    Timestamp(System.currentTimeMillis()),
+                    diaryList.value?.get(i)!!.videoFileName,
+                    diaryList.value?.get(i)!!.videoPath
+                )
+                result.add(i, content)
+            }
+
+
+        return result
     }
 
     fun onClickRow(position: Int) {
