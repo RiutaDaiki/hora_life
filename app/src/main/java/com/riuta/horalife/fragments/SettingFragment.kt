@@ -47,9 +47,21 @@ class SettingFragment : Fragment() {
 
         binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             when(isChecked) {
-                true -> setDefaultNightMode(MODE_NIGHT_YES)
-                false -> setDefaultNightMode(MODE_NIGHT_NO)
+                true -> {
+                    setDefaultNightMode(MODE_NIGHT_YES)
+                    viewModel.isDarkTheme.value = true
+                }
+                false -> {
+                    setDefaultNightMode(MODE_NIGHT_NO)
+                    viewModel.isDarkTheme.value = false
+                }
             }
+        }
+
+        viewModel.isDarkTheme.observe(viewLifecycleOwner){
+            //fireStoreのsetting更新
+            viewModel.updateTheme(it)
+            println(1)
         }
 
 

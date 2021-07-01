@@ -37,15 +37,6 @@ class ExampleFragment : Fragment() {
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
 
-        when(isDarkTheme()){
-            true -> viewModel.isDarkTheme.value = true
-            false ->{
-                viewModel.isDarkTheme.value = false
-                println("テーマ")
-            }
-
-        }
-
         return binding.root
     }
 
@@ -59,11 +50,6 @@ class ExampleFragment : Fragment() {
         player.isLooping = false
         player.start()
         player.setOnCompletionListener { mp -> player.stop() }
-    }
-
-    fun isDarkTheme(): Boolean {
-        return resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 
 }

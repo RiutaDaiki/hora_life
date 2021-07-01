@@ -1,5 +1,6 @@
 package com.riuta.horalife.model
 
+import android.text.BoringLayout
 import android.util.Log
 import com.riuta.horalife.dataClass.User
 import com.google.firebase.auth.FirebaseAuth
@@ -16,19 +17,33 @@ class YouRepository {
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private val users = "users"
 
-    fun createUser(user: User) {
+    fun createUser(user: User, userSetting: Setting) {
         db.collection(users).document(user.userId)
             .set(user)
             .addOnSuccessListener {
-                createUserSetting(user.userId)
+                createUserSetting(user.userId, userSetting)
             }
 
     }
 
-    fun createUserSetting(id: String){
-//        db.collection(users).document(id)
-//            .collection("setting")
-//            .add()
+    fun createUserSetting(id: String, userSetting: Setting){
+        db.collection(users).document(id)
+            .collection("setting")
+            .add(userSetting)
+    }
+
+    fun updateTheme(isDarkTheme: Boolean){
+        println(5)
+        db.collection(users).document(currentUser.uid)
+            .collection("setting")
+            .add(Setting(isDarkTheme))
+            .addOnSuccessListener {
+                println(3)
+            }
+            .addOnFailureListener {
+                println(it.toString())
+                println(4)
+            }
     }
 
     fun checkExisting(userId: String, existing: (Boolean) -> Unit) {

@@ -7,6 +7,7 @@ import com.riuta.horalife.dataClass.User
 import com.riuta.horalife.model.YouRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.riuta.horalife.dataClass.Setting
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -32,9 +33,15 @@ class YouViewModel : ViewModel() {
 
     val isDarkTheme = MutableLiveData<Boolean>()
 
+    fun updateTheme(isDarkTheme: Boolean){
+        Repository.repository.updateTheme(isDarkTheme)
+        println(2)
+    }
+
     fun callCreateUser(email: String, id: String, name: String) {
         val newUser = User(email, id, name)
-        Repository.repository.createUser(newUser)
+        val setting = Setting(isDarkTheme.value?: false)
+        Repository.repository.createUser(newUser, setting)
     }
 
     fun callExisting(userId: String): Boolean {
