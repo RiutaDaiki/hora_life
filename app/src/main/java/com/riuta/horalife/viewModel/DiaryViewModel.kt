@@ -27,7 +27,6 @@ class DiaryViewModel() : ViewModel() {
 
     val currentAccount = MutableLiveData<FirebaseUser>()
 
-
     fun setList(fallBack: () -> Unit) {
         viewModelScope.launch {
             Repository.repository.readDiaryInfo(currentAccount.value)
@@ -48,25 +47,25 @@ class DiaryViewModel() : ViewModel() {
     val content = MutableLiveData<List<DiaryContent>>(diaryContent())
 
     fun diaryContent(): List<DiaryContent>{
-        val result = mutableListOf<DiaryContent>()
-        setList{
-            println("えらぁぁぁっl")
-        }
 
+        setList {  }
+        Log.d("debug", diaryList.value?.get(0)?.recordedDate ?: "ぬるぽ")
+        val list = mutableListOf<DiaryContent>()
         val rowNumber = diaryList.value?.size ?: 0
-        for(i in 0..rowNumber){
+        for(i in 0 until rowNumber){
             val comment = diaryList.value?.get(i)?.comment ?: ""
             val rowComment = if (comment.length < 40) comment else comment.substring(0..41)
-            val content = DiaryContent(
-                diaryList.value?.get(i)!!.recordedDate,
+            val rowContent = DiaryContent(
+                diaryList.value?.get(i)?.recordedDate ?: "",
                 rowComment,
-                diaryList.value?.get(i)!!.pngFileName,
+                diaryList.value?.get(i)?.pngFileName ?: "",
                 Timestamp(System.currentTimeMillis()),
-                diaryList.value?.get(i)!!.videoFileName,
-                diaryList.value?.get(i)!!.videoPath
+                diaryList.value?.get(i)?.videoFileName ?: "",
+                diaryList.value?.get(i)?.videoPath ?: ""
             )
-            result.add(i, content)
+            list.add(i, rowContent)
         }
+        val result: List<DiaryContent> = list
         return result
     }
 
@@ -82,7 +81,6 @@ class DiaryViewModel() : ViewModel() {
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         viewModelScope.launch {
-            Log.d("ビデオURえる", diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
             if (diaryList.value != null && selectedPosition.value != null) {
                 Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
                         .onSuccess {

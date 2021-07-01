@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
@@ -38,10 +39,11 @@ class DiaryViewAdapter(
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
         binding.viewmodel = viewModel
         binding.position = position
-        viewModel.setList {  }
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }
+        Log.d("デバッグ", viewModel.diaryList.value!!.get(0).recordedDate)
+
 
         viewModel.getBitMap(position) {
             holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())
