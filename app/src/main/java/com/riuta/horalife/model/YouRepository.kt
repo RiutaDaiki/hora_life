@@ -6,18 +6,29 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.riuta.horalife.dataClass.Setting
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
 class YouRepository {
     private val db = Firebase.firestore
-    private val user = FirebaseAuth.getInstance().currentUser
+    private val currentUser = FirebaseAuth.getInstance().currentUser
     private val users = "users"
 
     fun createUser(user: User) {
         db.collection(users).document(user.userId)
             .set(user)
+            .addOnSuccessListener {
+                createUserSetting(user.userId)
+            }
+
+    }
+
+    fun createUserSetting(id: String){
+//        db.collection(users).document(id)
+//            .collection("setting")
+//            .add()
     }
 
     fun checkExisting(userId: String, existing: (Boolean) -> Unit) {
@@ -39,7 +50,7 @@ class YouRepository {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
 
-                user.delete()
+                currentUser.delete()
                     .addOnSuccessListener {
                         continuation.resume(true)
                     }
@@ -58,7 +69,7 @@ class YouRepository {
     private suspend fun sendVerifyFun(): Result<Boolean> {
         return kotlin.runCatching {
             suspendCoroutine { continuation ->
-                user.sendEmailVerification()
+                currentUser.sendEmailVerification()
                     .addOnSuccessListener {
                         continuation.resume(true)
                     }
