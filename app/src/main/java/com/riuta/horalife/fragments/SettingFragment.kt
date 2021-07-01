@@ -1,10 +1,14 @@
 package com.riuta.horalife.fragments
 
+import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +19,7 @@ import com.riuta.horalife.dialog.AccountDeleteDialog
 import com.riuta.horalife.viewModel.YouViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.riuta.horalife.MainActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 
@@ -36,8 +41,20 @@ class SettingFragment : Fragment() {
         if (user == null) {
             binding.constraintLayout.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
             binding.notLoginText.text = resources.getString(R.string.no_setting)
-
         }
+        binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            when(isChecked) {
+                true -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                false -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+
+
+            }
+        }
+        when(Configuration.UI_MODE_NIGHT_MASK){
+            Configuration.UI_MODE_NIGHT_NO -> binding.themeSwitch.isChecked = false
+            Configuration.UI_MODE_NIGHT_YES -> binding.themeSwitch.isChecked = true
+        }
+
 
         binding.deleteText.setOnClickListener {
             lifecycleScope.launch {
