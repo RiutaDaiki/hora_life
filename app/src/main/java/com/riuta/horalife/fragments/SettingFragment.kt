@@ -1,5 +1,6 @@
 package com.riuta.horalife.fragments
 
+import android.app.Activity
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
@@ -44,17 +45,15 @@ class SettingFragment : Fragment() {
         }
         binding.themeSwitch.setOnCheckedChangeListener { _, isChecked ->
             when(isChecked) {
-                true -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-                false -> AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-
-
+                true -> setDefaultNightMode(MODE_NIGHT_YES)
+                false -> setDefaultNightMode(MODE_NIGHT_NO)
             }
         }
-        when(Configuration.UI_MODE_NIGHT_MASK){
-            Configuration.UI_MODE_NIGHT_NO -> binding.themeSwitch.isChecked = false
-            Configuration.UI_MODE_NIGHT_YES -> binding.themeSwitch.isChecked = true
-        }
 
+        when(isDarkTheme()){
+            true -> binding.themeSwitch.isChecked = true
+            false -> binding.themeSwitch.isChecked = false
+        }
 
         binding.deleteText.setOnClickListener {
             lifecycleScope.launch {
@@ -84,6 +83,11 @@ class SettingFragment : Fragment() {
             }
         }
         return binding.root
+    }
+
+    fun isDarkTheme(): Boolean {
+        return resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
     }
 
     private fun navToYou() {
