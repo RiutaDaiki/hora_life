@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,17 @@ class ExampleFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
+
+        fun dark(){
+            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+            val highScore = sharedPref.getBoolean(getString(R.string.current_display_theme), false)
+            Log.d("取得できていろ！", highScore.toString())
+        }
+
+        dark()
+
+
+
 
         return binding.root
     }

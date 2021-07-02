@@ -33,15 +33,9 @@ class YouViewModel : ViewModel() {
 
     val isDarkTheme = MutableLiveData<Boolean>()
 
-    fun updateTheme(isDarkTheme: Boolean){
-        Repository.repository.updateTheme(isDarkTheme)
-        println(2)
-    }
-
     fun callCreateUser(email: String, id: String, name: String) {
         val newUser = User(email, id, name)
-        val setting = Setting(isDarkTheme.value?: false)
-        Repository.repository.createUser(newUser, setting)
+        Repository.repository.createUser(newUser)
     }
 
     fun callExisting(userId: String): Boolean {

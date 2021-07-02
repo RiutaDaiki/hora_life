@@ -1,5 +1,7 @@
 package com.riuta.horalife.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,8 +62,9 @@ class SettingFragment : Fragment() {
 
         viewModel.isDarkTheme.observe(viewLifecycleOwner){
             //fireStoreのsetting更新
-            viewModel.updateTheme(it)
-            println(1)
+            lifecycleScope.launch(Dispatchers.IO) {
+                updateThemeSetting(it)
+            }
         }
 
 
@@ -87,13 +90,22 @@ class SettingFragment : Fragment() {
                     viewModel.sendVerify()
                     lifecycleScope.launch {
                         viewModel.isSendVerifyMail.collect {
-                            if (it) Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
+                            if (it) Toast.makeText(context, resources.getString(R.string.send_verify_email), Toast.LENGTH_LONG).show()
                         }
                     }
                 } else Toast.makeText(context, "メールアドレス認証済み", Toast.LENGTH_SHORT).show()
             }
         }
         return binding.root
+    }
+
+    @SuppressLint("CommitPrefEdits")
+    fun updateThemeSetting(isDarkTheme: Boolean){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putBoolean(getString(R.string.current_display_theme), isDarkTheme)
+            commit()
+        }
     }
 
     fun isDarkTheme(): Boolean {

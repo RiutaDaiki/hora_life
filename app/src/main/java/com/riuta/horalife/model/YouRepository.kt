@@ -17,33 +17,9 @@ class YouRepository {
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private val users = "users"
 
-    fun createUser(user: User, userSetting: Setting) {
+    fun createUser(user: User) {
         db.collection(users).document(user.userId)
             .set(user)
-            .addOnSuccessListener {
-                createUserSetting(user.userId, userSetting)
-            }
-
-    }
-
-    fun createUserSetting(id: String, userSetting: Setting){
-        db.collection(users).document(id)
-            .collection("setting")
-            .add(userSetting)
-    }
-
-    fun updateTheme(isDarkTheme: Boolean){
-        println(5)
-        db.collection(users).document(currentUser.uid)
-            .collection("setting")
-            .add(Setting(isDarkTheme))
-            .addOnSuccessListener {
-                println(3)
-            }
-            .addOnFailureListener {
-                println(it.toString())
-                println(4)
-            }
     }
 
     fun checkExisting(userId: String, existing: (Boolean) -> Unit) {
