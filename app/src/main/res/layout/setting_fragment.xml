@@ -52,7 +52,7 @@
             android:paddingRight="8sp"
             android:paddingBottom="8sp"
             android:text="アカウントを削除"
-            android:textColor="@color/black"
+            android:textColor="@color/text"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/account_text"
             app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -76,7 +76,7 @@
             android:paddingRight="8sp"
             android:paddingBottom="8sp"
             android:text="認証用メールを送信"
-            android:textColor="@color/black"
+            android:textColor="@color/text"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/delete_text"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
@@ -120,7 +120,7 @@
             android:layout_height="37dp"
             android:foreground="?attr/selectableItemBackground"
             android:text="ダークモード"
-            android:textColor="@color/black"
+            android:textColor="@color/text"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/theme_text"
