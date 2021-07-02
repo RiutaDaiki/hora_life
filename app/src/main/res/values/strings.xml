@@ -19,6 +19,9 @@
     <string name="no_setting">設定する項目がありません、\n ログインしてください</string>
     <string name="current_display_theme">現在のテーマ</string>
     <string name="send_verify_email">認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください</string>
+    <string name="deleted_account">アカウントを削除しました</string>
+    <string name="fail_to_delete_account">アカウントを削除できませんでした。再度ログイン後削除してください</string>
+    <string name="verified_email">メールアドレス認証済み</string>
 
 
 </resources>

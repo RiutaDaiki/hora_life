@@ -61,29 +61,27 @@ class SettingFragment : Fragment() {
         }
 
         viewModel.isDarkTheme.observe(viewLifecycleOwner){
-            //fireStoreのsetting更新
             lifecycleScope.launch(Dispatchers.IO) {
                 updateThemeSetting(it)
             }
         }
-
-
 
         binding.deleteText.setOnClickListener {
             lifecycleScope.launch {
                 val dialog = AccountDeleteDialog()
                 dialog.show(parentFragmentManager, null)
                 viewModel.isDeleteUser.collect {
-                    if (it) Toast.makeText(context, "アカウントを削除しました", Toast.LENGTH_LONG).show()
+                    if (it) Toast.makeText(context, resources.getString(R.string.deleted_account), Toast.LENGTH_LONG).show()
                     else Toast.makeText(
                         context,
-                        "アカウントを削除できませんでした。再度ログイン後削除してください",
+                        resources.getString(R.string.fail_to_delete_account),
                         Toast.LENGTH_LONG
                     ).show()
                     navToYou()
                 }
             }
         }
+
         binding.verifyText.setOnClickListener {
             if(user != null){
                 if (!user.isEmailVerified) {
@@ -93,9 +91,10 @@ class SettingFragment : Fragment() {
                             if (it) Toast.makeText(context, resources.getString(R.string.send_verify_email), Toast.LENGTH_LONG).show()
                         }
                     }
-                } else Toast.makeText(context, "メールアドレス認証済み", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(context, resources.getString(R.string.verified_email), Toast.LENGTH_SHORT).show()
             }
         }
+        
         return binding.root
     }
 
