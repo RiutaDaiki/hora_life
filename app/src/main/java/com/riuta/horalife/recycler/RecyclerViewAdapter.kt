@@ -33,5 +33,3 @@ class RecyclerViewAdapter(private val displayData: List<Sound>, private  val lif
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 }
-
-//item_recycler.xmlのTextViewのTextの記述を見る

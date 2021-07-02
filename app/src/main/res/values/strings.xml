@@ -22,6 +22,4 @@
     <string name="deleted_account">アカウントを削除しました</string>
     <string name="fail_to_delete_account">アカウントを削除できませんでした。再度ログイン後削除してください</string>
     <string name="verified_email">メールアドレス認証済み</string>
-
-
 </resources>

@@ -9,10 +9,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.riuta.horalife.R
-import com.riuta.horalife.dataClass.DiaryContent
 import com.riuta.horalife.viewModel.DiaryViewModel
 import com.riuta.horalife.databinding.ItemDiaryBinding
-import java.sql.Timestamp
 
 
 class DiaryViewAdapter(
@@ -49,7 +47,7 @@ class DiaryViewAdapter(
         holder.binding.lifecycleOwner = lifecycleOwner
     }
 
-    fun createNoImage(): Bitmap {
+    private fun createNoImage(): Bitmap {
         val drawable = ContextCompat.getDrawable(context, R.drawable.no_image)
         val bitmapDrawable = drawable as BitmapDrawable
         return bitmapDrawable.bitmap

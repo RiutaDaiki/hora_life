@@ -31,7 +31,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/ExampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/ExampleFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

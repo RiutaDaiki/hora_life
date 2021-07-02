@@ -94,7 +94,7 @@ class SettingFragment : Fragment() {
                 } else Toast.makeText(context, resources.getString(R.string.verified_email), Toast.LENGTH_SHORT).show()
             }
         }
-        
+
         return binding.root
     }
 
