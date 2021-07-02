@@ -32,19 +32,12 @@ class ExampleFragment : Fragment() {
     lateinit var player: MediaPlayer
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = ExampleFragmentBinding.inflate(layoutInflater, container, false)
-
         binding.lifecycleOwner = viewLifecycleOwner
-
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
 
-
-
         setTheme()
-
-
-
 
         return binding.root
     }
@@ -61,7 +54,7 @@ class ExampleFragment : Fragment() {
         player.setOnCompletionListener { mp -> player.stop() }
     }
 
-    fun setTheme(){
+    private fun setTheme(){
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         val isDarkTHeme = sharedPref.getBoolean(getString(R.string.current_display_theme), false)
         when(isDarkTHeme){
