@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,13 +39,9 @@ class ExampleFragment : Fragment() {
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
 
-        fun dark(){
-            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-            val highScore = sharedPref.getBoolean(getString(R.string.current_display_theme), false)
-            Log.d("取得できていろ！", highScore.toString())
-        }
 
-        dark()
+
+        setTheme()
 
 
 
@@ -64,4 +61,11 @@ class ExampleFragment : Fragment() {
         player.setOnCompletionListener { mp -> player.stop() }
     }
 
+    fun setTheme(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val isDarkTHeme = sharedPref.getBoolean(getString(R.string.current_display_theme), false)
+        when(isDarkTHeme){
+            true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+    }
 }
