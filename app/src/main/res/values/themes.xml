@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.HORALIFE" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/oudoiro</item>
-        <item name="colorPrimaryVariant">@color/oudoiro_dark</item>
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorPrimaryVariant">@color/sub_theme_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,6 +12,5 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-<!--        <item name="rowBar">@colo</item>-->
     </style>
 </resources>

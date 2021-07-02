@@ -31,9 +31,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/ExampleFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/ExampleFragment.kt" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/menu_selector.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/diary_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/diary_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/item_diary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/item_diary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/setting_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/setting_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/you_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/you_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values-night/color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values-night/color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/themes.xml" afterDir="false" />
+>>>>>>> darkmode
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,9 +92,9 @@
       <list>
         <option value="Kotlin File" />
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
-        <option value="valueResourceFile" />
         <option value="Kotlin Class" />
+        <option value="valueResourceFile" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -94,7 +107,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="dataBinding" />
+        <entry key="$PROJECT_DIR$/.." value="flow" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -108,7 +121,11 @@
   <component name="PropertiesComponent">
     <property name="ApkExportedModule" value="HORA_LIFE.app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="SerialNumber@CHR7N18928013161" />
+<<<<<<< HEAD
     <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-07-02T06:32:25.433534Z" />
+=======
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-07-02T06:38:13.720285Z" />
+>>>>>>> darkmode
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
@@ -255,13 +272,18 @@
       <screen x="-172" y="-1055" width="1920" height="1055" />
     </state>
     <state x="257" y="-769" key="AndroidCreateResourceDirectoryDialog/1748.-1055.1920.1055/0.25.1440.875/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624337800523" />
-    <state x="376" y="-763" key="AndroidCreateResourceFileDialog" timestamp="1624337873978">
-      <screen x="-172" y="-1055" width="1920" height="1055" />
+    <state x="102" y="-763" key="AndroidCreateResourceFileDialog" timestamp="1625209066114">
+      <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
+    <state x="102" y="-763" key="AndroidCreateResourceFileDialog/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625209066114" />
     <state x="376" y="-763" key="AndroidCreateResourceFileDialog/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623645584202" />
     <state x="376" y="-763" key="AndroidCreateResourceFileDialog/1748.-1055.1920.1055/0.25.1440.875/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624337873978" />
     <state x="376" y="-781" key="AndroidCreateResourceFileDialog/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623033340031" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.bottom" timestamp="1625207590306">
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.bottom" timestamp="1625209669455">
+>>>>>>> darkmode
       <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="814" key="GridCell.Tab.0.bottom/-446.-1080.1920.1080/0.0.1440.900/1474.-1080.1920.1080@-446.-1080.1920.1080" timestamp="1625145187404" />
@@ -273,8 +295,13 @@
     <state width="1640" height="123" key="GridCell.Tab.0.bottom/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140072" />
     <state width="1878" height="317" key="GridCell.Tab.0.bottom/0.25.1440.804/-446.-1055.1920.1055/1474.-1055.1920.1055@-446.-1055.1920.1055" timestamp="1625130060945" />
     <state width="1871" height="315" key="GridCell.Tab.0.bottom/0.25.1440.804/1725.-1055.1920.1055/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624866430729" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.bottom/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625207590306" />
     <state width="1877" height="367" key="GridCell.Tab.0.bottom/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625199903428" />
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.bottom/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625209364225" />
+    <state width="0" height="0" key="GridCell.Tab.0.bottom/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625209669455" />
+>>>>>>> darkmode
     <state width="1871" height="231" key="GridCell.Tab.0.bottom/0.25.1440.875/1725.-1055.1920.970/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624856742208" />
     <state width="1640" height="837" key="GridCell.Tab.0.bottom/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006779" />
     <state width="1878" height="413" key="GridCell.Tab.0.bottom/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891129" />
@@ -289,7 +316,11 @@
     <state width="1878" height="369" key="GridCell.Tab.0.bottom/1748.-1055.1920.970/0.25.1440.875/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624241059265" />
     <state width="1878" height="484" key="GridCell.Tab.0.bottom/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624242648923" />
     <state width="1398" height="245" key="GridCell.Tab.0.bottom/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@0.0.1440.900" timestamp="1622780295829" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.center" timestamp="1625207590305">
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.center" timestamp="1625209669454">
+>>>>>>> darkmode
       <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="814" key="GridCell.Tab.0.center/-446.-1080.1920.1080/0.0.1440.900/1474.-1080.1920.1080@-446.-1080.1920.1080" timestamp="1625145187402" />
@@ -301,8 +332,13 @@
     <state width="1640" height="123" key="GridCell.Tab.0.center/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140071" />
     <state width="1878" height="317" key="GridCell.Tab.0.center/0.25.1440.804/-446.-1055.1920.1055/1474.-1055.1920.1055@-446.-1055.1920.1055" timestamp="1625130060945" />
     <state width="1871" height="315" key="GridCell.Tab.0.center/0.25.1440.804/1725.-1055.1920.1055/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624866430728" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.center/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625207590305" />
     <state width="1877" height="367" key="GridCell.Tab.0.center/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625199903427" />
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.center/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625209364224" />
+    <state width="0" height="0" key="GridCell.Tab.0.center/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625209669454" />
+>>>>>>> darkmode
     <state width="1871" height="231" key="GridCell.Tab.0.center/0.25.1440.875/1725.-1055.1920.970/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624856742207" />
     <state width="1640" height="837" key="GridCell.Tab.0.center/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006779" />
     <state width="1878" height="413" key="GridCell.Tab.0.center/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891127" />
@@ -317,7 +353,11 @@
     <state width="1878" height="369" key="GridCell.Tab.0.center/1748.-1055.1920.970/0.25.1440.875/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624241059263" />
     <state width="1878" height="484" key="GridCell.Tab.0.center/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624242648921" />
     <state width="1398" height="245" key="GridCell.Tab.0.center/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@0.0.1440.900" timestamp="1622780295828" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.left" timestamp="1625207590304">
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.left" timestamp="1625209669454">
+>>>>>>> darkmode
       <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="814" key="GridCell.Tab.0.left/-446.-1080.1920.1080/0.0.1440.900/1474.-1080.1920.1080@-446.-1080.1920.1080" timestamp="1625145187401" />
@@ -329,8 +369,13 @@
     <state width="1640" height="123" key="GridCell.Tab.0.left/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140070" />
     <state width="1878" height="317" key="GridCell.Tab.0.left/0.25.1440.804/-446.-1055.1920.1055/1474.-1055.1920.1055@-446.-1055.1920.1055" timestamp="1625130060944" />
     <state width="1871" height="315" key="GridCell.Tab.0.left/0.25.1440.804/1725.-1055.1920.1055/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624866430727" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.left/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625207590304" />
     <state width="1877" height="367" key="GridCell.Tab.0.left/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625199903426" />
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.left/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625209364223" />
+    <state width="0" height="0" key="GridCell.Tab.0.left/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625209669454" />
+>>>>>>> darkmode
     <state width="1871" height="231" key="GridCell.Tab.0.left/0.25.1440.875/1725.-1055.1920.970/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624856742206" />
     <state width="1640" height="837" key="GridCell.Tab.0.left/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006778" />
     <state width="1878" height="413" key="GridCell.Tab.0.left/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891126" />
@@ -345,7 +390,11 @@
     <state width="1878" height="369" key="GridCell.Tab.0.left/1748.-1055.1920.970/0.25.1440.875/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624241059261" />
     <state width="1878" height="484" key="GridCell.Tab.0.left/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1624242648920" />
     <state width="1398" height="245" key="GridCell.Tab.0.left/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@0.0.1440.900" timestamp="1622780295827" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.right" timestamp="1625207590306">
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.right" timestamp="1625209669455">
+>>>>>>> darkmode
       <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
     <state width="1878" height="814" key="GridCell.Tab.0.right/-446.-1080.1920.1080/0.0.1440.900/1474.-1080.1920.1080@-446.-1080.1920.1080" timestamp="1625145187403" />
@@ -357,8 +406,13 @@
     <state width="1640" height="123" key="GridCell.Tab.0.right/0.25.1440.801/1748.-1055.1920.1055/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624262140071" />
     <state width="1878" height="317" key="GridCell.Tab.0.right/0.25.1440.804/-446.-1055.1920.1055/1474.-1055.1920.1055@-446.-1055.1920.1055" timestamp="1625130060945" />
     <state width="1871" height="315" key="GridCell.Tab.0.right/0.25.1440.804/1725.-1055.1920.1055/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624866430728" />
+<<<<<<< HEAD
     <state width="1878" height="328" key="GridCell.Tab.0.right/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625207590306" />
     <state width="1877" height="367" key="GridCell.Tab.0.right/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625199903427" />
+=======
+    <state width="0" height="0" key="GridCell.Tab.0.right/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.970@-446.-1055.1920.1055" timestamp="1625209364225" />
+    <state width="0" height="0" key="GridCell.Tab.0.right/0.25.1440.875/-446.-1055.1920.1055/1474.-1055.1920.971@-446.-1055.1920.1055" timestamp="1625209669455" />
+>>>>>>> darkmode
     <state width="1871" height="231" key="GridCell.Tab.0.right/0.25.1440.875/1725.-1055.1920.970/-195.-1055.1920.1055@-195.-1055.1920.1055" timestamp="1624856742207" />
     <state width="1640" height="837" key="GridCell.Tab.0.right/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624264006779" />
     <state width="1878" height="413" key="GridCell.Tab.0.right/0.25.1440.875/1748.-1055.1920.970/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623209891128" />
