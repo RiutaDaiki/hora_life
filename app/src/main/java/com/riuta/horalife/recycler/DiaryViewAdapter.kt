@@ -37,8 +37,8 @@ class DiaryViewAdapter(
     override fun getItemCount(): Int = viewModel.diaryList.value?.size ?: 0
 
     override fun onBindViewHolder(holder: DiaryViewHolder, position: Int) {
-        binding.viewmodel = viewModel
-        binding.position = position
+        holder.binding.viewmodel = viewModel
+        holder.binding.position = position
         holder.binding.wrapper.setOnClickListener {
             onClickRow(position)
         }

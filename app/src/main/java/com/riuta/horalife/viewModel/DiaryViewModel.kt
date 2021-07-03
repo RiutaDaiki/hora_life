@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.sql.Timestamp
 
-
 class DiaryViewModel() : ViewModel() {
 
     object Repository {
