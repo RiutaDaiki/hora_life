@@ -44,7 +44,6 @@ class DiaryViewAdapter(
         }
         Log.d("デバッグ", viewModel.diaryList.value!!.get(0).recordedDate)
 
-
         viewModel.getBitMap(position) {
             holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())
         }

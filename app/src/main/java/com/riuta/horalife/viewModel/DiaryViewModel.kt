@@ -31,9 +31,11 @@ class DiaryViewModel() : ViewModel() {
         viewModelScope.launch {
             Repository.repository.readDiaryInfo(currentAccount.value)
                     .onSuccess {
+                        println("setList()成功")
                         diaryList.value = it
                     }
                     .onFailure {
+                        print("setList()失敗")
                         fallBack
                     }
         }
@@ -48,7 +50,6 @@ class DiaryViewModel() : ViewModel() {
 
     fun diaryContent(): List<DiaryContent>{
 
-        setList {  }
         Log.d("debug", diaryList.value?.get(0)?.recordedDate ?: "ぬるぽ")
         val list = mutableListOf<DiaryContent>()
         val rowNumber = diaryList.value?.size ?: 0
