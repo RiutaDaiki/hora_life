@@ -36,7 +36,7 @@ class DiaryDetailFragment() : Fragment(), CoroutineScope {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.delete -> {
                 val dialog = ConfirmDeleteDialog()
                 dialog.show(parentFragmentManager, null)

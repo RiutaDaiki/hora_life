@@ -20,7 +20,6 @@ import com.riuta.horalife.viewModel.YouViewModel
 
 class ExampleFragment : Fragment() {
     private lateinit var adapter: RecyclerViewAdapter
-    private val viewModel: YouViewModel by viewModels()
     val dataList = listOf<Sound>(Sound(R.string.sirabe, R.raw.sirabe),
             Sound(R.string.otsu, R.raw.otsu), Sound(R.string.kan, R.raw.kan),
             Sound(R.string.yuri, R.raw.yuri), Sound(R.string.tome, R.raw.tome),

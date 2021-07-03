@@ -52,5 +52,4 @@ class DiaryFragment : Fragment() {
     fun showEntries() {
         findNavController().navigate(R.id.action_nav_diary_to_entriesFragment)
     }
-
 }
