@@ -39,7 +39,6 @@ class SettingFragment : Fragment() {
         val user = Firebase.auth.currentUser
         if (user == null) {
             binding.constraintLayout.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
-            binding.notLoginText.text = resources.getString(R.string.no_setting)
         }
 
         when(isDarkTheme()){
