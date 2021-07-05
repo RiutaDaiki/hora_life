@@ -3,8 +3,8 @@ package com.riuta.horalife.model
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
-import com.riuta.horalife.dataClass.DiaryContent
-import com.riuta.horalife.dataClass.DiaryDetailContent
+import com.riuta.horalife.entity.DiaryContent
+import com.riuta.horalife.entity.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query

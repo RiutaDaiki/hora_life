@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
-import com.riuta.horalife.dataClass.DiaryContent
+import com.riuta.horalife.entity.DiaryContent
 import com.riuta.horalife.model.DiaryRepository
-import com.riuta.horalife.dataClass.DiaryDetailContent
+import com.riuta.horalife.entity.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.sql.Timestamp

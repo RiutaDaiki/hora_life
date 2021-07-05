@@ -3,11 +3,10 @@ package com.riuta.horalife.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.riuta.horalife.dataClass.User
+import com.riuta.horalife.entity.User
 import com.riuta.horalife.model.YouRepository
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.riuta.horalife.dataClass.Setting
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow

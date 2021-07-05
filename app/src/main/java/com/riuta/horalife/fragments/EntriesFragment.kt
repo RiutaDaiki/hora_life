@@ -21,7 +21,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.riuta.horalife.R
 import com.riuta.horalife.databinding.EntriesFragmentBinding
-import com.riuta.horalife.dataClass.DiaryContent
+import com.riuta.horalife.entity.DiaryContent
 import com.riuta.horalife.viewModel.DiaryViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

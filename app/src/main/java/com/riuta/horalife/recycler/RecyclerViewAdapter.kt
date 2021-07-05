@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.riuta.horalife.dataClass.Sound
+import com.riuta.horalife.entity.Sound
 import com.riuta.horalife.databinding.ItemExampleRecyclerBinding
 import com.riuta.horalife.fragments.ExampleFragment
 

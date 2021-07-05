@@ -1,13 +1,11 @@
 package com.riuta.horalife.model
 
-import android.text.BoringLayout
 import android.util.Log
-import com.riuta.horalife.dataClass.User
+import com.riuta.horalife.entity.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.riuta.horalife.dataClass.Setting
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine

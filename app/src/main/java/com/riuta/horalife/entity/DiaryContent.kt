@@ -1,4 +1,4 @@
-package com.riuta.horalife.dataClass
+package com.riuta.horalife.entity
 
 import java.sql.Timestamp
 

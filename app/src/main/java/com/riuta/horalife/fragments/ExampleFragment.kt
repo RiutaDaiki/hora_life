@@ -1,22 +1,18 @@
 package com.riuta.horalife.fragments
 
 import android.content.Context
-import android.content.res.Configuration
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.riuta.horalife.R
-import com.riuta.horalife.dataClass.Sound
+import com.riuta.horalife.entity.Sound
 import com.riuta.horalife.databinding.ExampleFragmentBinding
 import com.riuta.horalife.recycler.RecyclerViewAdapter
-import com.riuta.horalife.viewModel.YouViewModel
 
 class ExampleFragment : Fragment() {
     private lateinit var adapter: RecyclerViewAdapter

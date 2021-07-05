@@ -1,4 +1,4 @@
-package com.riuta.horalife.dataClass
+package com.riuta.horalife.entity
 
 data class DiaryDetailContent(val diaryId: String,
                               val recordedDate: String,
