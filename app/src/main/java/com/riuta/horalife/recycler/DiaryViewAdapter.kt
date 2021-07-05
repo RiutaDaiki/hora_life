@@ -3,11 +3,14 @@ package com.riuta.horalife.recycler
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.riuta.horalife.R
 import com.riuta.horalife.viewModel.DiaryViewModel
 import com.riuta.horalife.databinding.ItemDiaryBinding
@@ -20,6 +23,8 @@ class DiaryViewAdapter(
     private val onClickRow: (Int) -> Unit
 ) : RecyclerView.Adapter<DiaryViewAdapter.DiaryViewHolder>() {
     private lateinit var binding: ItemDiaryBinding
+    private val viewBinderHelper = ViewBinderHelper()
+
 
     inner class DiaryViewHolder(val binding: ItemDiaryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -43,6 +48,9 @@ class DiaryViewAdapter(
 
         viewModel.getBitMap(position) {
             holder.binding.thumbnail.setImageBitmap(it ?: createNoImage())
+        }
+        holder.binding.deleteDiary.setOnClickListener {
+            Toast.makeText(context, "デリート", Toast.LENGTH_SHORT).show()
         }
         holder.binding.lifecycleOwner = lifecycleOwner
     }
