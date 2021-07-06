@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<!--        <style name="DatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">-->
+<!--            <item name="android:text">#4CAF50</item>-->
 
-        <!-- 省略 -->
+<!--        </style>-->
+<!--        <style name="DatePickerDialog.Spinner">-->
+<!--            <item name="android:datePickerStyle">@style/DatePickerDialogSpinnerDatePickerStyle</item>-->
 
-        <!-- DatePickerDialog -->
-        <!--
-          parentはアプリ全体のテーマに合わせて、
-          "Theme.MaterialComponents.Light.Dialog" や "Theme.AppCompat.Light.Dialog"
-          にする。
-         -->
-        <style name="DatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog" />
-        <style name="DatePickerDialog.Spinner">
-            <item name="android:datePickerStyle">@style/DatePickerDialogSpinnerDatePickerStyle</item>
-        </style>
-        <style name="DatePickerDialogSpinnerDatePickerStyle">
-            <item name="android:datePickerMode">spinner</item>
-        </style>
+<!--        </style>-->
+<!--        <style name="DatePickerDialogSpinnerDatePickerStyle">-->
+<!--            <item name="colorAccent">@color/colorAccent</item>-->
+<!--            <item name="android:text">#4CAF50</item>-->
 
+<!--            <item name="android:datePickerMode">spinner</item>-->
+<!--        </style>-->
 </resources>

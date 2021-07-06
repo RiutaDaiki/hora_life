@@ -2,11 +2,14 @@ package com.riuta.horalife.dialog
 
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import com.riuta.horalife.R
+import java.time.LocalDate
+import java.time.Period
 import java.util.*
 
 class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
@@ -16,12 +19,23 @@ class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        return DatePickerDialog(this.requireContext(), R.style.DatePickerDialog_Spinner, this, year, month, day)
+        val dialog = DatePickerDialog(this.requireContext(),
+            this, year, month, day)
+        dialog.setMessage("生年月日を選択")
+        return dialog
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
         Log.d("debug", year.toString() + (month + 1).toString())
+        val choose = LocalDate.of(year, month, dayOfMonth)
+
+         fun calcAge(birthday: LocalDate): Int {
+            val today = LocalDate.now()
+            return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
+        }
+        Log.d("age", calcAge(choose).toString())
+
     }
 
 }
