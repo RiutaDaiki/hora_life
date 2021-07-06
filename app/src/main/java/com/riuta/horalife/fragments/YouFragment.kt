@@ -1,6 +1,7 @@
 package com.riuta.horalife.fragments
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +19,9 @@ import com.riuta.horalife.viewModel.YouViewModel
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.riuta.horalife.dialog.BirthDayPicker
+import java.time.LocalDate
+import java.time.Period
 
 class YouFragment : Fragment() {
     private lateinit var binding: YouFragmentBinding
@@ -34,6 +38,7 @@ class YouFragment : Fragment() {
     ): View? {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        BirthDayPicker().show(parentFragmentManager, null)
 
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
@@ -83,6 +88,21 @@ class YouFragment : Fragment() {
         return binding.root
     }
 
+
+
+//    private fun getUserAge(){
+//        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+//        val userAge = sharedPref.getInt()
+//    }
+
+    private fun updateUserAge(){
+
+    }
+
+    private fun calcAge(birthday: LocalDate): Int? {
+        val today = LocalDate.now()
+        return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

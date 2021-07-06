@@ -1,5 +1,6 @@
 package com.riuta.horalife.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

@@ -31,16 +31,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/dialog/BirthDayPicker.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/values/date_picker_spinner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/app-release.apk" beforeDir="false" afterPath="$PROJECT_DIR$/release/app-release.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/release/output-metadata.json" beforeDir="false" afterPath="$PROJECT_DIR$/release/output-metadata.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/SettingFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/YouFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riuta/horalife/fragments/YouFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@CHR7N18928013161]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/Users/daikirifuu/.android/avd/Pixel_4a_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -81,6 +85,7 @@
         <option value="layoutResourceFile" />
         <option value="Kotlin Class" />
         <option value="resourceFile" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -234,9 +239,10 @@
       <screen x="-172" y="-1080" width="1920" height="1080" />
     </state>
     <state x="252" y="-881" width="1071" height="706" key="#com.intellij.execution.impl.EditConfigurationsDialog/1748.-1055.1920.1055/0.25.1440.801/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1622782890542" />
-    <state x="575" y="-820" key="#com.intellij.ide.util.MemberChooser" timestamp="1623215279709">
-      <screen x="-172" y="-1080" width="1920" height="1080" />
+    <state x="481" y="-801" key="#com.intellij.ide.util.MemberChooser" timestamp="1625539943667">
+      <screen x="-266" y="-1055" width="1920" height="1055" />
     </state>
+    <state x="481" y="-801" key="#com.intellij.ide.util.MemberChooser/-266.-1055.1920.1055/0.25.1440.815@-266.-1055.1920.1055" timestamp="1625539943667" />
     <state x="575" y="-820" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1748.-1080.1920.1080/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623215279709" />
     <state x="526" y="-777" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623472201666">
       <screen x="-172" y="-1055" width="1920" height="1055" />
@@ -254,12 +260,17 @@
       <screen x="-172" y="-1055" width="1920" height="1055" />
     </state>
     <state x="257" y="-769" key="AndroidCreateResourceDirectoryDialog/1748.-1055.1920.1055/0.25.1440.875/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624337800523" />
-    <state x="376" y="-763" key="AndroidCreateResourceFileDialog" timestamp="1624337873978">
-      <screen x="-172" y="-1055" width="1920" height="1055" />
+    <state x="282" y="-763" key="AndroidCreateResourceFileDialog" timestamp="1625541974425">
+      <screen x="-266" y="-1055" width="1920" height="1055" />
     </state>
+    <state x="282" y="-763" key="AndroidCreateResourceFileDialog/-266.-1055.1920.1055/0.25.1440.815@-266.-1055.1920.1055" timestamp="1625541974425" />
     <state x="376" y="-763" key="AndroidCreateResourceFileDialog/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623645584202" />
     <state x="376" y="-763" key="AndroidCreateResourceFileDialog/1748.-1055.1920.1055/0.25.1440.875/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1624337873978" />
     <state x="376" y="-781" key="AndroidCreateResourceFileDialog/1748.-1080.1920.1080/0.0.1440.900/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623033340031" />
+    <state x="347" y="-746" key="AndroidCreateXmlResourceDialog" timestamp="1625537870237">
+      <screen x="-446" y="-1055" width="1920" height="1055" />
+    </state>
+    <state x="347" y="-746" key="AndroidCreateXmlResourceDialog/-446.-1055.1920.1055/0.25.1440.815/1474.-1055.1920.1055@-446.-1055.1920.1055" timestamp="1625537870237" />
     <state width="1878" height="181" key="GridCell.Tab.0.bottom" timestamp="1625115579711">
       <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
