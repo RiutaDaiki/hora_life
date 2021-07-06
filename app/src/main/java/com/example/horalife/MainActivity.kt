@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean =
             findNavController(R.id.nav_host_fragment).navigateUp()
-
 }
 
 

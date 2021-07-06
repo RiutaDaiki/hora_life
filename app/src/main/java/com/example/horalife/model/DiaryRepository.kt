@@ -58,7 +58,8 @@ class DiaryRepository {
     suspend fun readDiaryInfo(user: FirebaseUser?): Result<List<DiaryDetailContent>> {
         return runCatching {
             suspendCoroutine { continuation ->
-                if (user == null) {
+                    if (user == null) {
+                        
                     db.collection(users)
                             .document(alreadyLoginUser.uid)
                             .collection(diaries)
@@ -87,7 +88,7 @@ class DiaryRepository {
                             }
                 } else {
                     db.collection(users)
-                            .document(user.uid)
+                            .document(user!!.uid)
                             .collection(diaries)
                             .orderBy("timestamp", Query.Direction.DESCENDING)
                             .get()

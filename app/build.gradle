@@ -8,8 +8,6 @@ apply plugin: 'com.google.gms.google-services'
 
 //apply plugin: "androidx.navigation.safeargs.kotlin"
 
-apply plugin: "androidx.navigation.safeargs"
-
 task wrapper(type: Wrapper) {
     gradleVersion = '5.0'
 }
@@ -20,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.horalife"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -53,9 +51,10 @@ android {
 }
 
 dependencies {
+    //noinspection GradleDependency
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.core:core-ktx:1.5.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     testImplementation 'junit:junit:4.+'
@@ -94,10 +93,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-
     //coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
-
-
 }
 

@@ -19,6 +19,7 @@ import com.google.firebase.ktx.Firebase
 
 class DiaryFragment : Fragment() {
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,10 +32,10 @@ class DiaryFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         if (user != null) {
+            
             val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
                 viewModel.onClickRow(it)
-                val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
-                findNavController().navigate(action)
+                findNavController().navigate(R.id.action_diary_to_diary_detail)
             }
             binding.diaryRecycler.adapter = adapter
             viewModel.setList {
