@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 class YouViewModel : ViewModel() {
     object Repository {
@@ -56,5 +57,8 @@ class YouViewModel : ViewModel() {
         }
     }
 
-    val userAge = MutableLiveData<Int>()
+    val userAge = MutableLiveData<LocalDate>()
+    fun updateUserAge(birthDay: LocalDate) {
+            userAge.value = birthDay
+    }
 }

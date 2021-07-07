@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.riuta.horalife.R
@@ -19,10 +20,12 @@ import com.riuta.horalife.databinding.YouFragmentBinding
 import com.riuta.horalife.viewModel.DiaryViewModel
 import com.riuta.horalife.viewModel.YouViewModel
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.riuta.horalife.dialog.BirthDayPicker
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.Period
@@ -30,7 +33,7 @@ import java.time.Period
 class YouFragment : Fragment() {
     private lateinit var binding: YouFragmentBinding
     private val SIGN_IN = 9001
-    private val viewModel: YouViewModel by viewModels()
+    private val viewModel: YouViewModel by activityViewModels()
     private val currentUser = Firebase.auth.currentUser
     private val diaryViewModel: DiaryViewModel by activityViewModels()
 
@@ -39,15 +42,12 @@ class YouFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
-
-        BirthDayPicker().show(parentFragmentManager, null)
-
 
         fun showLogoutTxt() {
             binding.user.text = currentUser?.displayName
@@ -68,14 +68,21 @@ class YouFragment : Fragment() {
             binding.user.text = "ログインしてません"
             binding.statusText.text = "ログイン・登録"
             binding.statusText.setTextColor(resources.getColor(R.color.blue))
-            binding.statusText.setOnClickListener {
-                startActivityForResult(
-                    AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                    SIGN_IN
-                )
+            viewModel.userAge.observe(viewLifecycleOwner) {
+
+                if (getUserAge() == -1) BirthDayPicker().show(parentFragmentManager, null)
+                else if (calcAge(it) < 13) Toast.makeText(this.requireContext(), "ログイン機能には年齢制限があります", Toast.LENGTH_LONG).show()
+                else{
+                    binding.statusText.setOnClickListener {
+                        startActivityForResult(
+                            AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build(),
+                            SIGN_IN
+                        )
+                    }
+                }
             }
         }
 
@@ -85,12 +92,7 @@ class YouFragment : Fragment() {
             showLoginTxt()
         }
 
-        viewModel.userAge.observe(viewLifecycleOwner){
-            Log.d("debug", "ああああああああああああい")
 
-            lifecycleScope.launch(Dispatchers.IO){
-            }
-        }
 
         binding.settingText.setOnClickListener {
             findNavController().navigate(R.id.action_nav_you_to_setting)
@@ -99,15 +101,13 @@ class YouFragment : Fragment() {
         return binding.root
     }
 
-
-
-    private fun getUserAge(): Int{
+    private fun getUserAge(): Int {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return -1
         val userAge = sharedPref.getInt(getString(R.string.user_age), -1)
         return userAge
     }
 
-    private fun updateUserAge(userAge: Int){
+    private fun updateUserAge(userAge: Int) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putInt(getString(R.string.user_age), userAge)
@@ -115,7 +115,7 @@ class YouFragment : Fragment() {
         }
     }
 
-    private fun calcAge(birthday: LocalDate): Int {
+    fun calcAge(birthday: LocalDate): Int {
         val today = LocalDate.now()
         return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
     }
@@ -131,7 +131,11 @@ class YouFragment : Fragment() {
                 findNavController().navigate(R.id.nav_example)
                 if (!user.isEmailVerified) user.sendEmailVerification()
                     .addOnSuccessListener {
-                        Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            context,
+                            "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
 
 

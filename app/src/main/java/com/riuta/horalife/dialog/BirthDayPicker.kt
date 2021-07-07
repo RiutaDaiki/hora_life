@@ -32,11 +32,6 @@ class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
 
         val choose = LocalDate.of(year, month, dayOfMonth)
 
-         fun calcAge(birthday: LocalDate): Int {
-            val today = LocalDate.now()
-            return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
-        }
-        viewModel.userAge.value = calcAge(choose)
+        viewModel.updateUserAge(choose)
     }
-
 }
