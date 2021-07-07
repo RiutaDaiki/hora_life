@@ -2,7 +2,6 @@ package com.riuta.horalife.dialog
 
 import android.app.DatePickerDialog
 import android.app.Dialog
-import android.content.DialogInterface.BUTTON_POSITIVE
 import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
@@ -20,6 +19,7 @@ class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val dialog = DatePickerDialog(this.requireContext(),
+            R.style.DatePickerTheme,
             this, year, month, day)
         dialog.setMessage("生年月日を選択")
         return dialog
