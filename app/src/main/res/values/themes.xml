@@ -12,21 +12,10 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-<!--        <item name="android:datePickerStyle">@color/black</item>-->
 
     </style>
 
-    <style name="BirthDayPickerStyle" parent="Theme.AppCompat.Light.Dialog">
-        <item name="android:textColor">@color/red</item>
-        <item name="android:datePickerMode">spinner</item>
 
-    </style>
-
-            <style name="DatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog"/>
-
-            <style name="DatePickerDialog.Spinner">
-                <item name="android:datePickerStyle">@style/DatePickerDialogSpinnerDatePickerStyle</item>
-            </style>
 
             <style name="DatePickerDialogSpinnerDatePickerStyle">
 

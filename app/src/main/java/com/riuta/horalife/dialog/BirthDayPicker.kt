@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.riuta.horalife.R
+import com.riuta.horalife.viewModel.YouViewModel
 import java.time.LocalDate
 import java.time.Period
 import java.util.*
 
 class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
+    private val viewModel: YouViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val calendar = Calendar.getInstance()
@@ -27,15 +30,13 @@ class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
-        Log.d("debug", year.toString() + (month + 1).toString())
         val choose = LocalDate.of(year, month, dayOfMonth)
 
          fun calcAge(birthday: LocalDate): Int {
             val today = LocalDate.now()
             return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
         }
-        Log.d("age", calcAge(choose).toString())
-
+        viewModel.userAge.value = calcAge(choose)
     }
 
 }

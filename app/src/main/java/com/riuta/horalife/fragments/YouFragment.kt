@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.riuta.horalife.R
 import com.riuta.horalife.databinding.YouFragmentBinding
@@ -20,6 +22,8 @@ import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.riuta.horalife.dialog.BirthDayPicker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.Period
 
@@ -38,11 +42,11 @@ class YouFragment : Fragment() {
     ): View? {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        BirthDayPicker().show(parentFragmentManager, null)
-
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build()
         )
+
+        BirthDayPicker().show(parentFragmentManager, null)
 
 
         fun showLogoutTxt() {
@@ -81,6 +85,13 @@ class YouFragment : Fragment() {
             showLoginTxt()
         }
 
+        viewModel.userAge.observe(viewLifecycleOwner){
+            Log.d("debug", "ああああああああああああい")
+
+            lifecycleScope.launch(Dispatchers.IO){
+            }
+        }
+
         binding.settingText.setOnClickListener {
             findNavController().navigate(R.id.action_nav_you_to_setting)
         }
@@ -90,16 +101,21 @@ class YouFragment : Fragment() {
 
 
 
-//    private fun getUserAge(){
-//        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-//        val userAge = sharedPref.getInt()
-//    }
-
-    private fun updateUserAge(){
-
+    private fun getUserAge(): Int{
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return -1
+        val userAge = sharedPref.getInt(getString(R.string.user_age), -1)
+        return userAge
     }
 
-    private fun calcAge(birthday: LocalDate): Int? {
+    private fun updateUserAge(userAge: Int){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putInt(getString(R.string.user_age), userAge)
+            commit()
+        }
+    }
+
+    private fun calcAge(birthday: LocalDate): Int {
         val today = LocalDate.now()
         return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
     }

@@ -1,7 +1,7 @@
 package com.riuta.horalife.viewModel
 
 
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.riuta.horalife.dataClass.User
@@ -55,4 +55,6 @@ class YouViewModel : ViewModel() {
             }
         }
     }
+
+    val userAge = MutableLiveData<Int>()
 }
