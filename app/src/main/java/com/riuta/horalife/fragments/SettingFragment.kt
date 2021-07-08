@@ -35,6 +35,7 @@ class SettingFragment : Fragment() {
         binding = SettingFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
+        viewModel.birthDay.value = getBirthDay()
 
         val user = Firebase.auth.currentUser
         if (user == null) {
@@ -70,15 +71,18 @@ class SettingFragment : Fragment() {
             }
         }
 
-        binding.birthdayText.setOnClickListener {
+        viewModel.userBirthDay.observe(viewLifecycleOwner) {
+            val realBirthDay = it.plusMonths(1)
+            viewModel.birthDay.value = realBirthDay.toString()
+            lifecycleScope.launch{
+                updateUserAge(calcAge(it))
+                updateBirthDay(realBirthDay)
+            }
+        }
+        binding.editBirthday.setOnClickListener {
             BirthDayPicker().show(parentFragmentManager, null)
         }
 
-        viewModel.userAge.observe(viewLifecycleOwner) {
-            lifecycleScope.launch{
-                updateUserAge(calcAge(it))
-            }
-        }
         return binding.root
     }
 
@@ -86,12 +90,26 @@ class SettingFragment : Fragment() {
         findNavController().navigate(R.id.action_setting_to_you)
     }
 
-    fun updateUserAge(userAge: Int) {
+    private fun updateUserAge(userAge: Int) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putInt(getString(R.string.user_age), userAge)
             commit()
         }
+    }
+
+    private fun updateBirthDay(birthday: LocalDate){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putString(getString(R.string.birthday), birthday.toString())
+            commit()
+        }
+    }
+
+    private fun getBirthDay(): String {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return ""
+        val birthday = sharedPref.getString(getString(R.string.birthday), "")
+        return birthday ?: ""
     }
 
     private fun calcAge(birthday: LocalDate): Int {

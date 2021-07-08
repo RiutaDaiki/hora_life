@@ -57,8 +57,10 @@ class YouViewModel : ViewModel() {
         }
     }
 
-    val userAge = MutableLiveData<LocalDate>()
+    val birthDay = MutableLiveData<String>()
+
+    val userBirthDay = MutableLiveData<LocalDate>()
     fun updateUserAge(birthDay: LocalDate) {
-            userAge.value = birthDay
+            userBirthDay.value = birthDay
     }
 }

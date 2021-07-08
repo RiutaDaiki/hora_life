@@ -18,5 +18,6 @@
     <string name="no_login_diary">この機能をアンロックするにはログインする必要があります</string>
     <string name="no_setting">設定する項目がありません、\n ログインしてください</string>
     <string name="user_age">userAge</string>
+    <string name="birthday">birthday</string>
 
 </resources>

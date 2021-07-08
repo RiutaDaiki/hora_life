@@ -77,14 +77,15 @@ class YouFragment : Fragment() {
                     Toast.LENGTH_LONG
                 ).show()
 
-                viewModel.userAge.observe(viewLifecycleOwner) {
+                viewModel.userBirthDay.observe(viewLifecycleOwner) {
                     lifecycleScope.launch {
                         updateUserAge(calcAge(it))
+                        updateBirthDay(it)
                     }
                     if (calcAge(it) > 12) logInFun()
                     else Toast.makeText(
                         this.requireContext(),
-                        "ユーザー設定から生年月日を再設定できます。",
+                        "設定から生年月日を再設定できます。",
                         Toast.LENGTH_LONG
                     )
                         .show()
@@ -127,6 +128,14 @@ class YouFragment : Fragment() {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putInt(getString(R.string.user_age), userAge)
+            commit()
+        }
+    }
+
+    private fun updateBirthDay(birthday: LocalDate){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putString(getString(R.string.birthday), birthday.toString())
             commit()
         }
     }

@@ -55,9 +55,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/view3" />
 
             <TextView
+                android:id="@+id/user_birthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/user_birthday"/>
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="33dp"
+                android:paddingTop="8sp"
+                android:paddingBottom="8sp"
+                android:text="@{viewModel.birthDay}"
+                app:layout_constraintEnd_toStartOf="@+id/edit_birthday"
+                app:layout_constraintTop_toBottomOf="@+id/view3" />
 
             <View
                 android:id="@+id/view4"
@@ -67,6 +74,17 @@
                 app:layout_constraintTop_toBottomOf="@id/birthday_text"
                 tools:layout_editor_absoluteX="3dp" />
 
+            <Button
+                android:id="@+id/edit_birthday"
+                android:layout_width="73dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="18dp"
+                android:text="編集"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/user_birthday"
+                tools:ignore="SmallSp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -75,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/category_user"
-            tools:layout_editor_absoluteX="26dp">
+            tools:layout_editor_absoluteX="0dp">
 
             <TextView
                 android:id="@+id/account_text"
