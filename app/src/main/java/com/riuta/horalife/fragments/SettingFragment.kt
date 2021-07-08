@@ -43,9 +43,9 @@ class SettingFragment : Fragment() {
         }
 
         binding.deleteText.setOnClickListener {
+            val dialog = AccountDeleteDialog()
+            dialog.show(parentFragmentManager, null)
             lifecycleScope.launch {
-                val dialog = AccountDeleteDialog()
-                dialog.show(parentFragmentManager, null)
                 viewModel.isDeleteUser.collect {
                     if (it) Toast.makeText(context, "アカウントを削除しました", Toast.LENGTH_LONG).show()
                     else Toast.makeText(
@@ -59,12 +59,16 @@ class SettingFragment : Fragment() {
         }
 
         binding.verifyText.setOnClickListener {
-            if(user != null){
+            if (user != null) {
                 if (!user.isEmailVerified) {
                     viewModel.sendVerify()
                     lifecycleScope.launch {
                         viewModel.isSendVerifyMail.collect {
-                            if (it) Toast.makeText(context, "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください", Toast.LENGTH_LONG).show()
+                            if (it) Toast.makeText(
+                                context,
+                                "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
                 } else Toast.makeText(context, "メールアドレス認証済み", Toast.LENGTH_SHORT).show()
@@ -74,7 +78,7 @@ class SettingFragment : Fragment() {
         viewModel.userBirthDay.observe(viewLifecycleOwner) {
             val realBirthDay = it.plusMonths(1)
             viewModel.birthDay.value = realBirthDay.toString()
-            lifecycleScope.launch{
+            lifecycleScope.launch {
                 updateUserAge(calcAge(it))
                 updateBirthDay(realBirthDay)
             }
@@ -98,7 +102,7 @@ class SettingFragment : Fragment() {
         }
     }
 
-    private fun updateBirthDay(birthday: LocalDate){
+    private fun updateBirthDay(birthday: LocalDate) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putString(getString(R.string.birthday), birthday.toString())
@@ -116,5 +120,4 @@ class SettingFragment : Fragment() {
         val today = LocalDate.now()
         return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
     }
-
 }
