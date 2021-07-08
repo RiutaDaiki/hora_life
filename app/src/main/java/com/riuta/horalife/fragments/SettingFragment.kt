@@ -16,8 +16,11 @@ import com.riuta.horalife.dialog.AccountDeleteDialog
 import com.riuta.horalife.viewModel.YouViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.riuta.horalife.dialog.BirthDayPicker
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import java.time.LocalDate
+import java.time.Period
 
 class SettingFragment : Fragment() {
     private lateinit var binding: SettingFragmentBinding
@@ -35,9 +38,7 @@ class SettingFragment : Fragment() {
 
         val user = Firebase.auth.currentUser
         if (user == null) {
-            binding.constraintLayout.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
-            binding.notLoginText.text = resources.getString(R.string.no_setting)
-
+            binding.categoryAccount.visibility = androidx.constraintlayout.widget.Group.INVISIBLE
         }
 
         binding.deleteText.setOnClickListener {
@@ -55,6 +56,7 @@ class SettingFragment : Fragment() {
                 }
             }
         }
+
         binding.verifyText.setOnClickListener {
             if(user != null){
                 if (!user.isEmailVerified) {
@@ -67,10 +69,34 @@ class SettingFragment : Fragment() {
                 } else Toast.makeText(context, "メールアドレス認証済み", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.birthdayText.setOnClickListener {
+            BirthDayPicker().show(parentFragmentManager, null)
+        }
+
+        viewModel.userAge.observe(viewLifecycleOwner) {
+            lifecycleScope.launch{
+                updateUserAge(calcAge(it))
+            }
+        }
         return binding.root
     }
 
     private fun navToYou() {
         findNavController().navigate(R.id.action_setting_to_you)
     }
+
+    fun updateUserAge(userAge: Int) {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putInt(getString(R.string.user_age), userAge)
+            commit()
+        }
+    }
+
+    private fun calcAge(birthday: LocalDate): Int {
+        val today = LocalDate.now()
+        return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
+    }
+
 }

@@ -71,20 +71,26 @@ class YouFragment : Fragment() {
             binding.statusText.setOnClickListener {
                 if (getUserAge() == -1) BirthDayPicker().show(parentFragmentManager, null)
                 else if (getUserAge() > 12) logInFun()
-                else Toast.makeText(
+                else if (getUserAge() < 13) Toast.makeText(
                     this.requireContext(),
                     "ユーザー設定から生年月日を再設定できます。",
                     Toast.LENGTH_LONG
                 ).show()
 
-            }
-        }
+                viewModel.userAge.observe(viewLifecycleOwner) {
+                    lifecycleScope.launch {
+                        updateUserAge(calcAge(it))
+                    }
+                    if (calcAge(it) > 12) logInFun()
+                    else Toast.makeText(
+                        this.requireContext(),
+                        "ユーザー設定から生年月日を再設定できます。",
+                        Toast.LENGTH_LONG
+                    )
+                        .show()
+                }
 
-        viewModel.userAge.observe(viewLifecycleOwner) {
-            updateUserAge(calcAge(it))
-            if (calcAge(it) > 12) logInFun()
-            else Toast.makeText(this.requireContext(), "ユーザー設定から生年月日を再設定できます。", Toast.LENGTH_LONG)
-                .show()
+            }
         }
 
         if (currentUser != null) {
@@ -117,7 +123,7 @@ class YouFragment : Fragment() {
         return userAge
     }
 
-    private fun updateUserAge(userAge: Int) {
+    fun updateUserAge(userAge: Int) {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
         with(sharedPref.edit()) {
             putInt(getString(R.string.user_age), userAge)
@@ -143,7 +149,7 @@ class YouFragment : Fragment() {
                     .addOnSuccessListener {
                         Toast.makeText(
                             context,
-                            "認証用メールを送信しました。メールに添付されたリンクをアクセスし、再度ログインしてください",
+                            "認証用メールを送信しました。リンクにアクセスし、再度ログインしてください",
                             Toast.LENGTH_LONG
                         ).show()
                     }
