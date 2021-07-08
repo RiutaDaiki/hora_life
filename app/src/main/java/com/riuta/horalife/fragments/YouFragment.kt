@@ -36,6 +36,9 @@ class YouFragment : Fragment() {
     private val viewModel: YouViewModel by activityViewModels()
     private val currentUser = Firebase.auth.currentUser
     private val diaryViewModel: DiaryViewModel by activityViewModels()
+    private val providers = arrayListOf(
+        AuthUI.IdpConfig.EmailBuilder().build()
+    )
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -45,9 +48,6 @@ class YouFragment : Fragment() {
     ): View {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build()
-        )
 
         fun showLogoutTxt() {
             binding.user.text = currentUser?.displayName
@@ -68,22 +68,23 @@ class YouFragment : Fragment() {
             binding.user.text = "ログインしてません"
             binding.statusText.text = "ログイン・登録"
             binding.statusText.setTextColor(resources.getColor(R.color.blue))
-            viewModel.userAge.observe(viewLifecycleOwner) {
-
+            binding.statusText.setOnClickListener {
                 if (getUserAge() == -1) BirthDayPicker().show(parentFragmentManager, null)
-                else if (calcAge(it) < 13) Toast.makeText(this.requireContext(), "ログイン機能には年齢制限があります", Toast.LENGTH_LONG).show()
-                else{
-                    binding.statusText.setOnClickListener {
-                        startActivityForResult(
-                            AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .build(),
-                            SIGN_IN
-                        )
-                    }
-                }
+                else if (getUserAge() > 12) logInFun()
+                else Toast.makeText(
+                    this.requireContext(),
+                    "ユーザー設定から生年月日を再設定できます。",
+                    Toast.LENGTH_LONG
+                ).show()
+
             }
+        }
+
+        viewModel.userAge.observe(viewLifecycleOwner) {
+            updateUserAge(calcAge(it))
+            if (calcAge(it) > 12) logInFun()
+            else Toast.makeText(this.requireContext(), "ユーザー設定から生年月日を再設定できます。", Toast.LENGTH_LONG)
+                .show()
         }
 
         if (currentUser != null) {
@@ -92,14 +93,23 @@ class YouFragment : Fragment() {
             showLoginTxt()
         }
 
-
-
         binding.settingText.setOnClickListener {
             findNavController().navigate(R.id.action_nav_you_to_setting)
         }
 
         return binding.root
     }
+
+    private fun logInFun() {
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(),
+            SIGN_IN
+        )
+    }
+
 
     private fun getUserAge(): Int {
         val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return -1
