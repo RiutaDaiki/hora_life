@@ -1,4 +1,5 @@
 <resources>
+<!--    音階-->
     <string name="app_name">HORA LIFE</string>
     <string name="model">お手本</string>
     <string name="library">法螺日記</string>
@@ -8,17 +9,28 @@
     <string name="kan">甲</string>
     <string name="yuri">揺り</string>
     <string name="tome">止め</string>
-    <string name="delete">この日記を削除</string>
     <string name="ots_atari">乙あたり</string>
     <string name="ots_ots_atari">乙乙あたり</string>
     <string name="ots_yurisori">乙揺りそり</string>
     <string name="kan_hira_yuri">甲平揺り</string>
     <string name="betsu_yuri">別揺り</string>
-    <string name="setting">設定</string>
+    
+<!--    DiaryFragment-->
     <string name="no_login_diary">この機能をアンロックするにはログインする必要があります</string>
-    <string name="no_setting">設定する項目がありません、\n ログインしてください</string>
-    <string name="user_age">userAge</string>
-    <string name="birthday">birthday</string>
+    
+<!--EntriesFragment    -->
+    <string name="diary_body">一言</string>
+    <string name="record_text">この内容で記録</string>
+    <string name="select_video">動画を選択</string>
+    
+<!--DiaryDetailFragment-->
+    <string name="delete">この日記を削除</string>
+    <string name="play">PLAY</string>
+
+    <!--YouFragment-->
+    <string name="setting">設定</string>
+    
+<!--    SettingFragment-->
     <string name="user_setting">個人設定</string>
     <string name="birthday_text">生年月日</string>
     <string name="edit">編集</string>
@@ -27,5 +39,9 @@
     <string name="account">アカウント</string>
     <string name="delete_account">アカウントを削除</string>
     <string name="send_verify_mail">認証用メールを送信</string>
+    
+<!--    SharedPreferences-->
+    <string name="user_age">userAge</string>
+    <string name="birthday">birthday</string>
 
 </resources>
