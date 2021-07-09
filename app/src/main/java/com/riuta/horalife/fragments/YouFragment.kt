@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -42,16 +43,20 @@ class YouFragment : Fragment() {
     ): View {
         binding = YouFragmentBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         fun showLogoutTxt() {
             binding.user.text = currentUser?.displayName
             binding.statusText.text = "ログアウト"
-            binding.statusText.setTextColor(resources.getColor(R.color.red))
+//            binding.statusText.setTextColor(resources.getColor(R.color.red))
+            viewModel.statusTextColor.value = R.color.red
+
             binding.statusText.setOnClickListener {
                 AuthUI.getInstance()
                     .signOut(this.requireContext())
                     .addOnSuccessListener {
-                        findNavController().navigate(R.id.nav_example)
+//                        findNavController().navigate(R.id.nav_example)
+                        viewModel.statusTextColor.value = R.color.blue
                         Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
                     }
 
@@ -61,7 +66,8 @@ class YouFragment : Fragment() {
         fun showLoginTxt() {
             binding.user.text = "ログインしてません"
             binding.statusText.text = "ログイン・登録"
-            binding.statusText.setTextColor(resources.getColor(R.color.blue))
+//            binding.statusText.setTextColor(resources.getColor(R.color.blue))
+            viewModel.statusTextColor.value = R.color.blue
             binding.statusText.setOnClickListener {
                 if (getUserAge() == -1) BirthDayPicker().show(parentFragmentManager, null)
                 else if (getUserAge() > 12) logInFun()
@@ -147,7 +153,8 @@ class YouFragment : Fragment() {
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
-                findNavController().navigate(R.id.nav_example)
+//                findNavController().navigate(R.id.nav_example)
+                viewModel.statusTextColor.value = R.color.red
                 if (!user.isEmailVerified) user.sendEmailVerification()
                     .addOnSuccessListener {
                         Toast.makeText(

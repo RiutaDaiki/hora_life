@@ -4,7 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
+        <import type="android.content.Context"/>
+        <import type="androidx.core.content.ContextCompat"/>
+        <variable
+            name="viewModel"
+            type="com.riuta.horalife.viewModel.YouViewModel" />
 
     </data>
 
@@ -54,7 +58,6 @@
             android:id="@+id/view2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-
             android:background="@color/dark_gray"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -72,6 +75,7 @@
             android:paddingRight="8sp"
             android:paddingBottom="8sp"
             android:textSize="16sp"
+            android:textColor="@{ContextCompat.getColor(context, viewModel.statusTextColor)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
