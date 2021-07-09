@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.riuta.horalife.viewModel.YouViewModel" />
@@ -19,20 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@id/category_user">
 
             <TextView
                 android:id="@+id/user_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="52dp"
-                android:text="個人設定"
+                android:text="@string/user_setting"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/dark_gray"
@@ -48,11 +47,11 @@
                 android:paddingTop="8sp"
                 android:paddingRight="8sp"
                 android:paddingBottom="8sp"
-                android:text="生年月日"
+                android:text="@string/birthday_text"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view3" />
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
 
             <TextView
                 android:id="@+id/user_birthday"
@@ -64,10 +63,10 @@
                 android:paddingBottom="8sp"
                 android:text="@{viewModel.birthDay}"
                 app:layout_constraintEnd_toStartOf="@+id/edit_birthday"
-                app:layout_constraintTop_toBottomOf="@+id/view3" />
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
 
             <View
-                android:id="@+id/view4"
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/dark_gray"
@@ -79,7 +78,7 @@
                 android:layout_width="73dp"
                 android:layout_height="35dp"
                 android:layout_marginEnd="18dp"
-                android:text="編集"
+                android:text="@string/edit"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/user_birthday"
@@ -89,10 +88,63 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/category_theme"
+            android:layout_width="395dp"
+            android:layout_height="90dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/category_user">
+
+            <TextView
+                android:id="@+id/theme_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="52dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/theme"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/dark_gray"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/theme_text" />
+
+            <Switch
+                android:id="@+id/theme_switch"
+                android:layout_width="280dp"
+                android:layout_height="37dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/darkMode"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/theme_text"
+                app:layout_constraintTop_toBottomOf="@+id/view3"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_gray"
+                app:layout_constraintTop_toBottomOf="@id/theme_switch"
+                tools:layout_editor_absoluteX="3dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/category_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/category_user"
+            app:layout_constraintTop_toBottomOf="@id/category_theme"
             tools:layout_editor_absoluteX="0dp">
 
             <TextView
@@ -101,13 +153,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="52dp"
                 android:layout_marginTop="24dp"
-                android:text="アカウント"
+                android:text="@string/account"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/view5"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/dark_gray"
@@ -127,14 +179,14 @@
                 android:paddingTop="8sp"
                 android:paddingRight="8sp"
                 android:paddingBottom="8sp"
-                android:text="アカウントを削除"
+                android:text="@string/delete_account"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/account_text"
-                app:layout_constraintTop_toTopOf="@+id/view" />
+                app:layout_constraintTop_toTopOf="@+id/view5" />
 
             <View
-                android:id="@+id/view2"
+                android:id="@+id/view6"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/dark_gray"
@@ -151,16 +203,14 @@
                 android:paddingTop="8sp"
                 android:paddingRight="8sp"
                 android:paddingBottom="8sp"
-                android:text="認証用メールを送信"
+                android:text="@string/send_verify_mail"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/delete_text"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
+                app:layout_constraintTop_toBottomOf="@+id/view6" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>

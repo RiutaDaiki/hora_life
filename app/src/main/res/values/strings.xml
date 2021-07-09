@@ -19,5 +19,13 @@
     <string name="no_setting">設定する項目がありません、\n ログインしてください</string>
     <string name="user_age">userAge</string>
     <string name="birthday">birthday</string>
+    <string name="user_setting">個人設定</string>
+    <string name="birthday_text">生年月日</string>
+    <string name="edit">編集</string>
+    <string name="theme">テーマ</string>
+    <string name="darkMode">ダークモード</string>
+    <string name="account">アカウント</string>
+    <string name="delete_account">アカウントを削除</string>
+    <string name="send_verify_mail">認証用メールを送信</string>
 
 </resources>
