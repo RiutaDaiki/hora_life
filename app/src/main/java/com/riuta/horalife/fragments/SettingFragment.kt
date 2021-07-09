@@ -78,7 +78,6 @@ class SettingFragment : Fragment() {
                 } else Toast.makeText(context, "メールアドレス認証済み", Toast.LENGTH_SHORT).show()
             }
         }
-        Toast.makeText(this.requireContext(), isDarkTheme().toString(), Toast.LENGTH_SHORT).show()
 
         viewModel.userBirthDay.observe(viewLifecycleOwner) {
             val realBirthDay = it.plusMonths(1)
