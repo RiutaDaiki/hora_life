@@ -45,55 +45,6 @@ class YouFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
 
-        fun showLogoutTxt() {
-            binding.user.text = currentUser?.displayName
-            binding.statusText.text = "ログアウト"
-//            binding.statusText.setTextColor(resources.getColor(R.color.red))
-            viewModel.statusTextColor.value = R.color.red
-
-            binding.statusText.setOnClickListener {
-                AuthUI.getInstance()
-                    .signOut(this.requireContext())
-                    .addOnSuccessListener {
-//                        findNavController().navigate(R.id.nav_example)
-                        viewModel.statusTextColor.value = R.color.blue
-                        Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
-                    }
-
-            }
-        }
-
-        fun showLoginTxt() {
-            binding.user.text = "ログインしてません"
-            binding.statusText.text = "ログイン・登録"
-//            binding.statusText.setTextColor(resources.getColor(R.color.blue))
-            viewModel.statusTextColor.value = R.color.blue
-            binding.statusText.setOnClickListener {
-                if (getUserAge() == -1) BirthDayPicker().show(parentFragmentManager, null)
-                else if (getUserAge() > 12) logInFun()
-                else if (getUserAge() < 13) Toast.makeText(
-                    this.requireContext(),
-                    "ユーザー設定から生年月日を再設定できます。",
-                    Toast.LENGTH_LONG
-                ).show()
-
-                viewModel.userBirthDay.observe(viewLifecycleOwner) {
-                    lifecycleScope.launch {
-                        updateUserAge(calcAge(it))
-                        updateBirthDay(it)
-                    }
-                    if (calcAge(it) > 12) logInFun()
-                    else Toast.makeText(
-                        this.requireContext(),
-                        "設定から生年月日を再設定できます。",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-
-            }
-        }
-
         if (currentUser != null) {
             showLogoutTxt()
         } else {
@@ -153,8 +104,8 @@ class YouFragment : Fragment() {
 
             if (user != null) {
                 diaryViewModel.currentAccount.value = user
-//                findNavController().navigate(R.id.nav_example)
-                viewModel.statusTextColor.value = R.color.red
+                showLogoutTxt()
+
                 if (!user.isEmailVerified) user.sendEmailVerification()
                     .addOnSuccessListener {
                         Toast.makeText(
@@ -167,6 +118,51 @@ class YouFragment : Fragment() {
             if (user != null && viewModel.callExisting(user.uid)) {
                 viewModel.callCreateUser(user.email, user.uid, user.displayName)
             }
+        }
+    }
+
+    fun showLoginTxt() {
+        viewModel.displayName.value = "ゲストユーザー"
+        viewModel.statusText.value = "ログイン"
+        viewModel.statusTextColor.value = R.color.blue
+        binding.statusText.setOnClickListener {
+            if (getUserAge() == -1) BirthDayPicker().show(parentFragmentManager, null)
+            else if (getUserAge() > 12) logInFun()
+            else if (getUserAge() < 13) Toast.makeText(
+                this.requireContext(),
+                "ユーザー設定から生年月日を再設定できます。",
+                Toast.LENGTH_LONG
+            ).show()
+
+            viewModel.userBirthDay.observe(viewLifecycleOwner) {
+                lifecycleScope.launch {
+                    updateUserAge(calcAge(it))
+                    updateBirthDay(it)
+                }
+                if (calcAge(it) > 12) logInFun()
+                else Toast.makeText(
+                    this.requireContext(),
+                    "設定から生年月日を再設定できます。",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+            }
+        }
+    }
+
+    fun showLogoutTxt() {
+        viewModel.displayName.value = currentUser?.displayName
+        viewModel.statusText.value = "ログアウト"
+        viewModel.statusTextColor.value = R.color.red
+
+        binding.statusText.setOnClickListener {
+            AuthUI.getInstance()
+                .signOut(this.requireContext())
+                .addOnSuccessListener {
+                    showLoginTxt()
+                    Toast.makeText(this.requireContext(), "ログアウト完了", Toast.LENGTH_SHORT).show()
+                }
+
         }
     }
 }

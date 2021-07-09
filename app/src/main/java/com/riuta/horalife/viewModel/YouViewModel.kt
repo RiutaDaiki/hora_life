@@ -1,7 +1,6 @@
 package com.riuta.horalife.viewModel
 
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -67,6 +66,10 @@ class YouViewModel : ViewModel() {
 
     val isDarkTheme = MutableLiveData<Boolean>()
 
+    val statusText = MutableLiveData<String>()
+
     val statusTextColor = MutableLiveData<Int>()
+
+    val displayName = MutableLiveData<String>()
 
 }
