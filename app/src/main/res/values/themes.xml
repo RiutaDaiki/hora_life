@@ -14,9 +14,6 @@
         <!-- Customize your theme here. -->
 
     </style>
-
-
-
             <style name="DatePickerDialogSpinnerDatePickerStyle">
 
                 <item name="android:datePickerMode">spinner</item>

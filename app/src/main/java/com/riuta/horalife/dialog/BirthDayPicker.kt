@@ -3,14 +3,12 @@ package com.riuta.horalife.dialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.riuta.horalife.R
 import com.riuta.horalife.viewModel.YouViewModel
 import java.time.LocalDate
-import java.time.Period
 import java.util.*
 
 class BirthDayPicker: DialogFragment(), DatePickerDialog.OnDateSetListener{
