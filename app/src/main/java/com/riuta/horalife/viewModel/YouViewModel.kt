@@ -63,4 +63,7 @@ class YouViewModel : ViewModel() {
     fun updateUserAge(birthDay: LocalDate) {
             userBirthDay.value = birthDay
     }
+
+    val isDarkTheme = MutableLiveData<Boolean>()
+
 }

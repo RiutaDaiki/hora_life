@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.riuta.horalife.R
@@ -33,6 +34,8 @@ class ExampleFragment : Fragment() {
         adapter = RecyclerViewAdapter(dataList, viewLifecycleOwner, context)
         binding.recyclerView.adapter = adapter
 
+        setTheme()
+
         return binding.root
     }
 
@@ -46,6 +49,14 @@ class ExampleFragment : Fragment() {
         player.isLooping = false
         player.start()
         player.setOnCompletionListener { mp -> player.stop() }
+    }
+
+    private fun setTheme(){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val isDarkTHeme = sharedPref.getBoolean(getString(R.string.current_display_theme), false)
+        when(isDarkTHeme){
+            true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
 }

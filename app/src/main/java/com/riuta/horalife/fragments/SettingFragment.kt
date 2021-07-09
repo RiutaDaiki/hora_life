@@ -101,12 +101,18 @@ class SettingFragment : Fragment() {
             when(isChecked) {
                 true -> {
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-//                    viewModel.isDarkTheme.value = true
+                    viewModel.isDarkTheme.value = true
                 }
                 false -> {
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-//                    viewModel.isDarkTheme.value = false
+                    viewModel.isDarkTheme.value = false
                 }
+            }
+        }
+
+        viewModel.isDarkTheme.observe(viewLifecycleOwner){
+            lifecycleScope.launch(Dispatchers.IO) {
+                updateThemeSetting(it)
             }
         }
 
@@ -147,5 +153,13 @@ class SettingFragment : Fragment() {
     private fun calcAge(birthday: LocalDate): Int {
         val today = LocalDate.now()
         return Period.between(LocalDate.parse(birthday.toString()), today).getYears()
+    }
+
+    fun updateThemeSetting(isDarkTheme: Boolean){
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putBoolean(getString(R.string.current_display_theme), isDarkTheme)
+            commit()
+        }
     }
 }
