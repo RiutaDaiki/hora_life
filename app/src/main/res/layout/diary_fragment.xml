@@ -5,6 +5,9 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.riuta.horalife.viewModel.DiaryViewModel" />
+        <variable
             name="adapter"
             type="com.riuta.horalife.recycler.DiaryViewAdapter" />
 

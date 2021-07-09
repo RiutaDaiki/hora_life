@@ -28,6 +28,7 @@ class DiaryFragment : Fragment() {
        val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
 
         if (user != null) {
            val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {

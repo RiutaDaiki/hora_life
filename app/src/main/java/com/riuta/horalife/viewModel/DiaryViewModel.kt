@@ -15,6 +15,7 @@ import com.riuta.horalife.dataClass.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.sql.Timestamp
+import java.util.function.BinaryOperator
 
 
 class DiaryViewModel() : ViewModel() {
@@ -74,7 +75,6 @@ class DiaryViewModel() : ViewModel() {
 
     fun getVideoUri(uri: (Uri) -> Unit, fallBack: () -> Unit) {
         viewModelScope.launch {
-            Log.d("ビデオURえる", diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
             if (diaryList.value != null && selectedPosition.value != null) {
                 Repository.repository.readVideoUri(diaryList.value!!.get(selectedPosition.value!!).videoFileName.toUri().lastPathSegment!!)
                         .onSuccess {
