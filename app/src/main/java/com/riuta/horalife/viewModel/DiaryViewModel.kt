@@ -3,7 +3,6 @@ package com.riuta.horalife.viewModel
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 import androidx.core.net.toUri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,6 @@ import com.riuta.horalife.dataClass.DiaryDetailContent
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import java.sql.Timestamp
-import java.util.function.BinaryOperator
 
 
 class DiaryViewModel() : ViewModel() {
