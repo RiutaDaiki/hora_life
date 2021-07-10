@@ -25,13 +25,13 @@ class DiaryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
+        val binding = DiaryFragmentBinding.inflate(layoutInflater, container, false)
         binding.diaryRecycler.layoutManager = LinearLayoutManager(context)
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
 
         if (user != null) {
-           val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
+            binding.enable = true
+            val adapter = DiaryViewAdapter(viewLifecycleOwner, viewModel, this.requireContext()) {
                 viewModel.onClickRow(it)
                 val action = DiaryFragmentDirections.actionDiaryToDiaryDetail()
                 findNavController().navigate(action)
@@ -43,7 +43,10 @@ class DiaryFragment : Fragment() {
             viewModel.diaryList.observe(viewLifecycleOwner) {
                 adapter.notifyDataSetChanged()
             }
-        } else binding.noLoginTxt.text = resources.getString(R.string.no_login_diary)
+        } else {
+            binding.noLoginTxt.text = resources.getString(R.string.no_login_diary)
+            binding.enable = false
+        }
 
         binding.fab.setOnClickListener { showEntries() }
 

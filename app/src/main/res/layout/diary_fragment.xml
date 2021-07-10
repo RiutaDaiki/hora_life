@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="viewModel"
-            type="com.riuta.horalife.viewModel.DiaryViewModel" />
-        <variable
-            name="adapter"
-            type="com.riuta.horalife.recycler.DiaryViewAdapter" />
+            name="enable"
+            type="Boolean" />
 
 
     </data>
@@ -34,6 +30,7 @@
             android:layout_marginBottom="80dp"
             android:backgroundTint="@color/oudoiro"
             android:clickable="true"
+            android:enabled="@{enable}"
             app:tint="@color/black"
             app:backgroundTint="@color/oudoiro"
             app:layout_constraintBottom_toBottomOf="parent"

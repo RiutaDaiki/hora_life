@@ -105,4 +105,6 @@ class DiaryViewModel() : ViewModel() {
         }
     }
 
+    val fabIsEnabled = MutableLiveData<Boolean>()
+
 }
