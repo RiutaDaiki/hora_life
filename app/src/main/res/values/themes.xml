@@ -20,8 +20,6 @@
             </style>
 
     <style name="DatePickerTheme" parent="Theme.MaterialComponents.Light.Dialog">
-        <item name="android:colorAccent">@color/red</item>
-        <item name="android:colorControlActivated">@color/blue</item>
         <item name="android:buttonBarButtonStyle">@style/PickerButtonStyle</item>
         <item name="android:datePickerStyle">@style/DatePickerDialogSpinnerDatePickerStyle</item>
 
