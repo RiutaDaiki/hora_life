@@ -34,8 +34,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/entries_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/entries_fragment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/layout/setting_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/setting_fragment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/values-night/color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values-night/color.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/values/themes.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

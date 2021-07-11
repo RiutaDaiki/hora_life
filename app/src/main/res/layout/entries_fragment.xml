@@ -22,9 +22,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             style="?attr/materialButtonOutlinedStyle"
-            android:textColor="@color/colorPrimary"
-            app:rippleColor="@color/colorPrimary"
-            app:strokeColor="@color/colorPrimary" />
+            android:textColor="@color/second"
+            app:rippleColor="@color/second"
+            app:strokeColor="@color/second" />
 
         <ImageView
             android:id="@+id/camera"
@@ -36,7 +36,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/camera_256" />
-
 
         <DatePicker
             android:id="@+id/date_picker"
