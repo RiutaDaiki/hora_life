@@ -44,5 +44,7 @@
     <string name="user_age">userAge</string>
     <string name="birthday">birthday</string>
     <string name="current_display_theme">display_theme</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="move_to_policy">プライバシポリシーへ移動</string>
 
 </resources>

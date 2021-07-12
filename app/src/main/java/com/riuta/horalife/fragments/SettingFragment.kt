@@ -3,6 +3,9 @@ package com.riuta.horalife.fragments
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -114,6 +117,10 @@ class SettingFragment : Fragment() {
                 updateThemeSetting(it)
             }
         }
+
+        binding.moveToPolicy.linksClickable = true
+        binding.moveToPolicy.setText(Html.fromHtml("<a href=\"https://riutadaiki.github.io/hora_policy/\">プライバシーポリシーへ移動</a>"))
+        binding.moveToPolicy.movementMethod = LinkMovementMethod.getInstance()
 
         return binding.root
     }

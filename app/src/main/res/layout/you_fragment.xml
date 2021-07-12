@@ -80,7 +80,5 @@
             android:textColor="@{ContextCompat.getColor(context, viewModel.statusTextColor)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

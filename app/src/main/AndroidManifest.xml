@@ -31,8 +31,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider" />
         </provider>
-        <activity android:name="com.riuta.horalife.MainActivity">
-
+        <activity android:name="com.riuta.horalife.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
