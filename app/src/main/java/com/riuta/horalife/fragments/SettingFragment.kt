@@ -118,10 +118,6 @@ class SettingFragment : Fragment() {
             }
         }
 
-        binding.moveToPolicy.linksClickable = true
-        binding.moveToPolicy.setText(Html.fromHtml("<a href=\"https://riutadaiki.github.io/hora_policy/\">プライバシーポリシーへ移動</a>"))
-        binding.moveToPolicy.movementMethod = LinkMovementMethod.getInstance()
-
         return binding.root
     }
 
