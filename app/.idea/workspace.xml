@@ -30,13 +30,43 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="" />
+    <list default="true" id="e45e0ad3-8649-4697-8ed3-d19e0c2d2376" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/horalife_launcher-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/horalife_launcher2-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/horalife_launcher3-playstore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/horalife_launcher2_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/horalife_launcher3_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/horalife_launcher_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/drawable/horalife_launcher_foreground.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/horalife_launcher.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/horalife_launcher2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/horalife_launcher2_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-anydpi-v26/horalife_launcher_round.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/horalife_launcher2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/horalife_launcher2_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-hdpi/horalife_launcher2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-mdpi/horalife_launcher2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-mdpi/horalife_launcher2_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-mdpi/horalife_launcher2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xhdpi/horalife_launcher2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xhdpi/horalife_launcher2_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xhdpi/horalife_launcher2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xxhdpi/horalife_launcher2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xxhdpi/horalife_launcher2_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xxhdpi/horalife_launcher2_round.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xxxhdpi/horalife_launcher2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xxxhdpi/horalife_launcher2_foreground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/res/mipmap-xxxhdpi/horalife_launcher2_round.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/AndroidManifest.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@CHR7N18928013161]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/Users/daikirifuu/.android/avd/Pixel_4a_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -103,8 +133,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ApkExportedModule" value="HORA_LIFE.app" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="SerialNumber@CHR7N18928013161" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-07-08T07:36:35.036993Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="VirtualDevicePath@/Users/daikirifuu/.android/avd/Pixel_4a_API_30.avd" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-07-18T04:49:28.250862Z" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
@@ -236,9 +266,11 @@
     </state>
     <state x="481" y="-801" key="#com.intellij.ide.util.MemberChooser/-266.-1055.1920.1055/0.25.1440.815@-266.-1055.1920.1055" timestamp="1625539943667" />
     <state x="575" y="-820" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900/1748.-1080.1920.1080/-172.-1080.1920.1080@-172.-1080.1920.1080" timestamp="1623215279709" />
-    <state x="526" y="-777" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1623472201666">
-      <screen x="-172" y="-1055" width="1920" height="1055" />
+    <state x="253" y="-777" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1626583750125">
+      <screen x="-446" y="-1055" width="1920" height="1055" />
     </state>
+    <state x="253" y="-777" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-446.-1055.1920.1055/0.25.1440.797/1474.-1055.1920.1055@-446.-1055.1920.1055" timestamp="1626583750125" />
+    <state x="524" y="235" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.797@0.25.1440.797" timestamp="1626579501036" />
     <state x="526" y="-777" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.25.1440.875/1748.-1055.1920.970/-172.-1055.1920.1055@-172.-1055.1920.1055" timestamp="1623472201666" />
     <state x="567" y="-732" width="448" height="409" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1623472635145">
       <screen x="-172" y="-1055" width="1920" height="1055" />
